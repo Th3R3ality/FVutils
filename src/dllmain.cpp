@@ -35,7 +35,6 @@ void mainthread( HMODULE hmodule )
 			continue;
 		}
 
-		printf("health: %f\n", minecraft::localPlayer->getHealth());
 		std::this_thread::sleep_for( std::chrono::milliseconds( 5 ) );
 	}
 

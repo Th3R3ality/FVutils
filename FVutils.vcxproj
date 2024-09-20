@@ -115,6 +115,8 @@
     <ClInclude Include="src\minecraft\entity\Entity\Entity.h" />
     <ClInclude Include="src\minecraft\IClass.h" />
     <ClInclude Include="src\minecraft\minecraft.h" />
+    <ClInclude Include="src\minecraft\client\WorldClient\WorldClient.h" />
+    <ClInclude Include="src\minecraft\world\World\World.h" />
     <ClInclude Include="src\minhook\include\MinHook.h" />
     <ClInclude Include="src\minhook\src\buffer.h" />
     <ClInclude Include="src\minhook\src\hde\hde32.h" />
@@ -123,6 +125,7 @@
     <ClInclude Include="src\minhook\src\hde\table32.h" />
     <ClInclude Include="src\minhook\src\hde\table64.h" />
     <ClInclude Include="src\minhook\src\trampoline.h" />
+    <ClInclude Include="src\render\helper.h" />
     <ClInclude Include="src\render\render.h" />
   </ItemGroup>
   <ItemGroup>

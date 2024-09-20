@@ -1,7 +1,12 @@
 #include "hooks.h"
 #include <iostream>
+
+#include <jni.h>
+#include <jvmti.h>
+
 #include "../render/render.h"
 #include "../global.h"
+
 namespace hooks
 {
 	BOOL __stdcall hkwglSwapBuffers( IN  HDC hdc )
@@ -72,7 +77,6 @@ namespace hooks
 		ImGui_ImplOpenGL2_NewFrame();
 		ImGui_ImplWin32_NewFrame();
 		ImGui::NewFrame();
-
 
 		render::DoFrame();
 

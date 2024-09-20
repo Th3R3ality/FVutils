@@ -3,7 +3,7 @@
 
 #include "IClass.h"
 #include "client/EntityPlayerSP/EntityPlayerSP.h"
-
+#include "client/WorldClient/WorldClient.h"
 
 namespace minecraft
 {
@@ -15,7 +15,7 @@ namespace minecraft
 	inline const char* klassPath = "net.minecraft.client.Minecraft";
 
 	inline std::unique_ptr<EntityPlayerSP> localPlayer = nullptr;
-	inline jobject localPlayerInstance = nullptr;
+	inline std::unique_ptr<WorldClient> world = nullptr;
 
 	void Init();
 	void Destroy();

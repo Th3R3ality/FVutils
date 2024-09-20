@@ -15,6 +15,7 @@ namespace minecraft
 
 		fieldIDs["thePlayer"] = java::env->GetFieldID(klass, "thePlayer", "Lnet/minecraft/client/entity/EntityPlayerSP;");
 		fieldIDs["theWorld"] = java::env->GetFieldID(klass, "theWorld", "Lnet/minecraft/client/multiplayer/WorldClient;");
+
 		fieldIDs["renderManager"] = java::env->GetFieldID(klass, "renderManager", "Lnet/minecraft/client/renderer/entity/RenderManager;");
 		fieldIDs["timer"] = java::env->GetFieldID(klass, "timer", "Lnet/minecraft/util/Timer;");
 		fieldIDs["gameSettings"] = java::env->GetFieldID(klass, "gameSettings", "Lnet/minecraft/client/settings/GameSettings;");
@@ -54,15 +55,27 @@ namespace minecraft
 
 	bool ValidateObjects()
 	{
-		localPlayerInstance = java::env->GetObjectField( instance, fieldIDs[ "thePlayer" ] );
+		jobject localPlayerInstance = java::env->GetObjectField( instance, fieldIDs[ "thePlayer" ] );
 		if ( !localPlayerInstance )
 		{
 			localPlayer = nullptr;
 			return false;
 		}
-
-		if (localPlayer == nullptr || localPlayerInstance != localPlayer->instance )
-			localPlayer = std::make_unique<EntityPlayerSP>(localPlayerInstance);
+		if ( localPlayer == nullptr || localPlayerInstance != localPlayer->instance )
+			localPlayer = std::make_unique<EntityPlayerSP>( localPlayerInstance );
+		//else
+		//	java::env->DeleteLocalRef( localPlayerInstance );
+		
+		jobject worldClientInstance = java::env->GetObjectField( instance, fieldIDs[ "thePlayer" ] );
+		if ( !worldClientInstance )
+		{
+			world = nullptr;
+			return false;
+		}
+		if (world == nullptr || worldClientInstance != world->instance )
+			world = std::make_unique<WorldClient>(worldClientInstance);
+		//else
+		//	java::env->DeleteLocalRef( worldClientInstance );
 
 		return true;
 	}

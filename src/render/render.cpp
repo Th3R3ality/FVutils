@@ -1,5 +1,11 @@
 #include "render.h"
 
+#include <format>
+
+#include "helper.h"
+#include "../minecraft/minecraft.h"
+
+
 namespace render
 {
 	void DoGui();
@@ -11,7 +17,7 @@ namespace render
 	void DoFrame()
 	{
 		RECT _clientRect = {};
-		GetClientRect( render::window, &_clientRect);
+		GetClientRect( render::window, &_clientRect );
 		clientRect.x = _clientRect.right;
 		clientRect.y = _clientRect.bottom;
 
@@ -31,16 +37,25 @@ namespace render
 	}
 	void DoIndicators()
 	{
-		ImGui::SetNextWindowPos(ImVec2(0, 0));
-		ImGui::SetNextWindowSize(clientRect);
-		ImGui::Begin("Overlay", nullptr,
+		ImGui::SetNextWindowPos( ImVec2( 0, 0 ) );
+		ImGui::SetNextWindowSize( clientRect );
+		ImGui::Begin( "Overlay", nullptr,
 			ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize |
 			ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar |
-			ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_NoBackground);
+			ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_NoBackground );
 
 		ImDrawList* drawlist = ImGui::GetWindowDrawList();
-		drawlist->AddText( ImVec2( clientRect.x - 199, 51 ), ImColor( 0, 0, 0, 255 ), "FVutils" );
-		drawlist->AddText( ImVec2( clientRect.x - 200, 50 ), ImColor( 255, 0, 255, 255 ), "FVutils" );
+
+		ImVec2 textSize = ImGui::CalcTextSize( "FVutils" );
+
+		AddTextShadow( drawlist, ImVec2( clientRect.x - 200, 50 ), ImColor( 255, 0, 255, 255 ), "FVutils" );
+
+		AddTextShadow( drawlist, ImVec2( clientRect.x - 200, textSize.y * 1.5 + 50 ), ImColor( 255, 0, 255, 255 ),
+			std::format( "LocalPlayer: {}", (void*)minecraft::localPlayer->instance ).c_str() );
+		AddTextShadow( drawlist, ImVec2( clientRect.x - 200, textSize.y * 3 + 50 ), ImColor( 255, 0, 255, 255 ),
+			std::format( "World: {}", (void*)minecraft::world->instance ).c_str() );
+		AddTextShadow( drawlist, ImVec2( clientRect.x - 200, textSize.y * 4.5 + 50 ), ImColor( 255, 0, 255, 255 ),
+			std::format( "Health {}", minecraft::localPlayer->getHealth() ).c_str() );
 
 		ImGui::End();
 	}

@@ -16,6 +16,8 @@ klassName( jobject _instance ) \
 ~klassName() \
 { \
 	java::env->DeleteLocalRef( klass ); \
+	if ( instance ) \
+		java::env->DeleteLocalRef( instance ); \
 }
 
 struct IClass
@@ -41,6 +43,8 @@ struct IClass
 	~IClass()
 	{
 		java::env->DeleteLocalRef( klass );
+		if ( instance )
+			java::env->DeleteLocalRef( instance );
 	}
 
 	jclass GetClass()
