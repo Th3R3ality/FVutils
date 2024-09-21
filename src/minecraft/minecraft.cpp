@@ -24,6 +24,9 @@ namespace minecraft
 		fieldIDs["objectMouseOver"] = java::env->GetFieldID(klass, "objectMouseOver", "Lnet/minecraft/util/MovingObjectPosition;");
 		methodIDs["clickMouse"] = java::env->GetMethodID(klass, "clickMouse", "()V");
 
+		methodIDs[ "runTick" ] = java::env->GetMethodID( klass, "runTick", "()V" );
+
+
 		//thePlayer = new CEntityPlayerSP();
 		//theWorld = new CWorldClient();
 		//activeRenderInfo = new CActiveRenderInfo();
@@ -66,7 +69,7 @@ namespace minecraft
 		//else
 		//	java::env->DeleteLocalRef( localPlayerInstance );
 		
-		jobject worldClientInstance = java::env->GetObjectField( instance, fieldIDs[ "thePlayer" ] );
+		jobject worldClientInstance = java::env->GetObjectField( instance, fieldIDs[ "theWorld" ] );
 		if ( !worldClientInstance )
 		{
 			world = nullptr;

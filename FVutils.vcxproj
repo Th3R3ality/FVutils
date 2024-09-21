@@ -62,8 +62,8 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Program Files\Java\jdk-17\include\win32;C:\Program Files\Java\jdk-17\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>$(JAVA_HOME)include\win32;$(JAVA_HOME)include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -83,8 +83,8 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Program Files\Java\jdk-17\include\win32;C:\Program Files\Java\jdk-17\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>$(JAVA_HOME)include\win32;$(JAVA_HOME)include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -109,6 +109,12 @@
     <ClInclude Include="src\imgui\imstb_textedit.h" />
     <ClInclude Include="src\imgui\imstb_truetype.h" />
     <ClInclude Include="src\java\java.h" />
+    <ClInclude Include="src\jnihook\classfile.hpp" />
+    <ClInclude Include="src\jnihook\include\jnihook.h" />
+    <ClInclude Include="src\jnihook\include\jnihook.hpp" />
+    <ClInclude Include="src\jnihook\jnihook.h" />
+    <ClInclude Include="src\jnihook\jnihook.hpp" />
+    <ClInclude Include="src\jnihook\uuid.hpp" />
     <ClInclude Include="src\minecraft\client\EntityPlayerSP\EntityPlayerSP.h" />
     <ClInclude Include="src\minecraft\entity\EntityLivingBase\EntityLivingBase.h" />
     <ClInclude Include="src\minecraft\entity\EntityPlayer\EntityPlayer.h" />
@@ -116,6 +122,7 @@
     <ClInclude Include="src\minecraft\IClass.h" />
     <ClInclude Include="src\minecraft\minecraft.h" />
     <ClInclude Include="src\minecraft\client\WorldClient\WorldClient.h" />
+    <ClInclude Include="src\minecraft\network\SPacketChat.h" />
     <ClInclude Include="src\minecraft\world\World\World.h" />
     <ClInclude Include="src\minhook\include\MinHook.h" />
     <ClInclude Include="src\minhook\src\buffer.h" />
@@ -141,6 +148,9 @@
     <ClCompile Include="src\imgui\imgui_tables.cpp" />
     <ClCompile Include="src\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\java\java.cpp" />
+    <ClCompile Include="src\jnihook\classfile.cpp" />
+    <ClCompile Include="src\jnihook\jnihook.cpp" />
+    <ClCompile Include="src\jnihook\uuid.cpp" />
     <ClCompile Include="src\minecraft\client\EntityPlayerSP\EntityPlayerSP.cpp" />
     <ClCompile Include="src\minecraft\entity\EntityLivingBase\EntityLivingBase.cpp" />
     <ClCompile Include="src\minecraft\minecraft.cpp" />

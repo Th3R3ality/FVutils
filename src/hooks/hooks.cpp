@@ -53,15 +53,10 @@ void hooks::Init()
 	MH_CreateHook( GetProcAddress( hMod, "wglSwapBuffers" ), hkwglSwapBuffers, &wglSwapBuffersOrig );
 
 
-	//vtable = GetDeviceVtable();
-	//printf( "device vtable: %p\n", vtable );
-
-	//if ( vtable == NULL )
-	//	return;
-
-	//VMTEntryHook( vtable, INDEX_ENDSCENE, ( uintptr_t )hkEndScene, &EndSceneOrig );
-
 	MH_EnableHook( MH_ALL_HOOKS );
+
+
+
 }
 
 void hooks::Destroy()

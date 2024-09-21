@@ -50,12 +50,14 @@ namespace render
 
 		AddTextShadow( drawlist, ImVec2( clientRect.x - 200, 50 ), ImColor( 255, 0, 255, 255 ), "FVutils" );
 
-		AddTextShadow( drawlist, ImVec2( clientRect.x - 200, textSize.y * 1.5 + 50 ), ImColor( 255, 0, 255, 255 ),
-			std::format( "LocalPlayer: {}", (void*)minecraft::localPlayer->instance ).c_str() );
-		AddTextShadow( drawlist, ImVec2( clientRect.x - 200, textSize.y * 3 + 50 ), ImColor( 255, 0, 255, 255 ),
-			std::format( "World: {}", (void*)minecraft::world->instance ).c_str() );
-		AddTextShadow( drawlist, ImVec2( clientRect.x - 200, textSize.y * 4.5 + 50 ), ImColor( 255, 0, 255, 255 ),
-			std::format( "Health {}", minecraft::localPlayer->getHealth() ).c_str() );
+		if ( minecraft::localPlayer )
+			AddTextShadow( drawlist, ImVec2( clientRect.x - 200, textSize.y * 1.5 + 50 ), ImColor( 0, 0, 255, 255 ),
+				std::format( "LocalPlayer: {}", (void*)minecraft::localPlayer->instance ).c_str() );
+		if (minecraft::world )
+			AddTextShadow( drawlist, ImVec2( clientRect.x - 200, textSize.y * 3 + 50 ), ImColor( 0, 255, 0, 255 ),
+				std::format( "World: {}", (void*)minecraft::world->instance ).c_str() );
+		//AddTextShadow( drawlist, ImVec2( clientRect.x - 200, textSize.y * 4.5 + 50 ), ImColor( 255, 0, 255, 255 ),
+		//	std::format( "Health {}", minecraft::localPlayer->getHealth() ).c_str() );
 
 		ImGui::End();
 	}
