@@ -13,15 +13,7 @@
 #include "hooks/hooks.h"
 #include "java/java.h"
 #include "minecraft/minecraft.h"
-#include "jnihook/jnihook.h"
 
-jmethodID runTickOrig = nullptr;
-
-void runTickHook(JNIEnv* env, jclass klass)
-{
-	printf( "getMinecraft hook\n" );
-	env->CallStaticVoidMethod( klass, runTickOrig );
-}
 
 void mainthread( HMODULE hmodule )
 {
@@ -36,17 +28,6 @@ void mainthread( HMODULE hmodule )
 	minecraft::Init();
 
 	hooks::Init();
-	jnihook_result_t init_res = JNIHook_Init(java::jvm);
-	printf( "init_res: %i", init_res );
-
-	if ( init_res == JNIHOOK_OK )
-	{
-		jnihook_result_t attach_res = JNIHook_Attach( minecraft::methodIDs[ "getMinecraft" ], runTickHook, &runTickOrig );
-		printf( "attach_res: %i", attach_res );
-	}
-
-
-	printf( "runtick: %p\n", minecraft::methodIDs[ "runTick" ] );
 
 	jclass nhpc = java::FindClass( "net.minecraft.client.network.NetHandlerPlayClient" );
 
@@ -66,10 +47,7 @@ void mainthread( HMODULE hmodule )
 	}
 
 	java::env->DeleteLocalRef( nhpc );
-	if ( init_res == JNIHOOK_OK )
-	{
-		JNIHook_Shutdown();
-	}
+
 	hooks::Destroy();
 
 	minecraft::Destroy();

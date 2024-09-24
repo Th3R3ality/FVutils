@@ -109,12 +109,8 @@
     <ClInclude Include="src\imgui\imstb_textedit.h" />
     <ClInclude Include="src\imgui\imstb_truetype.h" />
     <ClInclude Include="src\java\java.h" />
-    <ClInclude Include="src\jnihook\classfile.hpp" />
     <ClInclude Include="src\jnihook\include\jnihook.h" />
     <ClInclude Include="src\jnihook\include\jnihook.hpp" />
-    <ClInclude Include="src\jnihook\jnihook.h" />
-    <ClInclude Include="src\jnihook\jnihook.hpp" />
-    <ClInclude Include="src\jnihook\uuid.hpp" />
     <ClInclude Include="src\minecraft\client\EntityPlayerSP\EntityPlayerSP.h" />
     <ClInclude Include="src\minecraft\entity\EntityLivingBase\EntityLivingBase.h" />
     <ClInclude Include="src\minecraft\entity\EntityPlayer\EntityPlayer.h" />
@@ -148,9 +144,6 @@
     <ClCompile Include="src\imgui\imgui_tables.cpp" />
     <ClCompile Include="src\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\java\java.cpp" />
-    <ClCompile Include="src\jnihook\classfile.cpp" />
-    <ClCompile Include="src\jnihook\jnihook.cpp" />
-    <ClCompile Include="src\jnihook\uuid.cpp" />
     <ClCompile Include="src\minecraft\client\EntityPlayerSP\EntityPlayerSP.cpp" />
     <ClCompile Include="src\minecraft\entity\EntityLivingBase\EntityLivingBase.cpp" />
     <ClCompile Include="src\minecraft\minecraft.cpp" />

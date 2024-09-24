@@ -111,18 +111,6 @@
     <ClInclude Include="src\jnihook\include\jnihook.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\jnihook\classfile.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\jnihook\jnihook.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\jnihook\jnihook.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\jnihook\uuid.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\minecraft\network\SPacketChat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -189,15 +177,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\minecraft\entity\EntityLivingBase\EntityLivingBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\jnihook\classfile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\jnihook\jnihook.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\jnihook\uuid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
