@@ -81,6 +81,14 @@ namespace java
 		env->DeleteLocalRef( c_ClassLoader );
 
 		initialised = (classLoader != nullptr && mid_findClass != nullptr);
+
+		if ( !initialised )
+			return;
+
+		for ( auto&& fn : classInitialisers )
+		{
+			fn();
+		}
 	}
 
 	void Destroy()

@@ -1,11 +1,23 @@
 #pragma once
 #include "../../entity/EntityPlayer/EntityPlayer.h"
 
-struct EntityPlayerSP : public EntityPlayer
+#define CURRENTCLASSNAME EntityPlayerSP
+
+SETCLASSPATH( "net/minecraft/entity/EntityLivingBase" );
+
+struct CURRENTCLASSNAME : public EntityPlayer
 {
-	const char* klassPath = "net.minecraft.client.entity.EntityPlayerSP";
-	
-	STRUCTORS( EntityPlayerSP );
+	STATICS();
+
+	static void Initialise()
+	{
+		INITIALISER_HEADER();
+	}
+
+	STRUCTORS();
 
 	jobject GetInstance();
 };
+
+
+#undef CURRENTCLASSNAME

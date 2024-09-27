@@ -18,6 +18,7 @@
 void mainthread( HMODULE hmodule )
 {
 	AllocConsole();
+	HWND consoleHwnd = GetConsoleWindow();
 	FILE* f;
 	freopen_s( &f, "CONOUT$", "w", stdout );
 	printf( "hello\n" );
@@ -27,13 +28,6 @@ void mainthread( HMODULE hmodule )
 	java::Init();
 	minecraft::Init();
 	hooks::Init();
-	
-
-	jclass nhpc = java::FindClass( "net.minecraft.client.network.NetHandlerPlayClient" );
-
-	jmethodID handleChatID = java::env->GetMethodID( nhpc, "handleChat", "(Lnet/minecraft/network/play/server/S02PacketChat;)V" );
-
-	printf( "handleChat: %p\n", handleChatID );
 
 	while ( !GetAsyncKeyState( VK_DELETE ) )
 	{
@@ -46,10 +40,6 @@ void mainthread( HMODULE hmodule )
 		std::this_thread::sleep_for( std::chrono::milliseconds( 5 ) );
 	}
 
-	//if ( nhpc )
-	//	java::env->DeleteLocalRef( nhpc );
-
-	//java::env->ExceptionClear();
 	printf( "destroying hooks\n" );
 	hooks::Destroy();
 
@@ -58,12 +48,17 @@ void mainthread( HMODULE hmodule )
 
 	printf( "destroying java\n" );
 	java::Destroy();
+	printf( "bye o/\n" );
+	Sleep( 100 );
 
-	if ( HWND consoleHwnd = GetConsoleWindow() )
+	if ( consoleHwnd )
 	{
 		FreeConsole();
+		Sleep( 100 );
 		PostMessageA( consoleHwnd, WM_CLOSE, 0, 0 );
 	}
+
+	Sleep( 10 );
 	FreeLibraryAndExitThread( hmodule, 0 );
 }
 

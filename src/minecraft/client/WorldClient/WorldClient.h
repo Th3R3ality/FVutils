@@ -1,9 +1,24 @@
 #pragma once
 #include "../../world/World/World.h"
 
-struct WorldClient : World
-{
-	const char* klassPath = "net.minecraft.client.multiplayer.WorldClient";
+#define CURRENTCLASSNAME WorldClient
 
-	STRUCTORS( WorldClient );
+SETCLASSPATH( "net/minecraft/client/multiplayer/WorldClient" );
+
+struct CURRENTCLASSNAME : World
+{
+	using World::World;
+
+	STATICS();
+
+	static void Initialise()
+	{
+		INITIALISER_HEADER();
+
+	}
+
+	STRUCTORS();
 };
+
+
+#undef CURRENTCLASSNAME

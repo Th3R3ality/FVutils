@@ -1,10 +1,9 @@
 #pragma once
-#include <jni.h>
 #include "../../IClass.h"
 
-#define CURRENTCLASSNAME Entity
+#define CURRENTCLASSNAME IChatComponent
 
-SETCLASSPATH( "net/minecraft/entity/Entity" );
+SETCLASSPATH("net/minecraft/util/IChatComponent");
 
 struct CURRENTCLASSNAME : public IClass
 {
@@ -15,10 +14,13 @@ struct CURRENTCLASSNAME : public IClass
 	static void Initialise()
 	{
 		INITIALISER_HEADER( );
+
+		METHOD( "getFormattedText", "()Ljava/lang/String;" );
+		METHOD( "getUnformattedText", "()Ljava/lang/String;" );
+
 	}
 
 	STRUCTORS( );
 };
-
 
 #undef CURRENTCLASSNAME

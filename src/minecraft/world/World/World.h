@@ -1,7 +1,24 @@
 #pragma once
 #include "../../IClass.h"
 
-struct World : IClass
+#define CURRENTCLASSNAME World
+
+SETCLASSPATH( "net/minecraft/world/World" );
+
+struct CURRENTCLASSNAME : IClass
 {
-	const char* klassPath = "net.minecraft.world.World";
+	using IClass::IClass;
+
+	STATICS();
+
+	static void Initialise()
+	{
+		INITIALISER_HEADER();
+
+	}
+
+	STRUCTORS();
 };
+
+
+#undef CURRENTCLASSNAME

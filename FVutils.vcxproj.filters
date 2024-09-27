@@ -111,7 +111,7 @@
     <ClInclude Include="src\jnihook\include\jnihook.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\minecraft\network\SPacketChat.h">
+    <ClInclude Include="src\minecraft\network\S02PacketChat\S02PacketChat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\HotSpot\HotSpot.hpp">
@@ -121,6 +121,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\JavaHook\Module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\minecraft\client\NetHandlerPlayClient\NetHandlerPlayClient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\minecraft\util\IChatComponent\IChatComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -198,6 +204,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\hooks\jhk_handleChat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\network\S02PacketChat\S02PacketChat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\client\NetHandlerPlayClient\NetHandlerPlayClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\entity\EntityPlayer\EntityPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\entity\Entity\Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\client\WorldClient\WorldClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\util\IChatComponent\IChatComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\world\World\World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

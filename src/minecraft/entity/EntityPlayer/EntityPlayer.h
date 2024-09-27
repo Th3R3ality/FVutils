@@ -1,7 +1,22 @@
 #pragma once
 #include "../EntityLivingBase/EntityLivingBase.h"
 
-struct EntityPlayer : public EntityLivingBase
+#define CURRENTCLASSNAME EntityPlayer
+
+SETCLASSPATH( "net/minecraft/entity/player/EntityPlayer" );
+
+struct CURRENTCLASSNAME : public EntityLivingBase
 {
-	const char* klassPath = "net.minecraft.entity.player.EntityPlayer";
+	using EntityLivingBase::EntityLivingBase;
+
+	STATICS();
+
+	static void Initialise()
+	{
+		INITIALISER_HEADER( );
+	}
+
+	STRUCTORS( );
 };
+
+#undef CURRENTCLASSNAME

@@ -2,7 +2,7 @@
 #include <iostream>
 #include "../global.h"
 #include "../render/render.h"
-
+#include "../minecraft/client/NetHandlerPlayClient/NetHandlerPlayClient.h"
 
 void hooks::Init()
 {
@@ -17,11 +17,16 @@ void hooks::Init()
 	if ( !java::initialised )
 		return;
 
-	jclass _NetHandlerPlayClient = java::FindClass( "net/minecraft/client/network/NetHandlerPlayClient" );
+	jclass __NetHandlerPlayClient = java::FindClass( "net/minecraft/client/network/NetHandlerPlayClient" );
+	printf( "__NetHandlerPlayClient: %p\n", __NetHandlerPlayClient );
+	jmethodID __handleChat = java::env->GetMethodID( __NetHandlerPlayClient, "handleChat", "(Lnet/minecraft/network/play/server/S02PacketChat;)V" );
+	printf( "__handleChat: %p\n", __handleChat );
+
+	jclass _NetHandlerPlayClient = NetHandlerPlayClient::klass;
 	printf( "NetHandlerPlayClient: %p\n", _NetHandlerPlayClient );
 	if ( !_NetHandlerPlayClient )
 		return;
-	jmethodID handleChat = java::env->GetMethodID( _NetHandlerPlayClient, "handleChat", "(Lnet/minecraft/network/play/server/S02PacketChat;)V" );
+	jmethodID handleChat =  NetHandlerPlayClient::methodIDs["handleChat"];
 	printf( "handleChat: %p\n", handleChat );
 	if ( !handleChat )
 		return;

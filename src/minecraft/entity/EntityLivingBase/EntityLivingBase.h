@@ -1,9 +1,22 @@
 #pragma once
 #include "../Entity/Entity.h"
 
-struct EntityLivingBase : public Entity
-{
-	const char* klassPath = "net.minecraft.entity.EntityLivingBase";
+#define CURRENTCLASSNAME EntityLivingBase
 
-	jfloat getHealth();
+SETCLASSPATH( "net/minecraft/entity/EntityLivingBase" );
+
+struct CURRENTCLASSNAME : public Entity
+{
+	using Entity::Entity;
+
+	STATICS();
+
+	static void Initialise()
+	{
+		INITIALISER_HEADER( );
+	}
+
+	STRUCTORS( );
 };
+
+#undef CURRENTCLASSNAME
