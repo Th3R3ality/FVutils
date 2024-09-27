@@ -115,6 +115,7 @@
     <ClInclude Include="src\jnihook\include\jnihook.h" />
     <ClInclude Include="src\jnihook\include\jnihook.hpp" />
     <ClInclude Include="src\minecraft\client\EntityPlayerSP\EntityPlayerSP.h" />
+    <ClInclude Include="src\minecraft\client\multiplayer\PlayerControllerMP\PlayerControllerMP.h" />
     <ClInclude Include="src\minecraft\client\NetHandlerPlayClient\NetHandlerPlayClient.h" />
     <ClInclude Include="src\minecraft\entity\EntityLivingBase\EntityLivingBase.h" />
     <ClInclude Include="src\minecraft\entity\EntityPlayer\EntityPlayer.h" />
@@ -154,6 +155,7 @@
     <ClCompile Include="src\JavaHook\Module.cpp" />
     <ClCompile Include="src\java\java.cpp" />
     <ClCompile Include="src\minecraft\client\EntityPlayerSP\EntityPlayerSP.cpp" />
+    <ClCompile Include="src\minecraft\client\multiplayer\PlayerControllerMP\PlayerControllerMP.cpp" />
     <ClCompile Include="src\minecraft\client\NetHandlerPlayClient\NetHandlerPlayClient.cpp" />
     <ClCompile Include="src\minecraft\client\WorldClient\WorldClient.cpp" />
     <ClCompile Include="src\minecraft\entity\EntityLivingBase\EntityLivingBase.cpp" />

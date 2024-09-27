@@ -1,0 +1,24 @@
+#pragma once
+#include "../../../IClass.h"
+
+#define CURRENTCLASSNAME PlayerControllerMP
+
+SETCLASSPATH( "net/minecraft/client/multiplayer/PlayerControllerMP" );
+
+struct CURRENTCLASSNAME : IClass
+{
+	using IClass::IClass;
+
+	STATICS();
+
+	static void Initialise()
+	{
+		INITIALISER_HEADER();
+
+		METHOD( "attackEntity", "(Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/entity/Entity;)V" );
+	}
+
+	STRUCTORS();
+};
+
+#undef CURRENTCLASSNAME

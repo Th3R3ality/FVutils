@@ -12,6 +12,10 @@ struct CURRENTCLASSNAME : public EntityPlayer
 	static void Initialise()
 	{
 		INITIALISER_HEADER();
+
+		METHOD( "getPosition", "()Lnet/minecraft/util/BlockPos;" );
+		METHOD( "setSprinting", "(Z)V" );
+		METHOD( "swingItem", "()V" );
 	}
 
 	STRUCTORS();
