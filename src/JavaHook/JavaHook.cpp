@@ -42,12 +42,12 @@ void JavaHook::clean()
 
 bool JavaHook::hook(jmethodID methodID, i2i_detour_t detour)
 {
-    //static int runonce = []()->int
-    //{
-    //        jvmtiCapabilities capabilities{ .can_retransform_classes = JVMTI_ENABLE };
-    //        p_tienv->AddCapabilities(&capabilities);
-    //        return 0;
-    //}();
+    static int runonce = []()->int
+    {
+            jvmtiCapabilities capabilities{ .can_retransform_classes = JVMTI_ENABLE };
+            java::tienv->AddCapabilities(&capabilities);
+            return 0;
+    }();
     if (!methodID || !detour) 
         return false;
 
