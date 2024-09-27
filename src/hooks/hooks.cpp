@@ -17,22 +17,7 @@ void hooks::Init()
 	if ( !java::initialised )
 		return;
 
-	jclass __NetHandlerPlayClient = java::FindClass( "net/minecraft/client/network/NetHandlerPlayClient" );
-	printf( "__NetHandlerPlayClient: %p\n", __NetHandlerPlayClient );
-	jmethodID __handleChat = java::env->GetMethodID( __NetHandlerPlayClient, "handleChat", "(Lnet/minecraft/network/play/server/S02PacketChat;)V" );
-	printf( "__handleChat: %p\n", __handleChat );
-
-	jclass _NetHandlerPlayClient = NetHandlerPlayClient::klass;
-	printf( "NetHandlerPlayClient: %p\n", _NetHandlerPlayClient );
-	if ( !_NetHandlerPlayClient )
-		return;
-	jmethodID handleChat =  NetHandlerPlayClient::methodIDs["handleChat"];
-	printf( "handleChat: %p\n", handleChat );
-	if ( !handleChat )
-		return;
-
-
-	JavaHook::hook( handleChat, jhk_handleChat );
+	JavaHook::hook( NetHandlerPlayClient::methodIDs["handleChat"], jhk_handleChat);
 }
 
 void hooks::Destroy()
