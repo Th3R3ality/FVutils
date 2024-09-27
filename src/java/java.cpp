@@ -56,7 +56,7 @@ namespace java
 			if ( classLoaderObj )
 			{
 
-				jstring className = env->NewStringUTF( "net.minecraft.client.Minecraft" );
+				jstring className = env->NewStringUTF( "net/minecraft/client/Minecraft" );
 				jobject minecraftClass = env->CallObjectMethod( classLoaderObj, mid_findClass, className );
 
 				if ( minecraftClass )
@@ -80,7 +80,7 @@ namespace java
 		env->DeleteLocalRef( c_Set );
 		env->DeleteLocalRef( c_ClassLoader );
 
-		initialised = true;
+		initialised = (classLoader != nullptr && mid_findClass != nullptr);
 	}
 
 	void Destroy()

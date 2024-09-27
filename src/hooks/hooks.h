@@ -1,6 +1,9 @@
 #pragma once
 #include <Windows.h>
-#include <d3d9.h>
+#include <jni.h>
+#include "../java/java.h"
+#include "../JavaHook/JavaHook.h"
+
 #include "../minhook/include/MinHook.h"
 
 inline void VMTEntryHook(uintptr_t VMT, size_t Index, uintptr_t Detour, uintptr_t* ppOrig = nullptr)
@@ -24,6 +27,8 @@ namespace hooks
 	inline uintptr_t vtable = 0;
 	inline void* wglSwapBuffersOrig = nullptr;
 	inline LONG_PTR wndProcOrig = 0;
+
+	void jhk_handleChat( HotSpot::frame* frame, HotSpot::Thread* thread, bool* cancel );
 
 	LRESULT CALLBACK hkWndProc( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam );
 	BOOL __stdcall hkwglSwapBuffers( IN HDC hdc );

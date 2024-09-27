@@ -3,45 +3,6 @@
 #include "../global.h"
 #include "../render/render.h"
 
-#define INDEX_ENDSCENE 42
-#define INDEX_PRESENT 17
-#define INDEX_RESET 16
-
-uintptr_t GetDeviceVtable()
-{
-	IDirect3D9* pD3D = Direct3DCreate9( D3D_SDK_VERSION );
-
-	if ( !pD3D )
-		return NULL;
-
-	IDirect3DDevice9* pDummyDevice = NULL;
-
-	D3DPRESENT_PARAMETERS d3dpp = {};
-	d3dpp.Windowed = false;
-	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
-	d3dpp.hDeviceWindow = GetForegroundWindow();
-
-	HRESULT dummyDeviceCreated = pD3D->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, d3dpp.hDeviceWindow, D3DCREATE_SOFTWARE_VERTEXPROCESSING, &d3dpp, &pDummyDevice );
-
-	if ( dummyDeviceCreated != S_OK )
-	{
-		d3dpp.Windowed = !d3dpp.Windowed;
-		dummyDeviceCreated = pD3D->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, d3dpp.hDeviceWindow, D3DCREATE_SOFTWARE_VERTEXPROCESSING, &d3dpp, &pDummyDevice );
-
-		if ( dummyDeviceCreated != S_OK )
-		{
-			pD3D->Release();
-			return NULL;
-		}
-	}
-
-	uintptr_t _vtable = *( uintptr_t* )pDummyDevice;
-
-	pDummyDevice->Release();
-	pD3D->Release();
-
-	return _vtable;
-}
 
 void hooks::Init()
 {
@@ -51,22 +12,30 @@ void hooks::Init()
 	if ( !hMod ) return;
 
 	MH_CreateHook( GetProcAddress( hMod, "wglSwapBuffers" ), hkwglSwapBuffers, &wglSwapBuffersOrig );
-
-
 	MH_EnableHook( MH_ALL_HOOKS );
 
+	if ( !java::initialised )
+		return;
+
+	jclass _NetHandlerPlayClient = java::FindClass( "net/minecraft/client/network/NetHandlerPlayClient" );
+	printf( "NetHandlerPlayClient: %p\n", _NetHandlerPlayClient );
+	if ( !_NetHandlerPlayClient )
+		return;
+	jmethodID handleChat = java::env->GetMethodID( _NetHandlerPlayClient, "handleChat", "(Lnet/minecraft/network/play/server/S02PacketChat;)V" );
+	printf( "handleChat: %p\n", handleChat );
+	if ( !handleChat )
+		return;
 
 
+	JavaHook::hook( handleChat, jhk_handleChat );
 }
 
 void hooks::Destroy()
 {
-
-
 	while ( !global::glUnhookWaiting )
 	{
 		global::glUnhookWant = true;
-		Sleep( 1 );
+		Sleep( 10 );
 	}
 	//if ( EndSceneOrig )
 	//{
@@ -75,4 +44,11 @@ void hooks::Destroy()
 
 	MH_DisableHook( MH_ALL_HOOKS );
 	MH_Uninitialize();
+
+	Sleep( 10 );
+
+	JavaHook::clean();
+
+	Sleep( 10 );
+
 }

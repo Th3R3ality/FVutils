@@ -114,6 +114,15 @@
     <ClInclude Include="src\minecraft\network\SPacketChat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\HotSpot\HotSpot.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\JavaHook\JavaHook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\JavaHook\Module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dllmain.cpp">
@@ -140,7 +149,7 @@
     <ClCompile Include="src\hooks\hooks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\hooks\hkwglSwapBuffers.cpp">
+    <ClCompile Include="src\hooks\hk_wglSwapBuffers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\minhook\src\hde\hde32.c">
@@ -161,7 +170,7 @@
     <ClCompile Include="src\render\render.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\hooks\hkWndProc.cpp">
+    <ClCompile Include="src\hooks\hk_WndProc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\imgui\imgui_impl_opengl2.cpp">
@@ -177,6 +186,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\minecraft\entity\EntityLivingBase\EntityLivingBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HotSpot\HotSpot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\JavaHook\JavaHook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\JavaHook\Module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\jhk_handleChat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

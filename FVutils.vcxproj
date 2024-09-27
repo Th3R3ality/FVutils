@@ -100,6 +100,7 @@
     <ClInclude Include="src\framework.h" />
     <ClInclude Include="src\global.h" />
     <ClInclude Include="src\hooks\hooks.h" />
+    <ClInclude Include="src\HotSpot\HotSpot.hpp" />
     <ClInclude Include="src\imgui\imconfig.h" />
     <ClInclude Include="src\imgui\imgui.h" />
     <ClInclude Include="src\imgui\imgui_impl_opengl2.h" />
@@ -108,6 +109,8 @@
     <ClInclude Include="src\imgui\imstb_rectpack.h" />
     <ClInclude Include="src\imgui\imstb_textedit.h" />
     <ClInclude Include="src\imgui\imstb_truetype.h" />
+    <ClInclude Include="src\JavaHook\JavaHook.h" />
+    <ClInclude Include="src\JavaHook\Module.h" />
     <ClInclude Include="src\java\java.h" />
     <ClInclude Include="src\jnihook\include\jnihook.h" />
     <ClInclude Include="src\jnihook\include\jnihook.hpp" />
@@ -133,9 +136,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dllmain.cpp" />
-    <ClCompile Include="src\hooks\hkwglSwapBuffers.cpp" />
-    <ClCompile Include="src\hooks\hkWndProc.cpp" />
+    <ClCompile Include="src\hooks\hk_wglSwapBuffers.cpp" />
+    <ClCompile Include="src\hooks\hk_WndProc.cpp" />
+    <ClCompile Include="src\hooks\jhk_handleChat.cpp" />
     <ClCompile Include="src\hooks\hooks.cpp" />
+    <ClCompile Include="src\HotSpot\HotSpot.cpp" />
     <ClCompile Include="src\imgui\imgui.cpp" />
     <ClCompile Include="src\imgui\imgui_demo.cpp" />
     <ClCompile Include="src\imgui\imgui_draw.cpp" />
@@ -143,6 +148,8 @@
     <ClCompile Include="src\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="src\imgui\imgui_tables.cpp" />
     <ClCompile Include="src\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="src\JavaHook\JavaHook.cpp" />
+    <ClCompile Include="src\JavaHook\Module.cpp" />
     <ClCompile Include="src\java\java.cpp" />
     <ClCompile Include="src\minecraft\client\EntityPlayerSP\EntityPlayerSP.cpp" />
     <ClCompile Include="src\minecraft\entity\EntityLivingBase\EntityLivingBase.cpp" />

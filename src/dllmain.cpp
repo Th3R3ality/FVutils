@@ -13,21 +13,21 @@
 #include "hooks/hooks.h"
 #include "java/java.h"
 #include "minecraft/minecraft.h"
-
+#include "JavaHook/JavaHook.h"
 
 void mainthread( HMODULE hmodule )
 {
 	AllocConsole();
 	FILE* f;
-	freopen_s(&f, "CONOUT$", "w", stdout);
-	printf("hello\n");
-	printf("BaseAddress : %x\n", GetModuleHandleA(NULL));
+	freopen_s( &f, "CONOUT$", "w", stdout );
+	printf( "hello\n" );
+	printf( "BaseAddress : %x\n", GetModuleHandleA( NULL ) );
 
 
 	java::Init();
 	minecraft::Init();
-
 	hooks::Init();
+	
 
 	jclass nhpc = java::FindClass( "net.minecraft.client.network.NetHandlerPlayClient" );
 
@@ -46,17 +46,23 @@ void mainthread( HMODULE hmodule )
 		std::this_thread::sleep_for( std::chrono::milliseconds( 5 ) );
 	}
 
-	java::env->DeleteLocalRef( nhpc );
+	//if ( nhpc )
+	//	java::env->DeleteLocalRef( nhpc );
 
+	//java::env->ExceptionClear();
+	printf( "destroying hooks\n" );
 	hooks::Destroy();
 
+	printf( "destroying minecraft\n" );
 	minecraft::Destroy();
+
+	printf( "destroying java\n" );
 	java::Destroy();
 
 	if ( HWND consoleHwnd = GetConsoleWindow() )
 	{
 		FreeConsole();
-		PostMessageA(consoleHwnd, WM_CLOSE, 0, 0);
+		PostMessageA( consoleHwnd, WM_CLOSE, 0, 0 );
 	}
 	FreeLibraryAndExitThread( hmodule, 0 );
 }
