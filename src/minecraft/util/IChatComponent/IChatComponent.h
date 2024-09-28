@@ -15,8 +15,8 @@ struct CURRENTCLASSNAME : public IClass
 	{
 		INITIALISER_HEADER( );
 
-		METHOD( "getFormattedText", "()Ljava/lang/String;" );
-		METHOD( "getUnformattedText", "()Ljava/lang/String;" );
+		GET_METHOD( "getFormattedText", "()Ljava/lang/String;" );
+		GET_METHOD( "getUnformattedText", "()Ljava/lang/String;" );
 
 	}
 

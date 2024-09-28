@@ -50,9 +50,22 @@ if ( CURRENTCLASSNAME :: initialised ) { return; } \
 CURRENTCLASSNAME :: klass = java::FindClass( CURRENTCLASSNAME :: klassPath ); \
 printf("Class [" EXPANDSTR(CURRENTCLASSNAME) "]: %p\n", CURRENTCLASSNAME :: klass);
 
-#define METHOD(name, sig) \
+#define GET_METHOD(name, sig) \
 CURRENTCLASSNAME :: methodIDs[ name ] = java::env->GetMethodID( CURRENTCLASSNAME :: klass, name, sig ); \
 printf("  Method ["##name##"]: %p\n", CURRENTCLASSNAME :: methodIDs[ name ]);
+
+#define GET_STATIC_METHOD(name, sig) \
+CURRENTCLASSNAME :: methodIDs[ name ] = java::env->GetStaticMethodID( CURRENTCLASSNAME :: klass, name, sig ); \
+printf("  Static Method ["##name##"]: %p\n", CURRENTCLASSNAME :: methodIDs[ name ]);
+
+#define GET_FIELD(name, sig) \
+CURRENTCLASSNAME :: fieldIDs[ name ] = java::env->GetFieldID( CURRENTCLASSNAME :: klass, name, sig ); \
+printf("  Field ["##name##"]: %p\n", CURRENTCLASSNAME :: methodIDs[ name ]);
+
+#define GET_STATIC_FIELD(name, sig) \
+CURRENTCLASSNAME :: fieldIDs[ name ] = java::env->GetStaticFieldID( CURRENTCLASSNAME :: klass, name, sig ); \
+printf("  Static Field ["##name##"]: %p\n", CURRENTCLASSNAME :: methodIDs[ name ]);
+
 
 struct INITIALISER_TYPE
 {

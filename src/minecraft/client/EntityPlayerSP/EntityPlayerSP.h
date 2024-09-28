@@ -13,14 +13,14 @@ struct CURRENTCLASSNAME : public EntityPlayer
 	{
 		INITIALISER_HEADER();
 
-		METHOD( "getPosition", "()Lnet/minecraft/util/BlockPos;" );
-		METHOD( "setSprinting", "(Z)V" );
-		METHOD( "swingItem", "()V" );
+		GET_METHOD( "getPosition", "()Lnet/minecraft/util/BlockPos;" );
+		GET_METHOD( "setSprinting", "(Z)V" );
+		GET_METHOD( "swingItem", "()V" );
 	}
 
 	STRUCTORS();
 
-	jobject GetInstance();
+	static jobject GetStaticInstance();
 };
 
 

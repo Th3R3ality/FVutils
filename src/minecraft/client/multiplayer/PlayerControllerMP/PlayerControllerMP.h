@@ -15,7 +15,7 @@ struct CURRENTCLASSNAME : IClass
 	{
 		INITIALISER_HEADER();
 
-		METHOD( "attackEntity", "(Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/entity/Entity;)V" );
+		GET_METHOD( "attackEntity", "(Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/entity/Entity;)V" );
 	}
 
 	STRUCTORS();

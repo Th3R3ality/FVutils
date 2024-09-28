@@ -117,6 +117,7 @@
     <ClInclude Include="src\minecraft\client\EntityPlayerSP\EntityPlayerSP.h" />
     <ClInclude Include="src\minecraft\client\multiplayer\PlayerControllerMP\PlayerControllerMP.h" />
     <ClInclude Include="src\minecraft\client\NetHandlerPlayClient\NetHandlerPlayClient.h" />
+    <ClInclude Include="src\minecraft\client\renderer\ActiveRenderInfo\ActiveRenderInfo.h" />
     <ClInclude Include="src\minecraft\entity\EntityLivingBase\EntityLivingBase.h" />
     <ClInclude Include="src\minecraft\entity\EntityPlayer\EntityPlayer.h" />
     <ClInclude Include="src\minecraft\entity\Entity\Entity.h" />
@@ -157,6 +158,7 @@
     <ClCompile Include="src\minecraft\client\EntityPlayerSP\EntityPlayerSP.cpp" />
     <ClCompile Include="src\minecraft\client\multiplayer\PlayerControllerMP\PlayerControllerMP.cpp" />
     <ClCompile Include="src\minecraft\client\NetHandlerPlayClient\NetHandlerPlayClient.cpp" />
+    <ClCompile Include="src\minecraft\client\renderer\ActiveRenderInfo\ActiveRenderInfo.cpp" />
     <ClCompile Include="src\minecraft\client\WorldClient\WorldClient.cpp" />
     <ClCompile Include="src\minecraft\entity\EntityLivingBase\EntityLivingBase.cpp" />
     <ClCompile Include="src\minecraft\entity\EntityPlayer\EntityPlayer.cpp" />

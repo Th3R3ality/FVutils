@@ -14,7 +14,7 @@ struct CURRENTCLASSNAME : IClass
 		INITIALISER_HEADER();
 
 		//NetHandlerPlayClient::methodIDs["handleChat"] = java::env->GetMethodID( NetHandlerPlayClient::klass, "handleChat", "(Lnet/minecraft/network/play/server/S02PacketChat;)V" );
-		METHOD( "handleChat", "(Lnet/minecraft/network/play/server/S02PacketChat;)V" );
+		GET_METHOD( "handleChat", "(Lnet/minecraft/network/play/server/S02PacketChat;)V" );
 	}
 
 	STRUCTORS();

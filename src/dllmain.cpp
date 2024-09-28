@@ -26,7 +26,6 @@ void mainthread( HMODULE hmodule )
 
 
 	java::Init();
-	minecraft::Init();
 	hooks::Init();
 
 	while ( !GetAsyncKeyState( VK_DELETE ) )
@@ -42,9 +41,6 @@ void mainthread( HMODULE hmodule )
 
 	printf( "destroying hooks\n" );
 	hooks::Destroy();
-
-	printf( "destroying minecraft\n" );
-	minecraft::Destroy();
 
 	printf( "destroying java\n" );
 	java::Destroy();

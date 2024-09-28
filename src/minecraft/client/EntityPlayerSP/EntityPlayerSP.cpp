@@ -3,7 +3,7 @@
 
 MAKE_INITIALISER( EntityPlayerSP );
 
-jobject EntityPlayerSP::GetInstance()
+jobject EntityPlayerSP::GetStaticInstance()
 {
-	return java::env->GetObjectField(minecraft::GetInstance(), minecraft::fieldIDs["thePlayer"]);
+	return java::env->GetObjectField(Minecraft::staticInstance, Minecraft::fieldIDs["thePlayer"]);
 }

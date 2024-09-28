@@ -132,6 +132,9 @@
     <ClInclude Include="src\minecraft\client\multiplayer\PlayerControllerMP\PlayerControllerMP.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\minecraft\client\renderer\ActiveRenderInfo\ActiveRenderInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dllmain.cpp">
@@ -231,6 +234,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\minecraft\client\multiplayer\PlayerControllerMP\PlayerControllerMP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\client\renderer\ActiveRenderInfo\ActiveRenderInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

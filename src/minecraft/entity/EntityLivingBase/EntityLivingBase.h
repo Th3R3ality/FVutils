@@ -14,6 +14,11 @@ struct CURRENTCLASSNAME : public Entity
 	static void Initialise()
 	{
 		INITIALISER_HEADER( );
+
+
+		GET_METHOD( "getHealth", "()F");
+		GET_METHOD( "getMaxHealth", "()F");
+		GET_METHOD( "canEntityBeSeen", "(Lnet/minecraft/entity/Entity;)Z");
 	}
 
 	STRUCTORS( );

@@ -18,9 +18,9 @@ struct CURRENTCLASSNAME : IClass
 	{
 		INITIALISER_HEADER();
 
-		METHOD( "getType", "()B" );
-		METHOD( "isChat", "()Z" );
-		METHOD( "getChatComponent", "()Lnet/minecraft/util/IChatComponent;" );
+		GET_METHOD( "getType", "()B" );
+		GET_METHOD( "isChat", "()Z" );
+		GET_METHOD( "getChatComponent", "()Lnet/minecraft/util/IChatComponent;" );
 
 	}
 

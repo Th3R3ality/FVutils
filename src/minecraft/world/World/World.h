@@ -15,6 +15,7 @@ struct CURRENTCLASSNAME : IClass
 	{
 		INITIALISER_HEADER();
 
+		GET_FIELD( "playerEntities", "Ljava/util/List;" );
 	}
 
 	STRUCTORS();
