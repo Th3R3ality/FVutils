@@ -4,11 +4,13 @@
 #include "IClass.h"
 #include "client/EntityPlayerSP/EntityPlayerSP.h"
 #include "client/WorldClient/WorldClient.h"
+#include "util/Timer/Timer.h"
 
 namespace minecraft
 {
 	inline std::unique_ptr<EntityPlayerSP> localPlayer = {};
 	inline std::unique_ptr<WorldClient> world = {};
+	inline std::unique_ptr<Timer> timer = {};
 
 	bool ValidateObjects();
 }

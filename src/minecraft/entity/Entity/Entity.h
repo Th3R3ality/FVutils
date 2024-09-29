@@ -1,12 +1,13 @@
 #pragma once
 #include <jni.h>
 #include "../../IClass.h"
+#include "../../../java/lang/String.h"
 
 #define CURRENTCLASSNAME Entity
 
 SETCLASSPATH( "net/minecraft/entity/Entity" );
 
-struct CURRENTCLASSNAME : public IClass
+struct Entity : public IClass
 {
 	using IClass::IClass;
 
@@ -34,6 +35,11 @@ struct CURRENTCLASSNAME : public IClass
 		GET_FIELD("prevRotationYaw", "F");
 		GET_FIELD("prevRotationPitch", "F");
 		GET_FIELD("boundingBox", "Lnet/minecraft/util/AxisAlignedBB;");
+	}
+
+	String getName()
+	{
+		return String(java::env->CallObjectMethod(this->instance, Entity::methodIDs["getName"]));
 	}
 
 	STRUCTORS( );

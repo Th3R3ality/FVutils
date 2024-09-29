@@ -97,6 +97,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\cache\cache.h" />
     <ClInclude Include="src\framework.h" />
     <ClInclude Include="src\global.h" />
     <ClInclude Include="src\hooks\hooks.h" />
@@ -112,6 +113,8 @@
     <ClInclude Include="src\JavaHook\JavaHook.h" />
     <ClInclude Include="src\JavaHook\Module.h" />
     <ClInclude Include="src\java\java.h" />
+    <ClInclude Include="src\java\lang\String.h" />
+    <ClInclude Include="src\java\util\List.h" />
     <ClInclude Include="src\jnihook\include\jnihook.h" />
     <ClInclude Include="src\jnihook\include\jnihook.hpp" />
     <ClInclude Include="src\minecraft\client\EntityPlayerSP\EntityPlayerSP.h" />
@@ -126,6 +129,7 @@
     <ClInclude Include="src\minecraft\client\WorldClient\WorldClient.h" />
     <ClInclude Include="src\minecraft\network\S02PacketChat\S02PacketChat.h" />
     <ClInclude Include="src\minecraft\util\IChatComponent\IChatComponent.h" />
+    <ClInclude Include="src\minecraft\util\Timer\Timer.h" />
     <ClInclude Include="src\minecraft\world\World\World.h" />
     <ClInclude Include="src\minhook\include\MinHook.h" />
     <ClInclude Include="src\minhook\src\buffer.h" />
@@ -139,6 +143,7 @@
     <ClInclude Include="src\render\render.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\cache\cache.cpp" />
     <ClCompile Include="src\dllmain.cpp" />
     <ClCompile Include="src\hooks\hk_wglSwapBuffers.cpp" />
     <ClCompile Include="src\hooks\hk_WndProc.cpp" />
@@ -155,6 +160,8 @@
     <ClCompile Include="src\JavaHook\JavaHook.cpp" />
     <ClCompile Include="src\JavaHook\Module.cpp" />
     <ClCompile Include="src\java\java.cpp" />
+    <ClCompile Include="src\java\lang\String.cpp" />
+    <ClCompile Include="src\java\util\List.cpp" />
     <ClCompile Include="src\minecraft\client\EntityPlayerSP\EntityPlayerSP.cpp" />
     <ClCompile Include="src\minecraft\client\multiplayer\PlayerControllerMP\PlayerControllerMP.cpp" />
     <ClCompile Include="src\minecraft\client\NetHandlerPlayClient\NetHandlerPlayClient.cpp" />
@@ -166,6 +173,7 @@
     <ClCompile Include="src\minecraft\minecraft.cpp" />
     <ClCompile Include="src\minecraft\network\S02PacketChat\S02PacketChat.cpp" />
     <ClCompile Include="src\minecraft\util\IChatComponent\IChatComponent.cpp" />
+    <ClCompile Include="src\minecraft\util\Timer\Timer.cpp" />
     <ClCompile Include="src\minecraft\world\World\World.cpp" />
     <ClCompile Include="src\minhook\src\buffer.c" />
     <ClCompile Include="src\minhook\src\hde\hde32.c" />

@@ -5,7 +5,7 @@
 
 SETCLASSPATH( "net/minecraft/entity/EntityLivingBase" );
 
-struct CURRENTCLASSNAME : public Entity
+struct EntityLivingBase : public Entity
 {
 	using Entity::Entity;
 

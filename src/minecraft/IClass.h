@@ -60,11 +60,11 @@ printf("  Static Method ["##name##"]: %p\n", CURRENTCLASSNAME :: methodIDs[ name
 
 #define GET_FIELD(name, sig) \
 CURRENTCLASSNAME :: fieldIDs[ name ] = java::env->GetFieldID( CURRENTCLASSNAME :: klass, name, sig ); \
-printf("  Field ["##name##"]: %p\n", CURRENTCLASSNAME :: methodIDs[ name ]);
+printf("  Field ["##name##"]: %p\n", CURRENTCLASSNAME :: fieldIDs[ name ]);
 
 #define GET_STATIC_FIELD(name, sig) \
 CURRENTCLASSNAME :: fieldIDs[ name ] = java::env->GetStaticFieldID( CURRENTCLASSNAME :: klass, name, sig ); \
-printf("  Static Field ["##name##"]: %p\n", CURRENTCLASSNAME :: methodIDs[ name ]);
+printf("  Static Field ["##name##"]: %p\n", CURRENTCLASSNAME :: fieldIDs[ name ]);
 
 
 struct INITIALISER_TYPE

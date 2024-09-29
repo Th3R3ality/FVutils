@@ -14,6 +14,7 @@
 #include "java/java.h"
 #include "minecraft/minecraft.h"
 #include "JavaHook/JavaHook.h"
+#include "cache/cache.h"
 
 void mainthread( HMODULE hmodule )
 {
@@ -30,12 +31,10 @@ void mainthread( HMODULE hmodule )
 
 	while ( !GetAsyncKeyState( VK_DELETE ) )
 	{
-		if ( !minecraft::ValidateObjects() )
+		if ( minecraft::ValidateObjects() )
 		{
-			std::this_thread::sleep_for( std::chrono::milliseconds( 5 ) );
-			continue;
+			cache::UpdateCache();
 		}
-
 		std::this_thread::sleep_for( std::chrono::milliseconds( 5 ) );
 	}
 
