@@ -39,7 +39,8 @@ struct Entity : public IClass
 
 	String getName()
 	{
-		return String(java::env->CallObjectMethod(this->instance, Entity::methodIDs["getName"]));
+		jobject jstringobject = java::env->CallObjectMethod( this->instance, Entity::methodIDs[ "getName" ] );
+		return String( jstringobject );
 	}
 
 	STRUCTORS( );

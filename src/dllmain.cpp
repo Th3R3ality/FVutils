@@ -31,7 +31,7 @@ void mainthread( HMODULE hmodule )
 
 	while ( !GetAsyncKeyState( VK_DELETE ) )
 	{
-		if ( minecraft::ValidateObjects() )
+		if ( (minecraft::objectsAreValid = minecraft::ValidateObjects()) )
 		{
 			cache::UpdateCache();
 		}

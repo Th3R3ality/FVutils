@@ -12,6 +12,7 @@ namespace minecraft
 	inline std::unique_ptr<WorldClient> world = {};
 	inline std::unique_ptr<Timer> timer = {};
 
+	inline bool objectsAreValid = false;
 	bool ValidateObjects();
 }
 

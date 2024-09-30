@@ -5,7 +5,7 @@
 
 SETCLASSPATH( "net/minecraft/entity/player/EntityPlayer" );
 
-struct CURRENTCLASSNAME : public EntityLivingBase
+struct EntityPlayer : public EntityLivingBase
 {
 	using EntityLivingBase::EntityLivingBase;
 
@@ -16,7 +16,18 @@ struct CURRENTCLASSNAME : public EntityLivingBase
 		INITIALISER_HEADER( );
 	}
 
-	STRUCTORS( );
+	EntityPlayer( INITIALISER_TYPE )
+	{
+		java::classInitialisers.push_back( &Initialise );
+	}
+	EntityPlayer( jobject _instance )
+	{
+		instance = _instance;
+	}
+	~EntityPlayer()
+	{
+		if ( instance ) java::env->DeleteLocalRef( instance );
+	};
 };
 
 #undef CURRENTCLASSNAME

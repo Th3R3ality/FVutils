@@ -19,8 +19,12 @@ struct String : IClass
 
 	}
 
+	String() = default;
+
 	std::string ToString()
 	{
+		if ( this->instance == nullptr )
+			return "ERROR < ToString > NO INSTANCE SET";
 		jstring jStr = (jstring)this->instance;
 		const char* nativeStr = java::env->GetStringUTFChars(jStr, nullptr);
 		std::string ret = std::string(nativeStr);

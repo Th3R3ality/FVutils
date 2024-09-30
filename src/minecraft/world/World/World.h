@@ -10,7 +10,7 @@
 
 SETCLASSPATH( "net/minecraft/world/World" );
 
-struct CURRENTCLASSNAME : IClass
+struct World : IClass
 {
 	using IClass::IClass;
 
@@ -25,20 +25,21 @@ struct CURRENTCLASSNAME : IClass
 
 	std::vector<EntityPlayer> playerEntities()
 	{
-		List playerList = List( java::env->GetObjectField( instance, fieldIDs[ "playerEntities" ] ) );
-		jobjectArray playerArray = playerList.toArray();
-
 		std::vector<EntityPlayer> out;
+
+		jobject playerList = java::env->GetObjectField( instance, fieldIDs[ "playerEntities" ] );
+		jobjectArray playerArray = List(playerList).toArray();
 
 		jsize length = java::env->GetArrayLength( playerArray );
 		for ( jsize idx = 0; idx < length; idx++ )
 		{
-			EntityPlayer player = EntityPlayer( java::env->GetObjectArrayElement( playerArray, idx ) );
+			EntityPlayer player = java::env->GetObjectArrayElement( playerArray, idx );
 
 			if ( player.instance )
-				out.emplace_back( player );
+				out.push_back( player );
 		}
 
+		java::env->DeleteLocalRef( playerList );
 		java::env->DeleteLocalRef( playerArray );
 
 		return out;

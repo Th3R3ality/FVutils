@@ -5,7 +5,7 @@
 
 SETCLASSPATH( "java/util/List" );
 
-struct CURRENTCLASSNAME : IClass
+struct List : IClass
 {
 	STATICS();
 
