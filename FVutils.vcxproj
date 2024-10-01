@@ -62,7 +62,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(JAVA_HOME)include\win32;$(JAVA_HOME)include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -83,7 +83,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(JAVA_HOME)include\win32;$(JAVA_HOME)include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>

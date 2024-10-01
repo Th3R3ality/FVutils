@@ -5,9 +5,8 @@
 
 SETCLASSPATH( "net/minecraft/client/multiplayer/WorldClient" );
 
-struct CURRENTCLASSNAME : World
+struct WorldClient : World
 {
-	using World::World;
 
 	STATICS();
 
@@ -19,6 +18,5 @@ struct CURRENTCLASSNAME : World
 
 	STRUCTORS();
 };
-
 
 #undef CURRENTCLASSNAME

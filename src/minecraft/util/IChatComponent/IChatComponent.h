@@ -5,10 +5,8 @@
 
 SETCLASSPATH("net/minecraft/util/IChatComponent");
 
-struct CURRENTCLASSNAME : public IClass
+struct IChatComponent : public IClass
 {
-	using IClass::IClass;
-
 	STATICS();
 
 	static void Initialise()

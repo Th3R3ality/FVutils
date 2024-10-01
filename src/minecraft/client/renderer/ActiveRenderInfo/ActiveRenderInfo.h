@@ -5,10 +5,8 @@
 
 SETCLASSPATH("net/minecraft/client/renderer/ActiveRenderInfo");
 
-struct CURRENTCLASSNAME : IClass
+struct ActiveRenderInfo : IClass
 {
-	using IClass::IClass;
-
 	STATICS();
 
 	static void Initialise()

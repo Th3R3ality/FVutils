@@ -5,7 +5,7 @@
 
 SETCLASSPATH( "net/minecraft/util/Timer" );
 
-struct CURRENTCLASSNAME : IClass
+struct Timer : IClass
 {
 	STATICS();
 
@@ -18,3 +18,5 @@ struct CURRENTCLASSNAME : IClass
 
 	STRUCTORS();
 };
+
+#undef CURRENTCLASSNAME

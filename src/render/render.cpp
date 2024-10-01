@@ -27,7 +27,7 @@ namespace render
 		if ( !minecraft::objectsAreValid )
 			return;
 
-		//std::lock_guard<std::mutex> guard(cache::dataMutex);
+		std::lock_guard<std::mutex> guard(cache::dataMutex);
 
 		DoPlayers();
 		DoIndicators();
@@ -37,10 +37,10 @@ namespace render
 		ImGui::ShowDemoWindow();
 
 		ImGui::Begin("FVutils");
-		//for ( auto&& p : cache::data.players )
-		//{
-		//	ImGui::Text( p.name.c_str() );
-		//}
+		for ( auto&& p : cache::data.players )
+		{
+			ImGui::Text( p.name.c_str() );
+		}
 		ImGui::End();
 	}
 	void DoPlayers()

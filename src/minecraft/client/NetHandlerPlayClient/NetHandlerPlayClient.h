@@ -5,7 +5,7 @@
 
 SETCLASSPATH( "net/minecraft/client/network/NetHandlerPlayClient" );
 
-struct CURRENTCLASSNAME : IClass
+struct NetHandlerPlayClient : IClass
 {
 	STATICS();
 
@@ -20,6 +20,5 @@ struct CURRENTCLASSNAME : IClass
 	STRUCTORS();
 
 };
-
 
 #undef CURRENTCLASSNAME

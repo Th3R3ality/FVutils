@@ -5,13 +5,8 @@
 
 SETCLASSPATH( "net/minecraft/network/play/server/S02PacketChat" );
 
-struct CURRENTCLASSNAME : IClass
+struct S02PacketChat : IClass
 {
-	//static std::map<std::string, jmethodID> methodIDs; 
-	//static std::map<std::string, jfieldID> fieldIDs; 
-	//static jclass klass; 
-	//static bool initialised; 
-	//static const char* klassPath;
 	STATICS();
 
 	static void Initialise()
@@ -24,23 +19,7 @@ struct CURRENTCLASSNAME : IClass
 
 	}
 
-	//S02PacketChat(INITIALISER_TYPE) {
-	//	java::classInitialisers.push_back(&Initialise);
-	//} 
-	//S02PacketChat(jobject _instance) {
-	//	instance = _instance;
-	//} 
-	//~S02PacketChat() {
-	//	if (instance) java::env->DeleteLocalRef(instance);
-	//}
 	STRUCTORS();
-
-
-
 };
-
-
-
-
 
 #undef CURRENTCLASSNAME

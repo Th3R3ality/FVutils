@@ -14,6 +14,7 @@ static bool initialised; \
 static const char* klassPath; \
 
 #define STRUCTORS( )\
+CURRENTCLASSNAME() = default; \
 CURRENTCLASSNAME ( INITIALISER_TYPE ) \
 { \
 	java::classInitialisers.push_back(&Initialise); \
@@ -24,10 +25,10 @@ CURRENTCLASSNAME ( jobject _instance ) \
 } \
  \
 ~ CURRENTCLASSNAME () \
-{ \
-	if ( instance ) \
-		java::env->DeleteLocalRef( instance ); \
-}
+{}
+
+//	if ( instance )
+//		java::env->DeleteLocalRef( instance );
 
 #define EXPAND(x) x
 
@@ -81,13 +82,9 @@ struct IClass
 
 	jobject instance = 0;
 
-
-	IClass()
-	{
-
-	}
 	static void Initialise() {}
 
+	IClass() = default;
 	IClass( INITIALISER_TYPE )
 	{
 		java::classInitialisers.push_back( &Initialise );
@@ -96,24 +93,10 @@ struct IClass
 		instance = _instance;
 	} ~IClass()
 	{
-		if ( instance ) java::env->DeleteLocalRef( instance );
+		//if ( instance ) java::env->DeleteLocalRef( instance );
 	}
-
-
-	//IClass( INITIALISER_TYPE )
-	//{
-	//	initialised = false;
-	//	java::classInitialisers.push_back(&Initialise);
-	//}
-
-
-	//IClass( jobject _instance )
-	//{
-	//	instance = _instance;
-	//}
-
-	static jclass GetClass()
+	void Deref()
 	{
-		return IClass::klass;
+		if ( instance ) java::env->DeleteLocalRef( instance );
 	}
 };

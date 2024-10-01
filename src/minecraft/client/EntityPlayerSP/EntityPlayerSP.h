@@ -5,7 +5,7 @@
 
 SETCLASSPATH( "net/minecraft/entity/EntityLivingBase" );
 
-struct CURRENTCLASSNAME : public EntityPlayer
+struct EntityPlayerSP : public EntityPlayer
 {
 	STATICS();
 

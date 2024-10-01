@@ -13,10 +13,7 @@ namespace cache
 
 		PlayerData( EntityPlayer player )
 		{
-			auto Str = player.getName();
-			
-			this->name = Str.ToString();
-			//this->name = player.getName().ToString();
+			this->name = player.getName().ToString();
 		}
 
 		std::string name = "";

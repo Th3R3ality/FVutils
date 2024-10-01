@@ -5,10 +5,8 @@
 
 SETCLASSPATH( "net/minecraft/client/multiplayer/PlayerControllerMP" );
 
-struct CURRENTCLASSNAME : IClass
+struct PlayerControllerMP : IClass
 {
-	using IClass::IClass;
-
 	STATICS();
 
 	static void Initialise()

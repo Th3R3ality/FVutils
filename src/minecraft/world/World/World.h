@@ -12,8 +12,6 @@ SETCLASSPATH( "net/minecraft/world/World" );
 
 struct World : IClass
 {
-	using IClass::IClass;
-
 	STATICS();
 
 	static void Initialise()
@@ -22,6 +20,8 @@ struct World : IClass
 
 		GET_FIELD( "playerEntities", "Ljava/util/List;" );
 	}
+
+	STRUCTORS();
 
 	std::vector<EntityPlayer> playerEntities()
 	{
@@ -45,8 +45,6 @@ struct World : IClass
 		return out;
 	}
 
-	STRUCTORS();
 };
-
 
 #undef CURRENTCLASSNAME

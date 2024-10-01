@@ -9,8 +9,6 @@ SETCLASSPATH( "net/minecraft/entity/Entity" );
 
 struct Entity : public IClass
 {
-	using IClass::IClass;
-
 	STATICS();
 
 	static void Initialise()
@@ -45,6 +43,5 @@ struct Entity : public IClass
 
 	STRUCTORS( );
 };
-
 
 #undef CURRENTCLASSNAME

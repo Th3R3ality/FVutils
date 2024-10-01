@@ -9,8 +9,6 @@ SETCLASSPATH( "java/lang/String" );
 
 struct String : IClass
 {
-	using IClass::IClass;
-
 	STATICS();
 
 	static void Initialise()
@@ -18,8 +16,6 @@ struct String : IClass
 		INITIALISER_HEADER();
 
 	}
-
-	String() = default;
 
 	std::string ToString()
 	{

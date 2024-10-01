@@ -21,11 +21,8 @@ namespace minecraft
 
 SETCLASSPATH("net/minecraft/client/Minecraft");
 
-struct CURRENTCLASSNAME : IClass
+struct Minecraft : IClass
 {
-	using IClass::IClass;
-
-
 	STATICS();
 
 	static jobject staticInstance;
@@ -50,8 +47,6 @@ struct CURRENTCLASSNAME : IClass
 
 		GetStaticInstance();
 	}
-
-
 
 	STRUCTORS();
 

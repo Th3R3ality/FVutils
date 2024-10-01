@@ -7,8 +7,6 @@ SETCLASSPATH( "net/minecraft/entity/EntityLivingBase" );
 
 struct EntityLivingBase : public Entity
 {
-	using Entity::Entity;
-
 	STATICS();
 
 	static void Initialise()
