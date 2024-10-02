@@ -4,7 +4,7 @@
 #include <string>
 #include <map>
 
-#include "../java/java.h"
+#include <java.h>
 
 #define STATICS() \
 static std::map<std::string, jmethodID> methodIDs; \
@@ -25,10 +25,10 @@ CURRENTCLASSNAME ( jobject _instance ) \
 } \
  \
 ~ CURRENTCLASSNAME () \
-{}
+{	if ( instance && !this->noDeref ) java::env->DeleteLocalRef( instance ); }
 
-//	if ( instance )
-//		java::env->DeleteLocalRef( instance );
+//
+//
 
 #define EXPAND(x) x
 
@@ -81,6 +81,7 @@ struct IClass
 	static const char* klassPath;
 
 	jobject instance = 0;
+	bool noDeref = false;
 
 	static void Initialise() {}
 
@@ -93,7 +94,7 @@ struct IClass
 		instance = _instance;
 	} ~IClass()
 	{
-		//if ( instance ) java::env->DeleteLocalRef( instance );
+		if ( instance && !noDeref ) java::env->DeleteLocalRef( instance );
 	}
 	void Deref()
 	{

@@ -1,5 +1,5 @@
 #pragma once
-#include "../../minecraft/IClass.h"
+#include <IClass.h>
 
 #define CURRENTCLASSNAME List
 

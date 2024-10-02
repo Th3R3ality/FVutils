@@ -48,11 +48,13 @@
     <OutDir>$(SolutionDir)bin\</OutDir>
     <IntDir>$(SolutionDir)bin\intermediate\</IntDir>
     <TargetName>$(ProjectName)_$(Configuration)</TargetName>
+    <IncludePath>$(SolutionDir)src\java;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin\</OutDir>
     <IntDir>$(SolutionDir)bin\intermediate\</IntDir>
     <TargetName>$(ProjectName)_$(Configuration)</TargetName>
+    <IncludePath>$(SolutionDir)src\java;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -118,13 +120,30 @@
     <ClInclude Include="src\jnihook\include\jnihook.h" />
     <ClInclude Include="src\jnihook\include\jnihook.hpp" />
     <ClInclude Include="src\minecraft\client\EntityPlayerSP\EntityPlayerSP.h" />
+    <ClInclude Include="src\minecraft\client\entity\AbstractClientPlayer\AbstractClientPlayer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\minecraft\client\entity\EntityOtherPlayerMP\EntityOtherPlayerMP.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="src\minecraft\client\multiplayer\PlayerControllerMP\PlayerControllerMP.h" />
     <ClInclude Include="src\minecraft\client\NetHandlerPlayClient\NetHandlerPlayClient.h" />
     <ClInclude Include="src\minecraft\client\renderer\ActiveRenderInfo\ActiveRenderInfo.h" />
+    <ClInclude Include="src\minecraft\client\renderer\entity\RenderLivingEntity\RenderLivingEntity.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\minecraft\client\renderer\entity\RenderPlayer\RenderPlayer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\minecraft\client\renderer\entity\Render\Render.h" />
     <ClInclude Include="src\minecraft\entity\EntityLivingBase\EntityLivingBase.h" />
     <ClInclude Include="src\minecraft\entity\EntityPlayer\EntityPlayer.h" />
     <ClInclude Include="src\minecraft\entity\Entity\Entity.h" />
-    <ClInclude Include="src\minecraft\IClass.h" />
+    <ClInclude Include="src\java\IClass.h" />
     <ClInclude Include="src\minecraft\minecraft.h" />
     <ClInclude Include="src\minecraft\client\WorldClient\WorldClient.h" />
     <ClInclude Include="src\minecraft\network\S02PacketChat\S02PacketChat.h" />
@@ -139,8 +158,8 @@
     <ClInclude Include="src\minhook\src\hde\table32.h" />
     <ClInclude Include="src\minhook\src\hde\table64.h" />
     <ClInclude Include="src\minhook\src\trampoline.h" />
-    <ClInclude Include="src\render\helper.h" />
-    <ClInclude Include="src\render\render.h" />
+    <ClInclude Include="src\rendering\helper.h" />
+    <ClInclude Include="src\rendering\rendering.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cache\cache.cpp" />
@@ -149,6 +168,11 @@
     <ClCompile Include="src\hooks\hk_WndProc.cpp" />
     <ClCompile Include="src\hooks\jhk_handleChat.cpp" />
     <ClCompile Include="src\hooks\hooks.cpp" />
+    <ClCompile Include="src\hooks\jhk_renderName.cpp" />
+    <ClCompile Include="src\hooks\jhk_runTick.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="src\HotSpot\HotSpot.cpp" />
     <ClCompile Include="src\imgui\imgui.cpp" />
     <ClCompile Include="src\imgui\imgui_demo.cpp" />
@@ -163,9 +187,26 @@
     <ClCompile Include="src\java\lang\String.cpp" />
     <ClCompile Include="src\java\util\List.cpp" />
     <ClCompile Include="src\minecraft\client\EntityPlayerSP\EntityPlayerSP.cpp" />
+    <ClCompile Include="src\minecraft\client\entity\AbstractClientPlayer\AbstractClientPlayer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\client\entity\EntityOtherPlayerMP\EntityOtherPlayerMP.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="src\minecraft\client\multiplayer\PlayerControllerMP\PlayerControllerMP.cpp" />
     <ClCompile Include="src\minecraft\client\NetHandlerPlayClient\NetHandlerPlayClient.cpp" />
     <ClCompile Include="src\minecraft\client\renderer\ActiveRenderInfo\ActiveRenderInfo.cpp" />
+    <ClCompile Include="src\minecraft\client\renderer\entity\RenderLivingEntity\RenderLivingEntity.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\client\renderer\entity\RenderPlayer\RenderPlayer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\client\renderer\entity\Render\Render.cpp" />
     <ClCompile Include="src\minecraft\client\WorldClient\WorldClient.cpp" />
     <ClCompile Include="src\minecraft\entity\EntityLivingBase\EntityLivingBase.cpp" />
     <ClCompile Include="src\minecraft\entity\EntityPlayer\EntityPlayer.cpp" />
@@ -180,7 +221,7 @@
     <ClCompile Include="src\minhook\src\hde\hde64.c" />
     <ClCompile Include="src\minhook\src\hook.c" />
     <ClCompile Include="src\minhook\src\trampoline.c" />
-    <ClCompile Include="src\render\render.cpp" />
+    <ClCompile Include="src\rendering\rendering.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

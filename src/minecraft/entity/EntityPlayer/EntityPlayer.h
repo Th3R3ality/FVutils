@@ -1,5 +1,6 @@
 #pragma once
 #include "../EntityLivingBase/EntityLivingBase.h"
+#include <iostream>
 
 #define CURRENTCLASSNAME EntityPlayer
 
@@ -14,7 +15,18 @@ struct EntityPlayer : public EntityLivingBase
 		INITIALISER_HEADER( );
 	}
 
-	STRUCTORS();
+	EntityPlayer() = default; EntityPlayer( INITIALISER_TYPE )
+	{
+		java::classInitialisers.push_back( &Initialise );
+	} EntityPlayer( jobject _instance )
+	{
+		instance = _instance;
+		//printf( "EntityPlayer( instance ) : %p\n", instance );
+	} ~EntityPlayer()
+	{
+		//printf( "~EntityPlayer() : %p%s\n", instance, noDeref ? " : noDeref" : "");
+		if ( instance && !this->noDeref ) java::env->DeleteLocalRef( instance );
+	};
 };
 
 #undef CURRENTCLASSNAME

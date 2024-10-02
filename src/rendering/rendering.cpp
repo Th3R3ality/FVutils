@@ -1,4 +1,4 @@
-#include "render.h"
+#include "rendering.h"
 
 #include <format>
 
@@ -6,7 +6,7 @@
 #include "../minecraft/minecraft.h"
 #include "../cache/cache.h"
 
-namespace render
+namespace rendering
 {
 	void DoGui();
 	void DoPlayers();
@@ -17,11 +17,11 @@ namespace render
 	void DoFrame()
 	{
 		RECT _clientRect = {};
-		GetClientRect( render::window, &_clientRect );
+		GetClientRect( rendering::window, &_clientRect );
 		clientRect.x = _clientRect.right;
 		clientRect.y = _clientRect.bottom;
 
-		if ( render::GuiOpen )
+		if ( rendering::GuiOpen )
 			DoGui();
 
 		if ( !minecraft::objectsAreValid )
@@ -39,7 +39,20 @@ namespace render
 		ImGui::Begin("FVutils");
 		for ( auto&& p : cache::data.players )
 		{
-			ImGui::Text( p.name.c_str() );
+			bool isTitan = true;
+			const char TITAN[] = "\xC2\xA7\x62\xE2\xAD\x90";
+			int idx = 0;
+			for ( int i = 0; i < sizeof(TITAN) - 1; i++ )
+			{
+				if ( p.name.size() <= i || p.name.c_str()[i] != TITAN[ i ] )
+				{
+					isTitan = false;
+					break;
+				}
+			}
+
+
+			ImGui::TextColored( isTitan ? ImColor(0xFFFF8888) : ImColor(0xFF88FF88), "%s", p.name.c_str());
 		}
 		ImGui::End();
 	}

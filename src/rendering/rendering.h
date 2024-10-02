@@ -7,7 +7,7 @@
 #include "../imgui/imgui_impl_opengl2.h"
 #include "../imgui/imgui.h"
 
-namespace render
+namespace rendering
 {
 	inline HGLRC glContext = nullptr;
 	inline HDC hdc = nullptr;

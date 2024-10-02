@@ -1,6 +1,7 @@
 #include "cache.h"
 #include "../minecraft/minecraft.h"
 
+#include <iostream>
 #include <mutex>
 #include <string>
 
@@ -10,14 +11,15 @@ namespace cache
 	{
 		std::lock_guard<std::mutex> guard( dataMutex );
 
-		auto playerEntities = minecraft::world->playerEntities();
+		std::vector<EntityPlayer> playerEntities;
+		minecraft::world->playerEntities(playerEntities);
 
 		int size = playerEntities.size();
 		data.players.resize( size );
 
 		for ( jint idx = 0; idx < size; idx++ )
 		{
-			cache::data.players.at(idx) = playerEntities.at( idx );
+			cache::data.players.at(idx) = PlayerData(playerEntities.at( idx ));
 		}
 	}
 }

@@ -1,8 +1,15 @@
 #include "hooks.h"
 #include <iostream>
 #include "../global.h"
-#include "../render/render.h"
+#include "../rendering/rendering.h"
 #include "../minecraft/client/NetHandlerPlayClient/NetHandlerPlayClient.h"
+#include "../minecraft/client/renderer/entity/RenderLivingEntity/RenderLivingEntity.h"
+#include "../minecraft/minecraft.h"
+
+#define HOOK(detour, methodID) \
+if (false == JavaHook::hook(methodID, detour)) \
+{ printf( "[-] failed hooking: " ## #detour ## "\n" ); } \
+else {printf( "[+] hooked: " ## #detour ## "\n" );}
 
 void hooks::Init()
 {
@@ -17,7 +24,9 @@ void hooks::Init()
 	if ( !java::initialised )
 		return;
 
-	JavaHook::hook( NetHandlerPlayClient::methodIDs["handleChat"], jhk_handleChat);
+	HOOK( jhk_handleChat, NetHandlerPlayClient::methodIDs[ "handleChat" ] );
+	HOOK( jhk_renderName, RenderLivingEntity::methodIDs[ "renderName" ] );
+	HOOK( jhk_runTick, Minecraft::methodIDs[ "runTick" ] );
 }
 
 void hooks::Destroy()

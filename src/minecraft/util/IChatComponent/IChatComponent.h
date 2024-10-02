@@ -1,9 +1,10 @@
 #pragma once
-#include "../../IClass.h"
+#include <IClass.h>
+#include "../../../java/lang/String.h"
 
 #define CURRENTCLASSNAME IChatComponent
 
-SETCLASSPATH("net/minecraft/util/IChatComponent");
+SETCLASSPATH( "net/minecraft/util/IChatComponent" );
 
 struct IChatComponent : public IClass
 {
@@ -11,14 +12,24 @@ struct IChatComponent : public IClass
 
 	static void Initialise()
 	{
-		INITIALISER_HEADER( );
+		INITIALISER_HEADER();
 
 		GET_METHOD( "getFormattedText", "()Ljava/lang/String;" );
 		GET_METHOD( "getUnformattedText", "()Ljava/lang/String;" );
 
 	}
 
-	STRUCTORS( );
+	String getFormattedText()
+	{
+		return java::env->CallObjectMethod( instance, IChatComponent::methodIDs[ "getFormattedText" ] );
+
+	}
+	String getUnformattedText()
+	{
+		return java::env->CallObjectMethod( instance, IChatComponent::methodIDs[ "getUnformattedText" ] );
+	}
+
+	STRUCTORS();
 };
 
 #undef CURRENTCLASSNAME

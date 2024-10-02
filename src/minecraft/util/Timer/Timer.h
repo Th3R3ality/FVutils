@@ -1,5 +1,5 @@
 #pragma once
-#include "../../IClass.h"
+#include <IClass.h>
 
 #define CURRENTCLASSNAME Timer
 

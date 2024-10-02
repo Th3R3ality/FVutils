@@ -66,7 +66,7 @@
     <ClInclude Include="src\minhook\src\trampoline.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\render\render.h">
+    <ClInclude Include="src\rendering\rendering.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\imgui\imgui_impl_opengl2.h">
@@ -81,7 +81,7 @@
     <ClInclude Include="src\minecraft\minecraft.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\minecraft\IClass.h">
+    <ClInclude Include="src\java\IClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\minecraft\client\EntityPlayerSP\EntityPlayerSP.h">
@@ -102,7 +102,7 @@
     <ClInclude Include="src\minecraft\client\WorldClient\WorldClient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\render\helper.h">
+    <ClInclude Include="src\rendering\helper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\jnihook\include\jnihook.h">
@@ -145,6 +145,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\java\lang\String.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\minecraft\client\renderer\entity\Render\Render.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\minecraft\client\renderer\entity\RenderPlayer\RenderPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\minecraft\client\renderer\entity\RenderLivingEntity\RenderLivingEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\minecraft\client\entity\EntityOtherPlayerMP\EntityOtherPlayerMP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\minecraft\client\entity\AbstractClientPlayer\AbstractClientPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -191,7 +206,7 @@
     <ClCompile Include="src\minhook\src\trampoline.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\render\render.cpp">
+    <ClCompile Include="src\rendering\rendering.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\hooks\hk_WndProc.cpp">
@@ -261,6 +276,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\java\lang\String.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\client\renderer\entity\Render\Render.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\jhk_renderName.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\client\renderer\entity\RenderPlayer\RenderPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\client\renderer\entity\RenderLivingEntity\RenderLivingEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\client\entity\EntityOtherPlayerMP\EntityOtherPlayerMP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\client\entity\AbstractClientPlayer\AbstractClientPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\jhk_runTick.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

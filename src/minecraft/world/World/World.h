@@ -1,5 +1,5 @@
 #pragma once
-#include "../../IClass.h"
+#include <IClass.h>
 
 #include <vector>
 
@@ -23,26 +23,25 @@ struct World : IClass
 
 	STRUCTORS();
 
-	std::vector<EntityPlayer> playerEntities()
+	void playerEntities(std::vector<EntityPlayer>& out)
 	{
-		std::vector<EntityPlayer> out;
-
-		jobject playerList = java::env->GetObjectField( instance, fieldIDs[ "playerEntities" ] );
-		jobjectArray playerArray = List(playerList).toArray();
+		List playerList = java::env->GetObjectField( instance, World::fieldIDs[ "playerEntities" ] );
+		jobjectArray playerArray = playerList.toArray();
 
 		jsize length = java::env->GetArrayLength( playerArray );
+		out.reserve(length);
+
 		for ( jsize idx = 0; idx < length; idx++ )
 		{
 			EntityPlayer player = java::env->GetObjectArrayElement( playerArray, idx );
-
 			if ( player.instance )
-				out.push_back( player );
+			{
+				out.emplace_back( player );
+			}
+			player.noDeref = true;
 		}
 
-		java::env->DeleteLocalRef( playerList );
 		java::env->DeleteLocalRef( playerArray );
-
-		return out;
 	}
 
 };

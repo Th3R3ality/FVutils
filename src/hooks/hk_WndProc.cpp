@@ -1,6 +1,6 @@
 #include "hooks.h"
 #include <Windows.h>
-#include "../render/render.h"
+#include "../rendering/rendering.h"
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 namespace hooks
@@ -10,12 +10,12 @@ namespace hooks
 		if (msg == WM_KEYDOWN)
 		{
 			if (wParam == VK_INSERT)
-				render::GuiOpen = !render::GuiOpen;
-			if (wParam == VK_ESCAPE && render::GuiOpen)
-				render::GuiOpen = false;
+				rendering::GuiOpen = !rendering::GuiOpen;
+			if (wParam == VK_ESCAPE && rendering::GuiOpen)
+				rendering::GuiOpen = false;
 		}
 
-		if ( render::GuiOpen && hooks::initialised )
+		if ( rendering::GuiOpen && hooks::initialised )
 		{
 			ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam);
 			return true;
