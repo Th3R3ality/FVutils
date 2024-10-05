@@ -19,7 +19,7 @@ struct Class : public IClass
 
 	String getName(JNIEnv* env = java::env)
 	{
-		return java::env->CallObjectMethod( instance, Class::methodIDs[ "getName" ] );
+		return env->CallObjectMethod( instance, Class::methodIDs[ "getName" ] );
 	}
 
 	STRUCTORS();

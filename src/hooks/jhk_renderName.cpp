@@ -21,13 +21,14 @@ namespace hooks
 		jobject _entity = JavaHook::get_jobject_param_at( frame, 1 );
 
 
-		//Class klass = env->GetObjectClass( _entity );
-		//klass.noDeref = true;
+		Class klass = env->GetObjectClass( _entity );
+		klass.noDeref = true;
 
-		//String klassStr = klass.getName( env );
-		//klassStr.noDeref = true;
+		String str = klass.getName( env );
+		str.noDeref = true;
 
 
+		//klass.Deref();
 
 		//if ( env->IsInstanceOf( instance, RenderPlayer::klass ) )
 		//{
