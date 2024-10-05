@@ -19,6 +19,21 @@ struct EntityLivingBase : public Entity
 		GET_METHOD( "canEntityBeSeen", "(Lnet/minecraft/entity/Entity;)Z");
 	}
 
+	float getHealth()
+	{
+		return java::env->CallFloatMethod(this->instance, EntityLivingBase::methodIDs["getHealth"]);
+	}
+
+	float getMaxHealth()
+	{
+		return java::env->CallFloatMethod(this->instance, EntityLivingBase::methodIDs["getMaxHealth"]);
+	}
+
+	bool canEntityBeSeen(jobject entityInstance)
+	{
+		return java::env->CallBooleanMethod(this->instance, EntityLivingBase::methodIDs["canEntityBeSeen"], entityInstance);
+	}
+
 	STRUCTORS( );
 };
 

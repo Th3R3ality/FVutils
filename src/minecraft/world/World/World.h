@@ -27,6 +27,7 @@ struct World : IClass
 	{
 		List playerList = java::env->GetObjectField( instance, World::fieldIDs[ "playerEntities" ] );
 		jobjectArray playerArray = playerList.toArray();
+		if ( playerArray == nullptr ) return;
 
 		jsize length = java::env->GetArrayLength( playerArray );
 		out.reserve(length);

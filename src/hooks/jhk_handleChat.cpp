@@ -18,7 +18,7 @@ namespace hooks
 
 		jboolean isChat = env->CallBooleanMethod( packet, S02PacketChat::methodIDs[ "isChat" ] );
 		//printf( "isChat : %i\n", (int)isChat );
-		jbyte getType = env->CallByteMethod( packet, S02PacketChat::methodIDs[ "getType" ] );
+		jbyte getType = env->CallByteMethod( packet, S02PacketChat::methodIDs[ "getType" ] ); 
 		//printf( "getType : %i\n", (int)getType );
 
 		IChatComponent chatComponent = env->CallObjectMethod( packet, S02PacketChat::methodIDs[ "getChatComponent" ] );
@@ -26,7 +26,7 @@ namespace hooks
 
 		{
 			String Str = env->CallObjectMethod( chatComponent.instance, IChatComponent::methodIDs[ "getUnformattedText" ] );
-
+			//Str.noDeref = true;
 			printf( "Chat: %s\n", Str.ToString().c_str() );
 		}
 

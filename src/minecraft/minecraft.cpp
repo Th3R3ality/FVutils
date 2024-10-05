@@ -29,6 +29,17 @@ namespace minecraft
 		else
 			java::env->DeleteLocalRef( worldClientInstance );
 
+		jobject timerInstance = java::env->GetObjectField( Minecraft::staticInstance, Minecraft::fieldIDs[ "timer" ] );
+		if ( !timerInstance )
+		{
+			timer = nullptr;
+			return false;
+		}
+		if ( timer == nullptr || timerInstance != timer->instance )
+			timer = std::make_unique<Timer>( timerInstance );
+		else
+			java::env->DeleteLocalRef( timerInstance );
+
 		return true;
 	}
 }

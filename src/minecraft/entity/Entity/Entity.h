@@ -3,6 +3,7 @@
 #include "IClass.h"
 #include "../../../java/lang/String.h"
 #include "../../util/IChatComponent/IChatComponent.h"
+#include "../../../util/math/vec.h"
 
 #define CURRENTCLASSNAME Entity
 
@@ -45,6 +46,37 @@ struct Entity : public IClass
 	{
 		return IChatComponent(java::env->CallObjectMethod( this->instance, Entity::methodIDs[ "getDisplayName" ] )).getUnformattedText();
 	}
+
+	fvec3 GetPos()
+	{
+		return fvec3{
+			(float)java::env->GetDoubleField(this->instance, Entity::fieldIDs["posX"]),
+			(float)java::env->GetDoubleField(this->instance, Entity::fieldIDs["posY"]),
+			(float)java::env->GetDoubleField(this->instance, Entity::fieldIDs["posZ"])
+		};
+	}
+
+	float GetHeight()
+	{
+		return java::env->GetFloatField(this->instance, Entity::fieldIDs["height"]);
+	}
+
+	fvec3 GetEyePos()
+	{
+		fvec3 pos = GetPos();
+		pos.y += this->GetHeight() * 0.85f;
+		return pos;
+	}
+
+	fvec3 GetLastTickPos()
+	{
+		return fvec3{
+			(float)java::env->GetDoubleField(this->instance, Entity::fieldIDs["lastTickPosX"]),
+			(float)java::env->GetDoubleField(this->instance, Entity::fieldIDs["lastTickPosY"]),
+			(float)java::env->GetDoubleField(this->instance, Entity::fieldIDs["lastTickPosZ"])
+		};
+	}
+
 
 	STRUCTORS();
 };

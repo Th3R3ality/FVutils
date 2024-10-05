@@ -100,7 +100,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\cache\cache.h" />
-    <ClInclude Include="src\framework.h" />
+    <ClInclude Include="src\fv\PlayerType.h" />
     <ClInclude Include="src\global.h" />
     <ClInclude Include="src\hooks\hooks.h" />
     <ClInclude Include="src\HotSpot\HotSpot.hpp" />
@@ -115,7 +115,19 @@
     <ClInclude Include="src\JavaHook\JavaHook.h" />
     <ClInclude Include="src\JavaHook\Module.h" />
     <ClInclude Include="src\java\java.h" />
+    <ClInclude Include="src\java\lang\Class.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="src\java\lang\String.h" />
+    <ClInclude Include="src\java\nio\DirectFloatBufferU\DirectFloatBufferU.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\java\nio\FloatBuffer\FloatBuffer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="src\java\util\List.h" />
     <ClInclude Include="src\jnihook\include\jnihook.h" />
     <ClInclude Include="src\jnihook\include\jnihook.hpp" />
@@ -160,6 +172,9 @@
     <ClInclude Include="src\minhook\src\trampoline.h" />
     <ClInclude Include="src\rendering\helper.h" />
     <ClInclude Include="src\rendering\rendering.h" />
+    <ClInclude Include="src\util\math\mathutils.h" />
+    <ClInclude Include="src\util\math\matrix.h" />
+    <ClInclude Include="src\util\math\vec.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cache\cache.cpp" />
@@ -184,7 +199,19 @@
     <ClCompile Include="src\JavaHook\JavaHook.cpp" />
     <ClCompile Include="src\JavaHook\Module.cpp" />
     <ClCompile Include="src\java\java.cpp" />
+    <ClCompile Include="src\java\lang\Class.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="src\java\lang\String.cpp" />
+    <ClCompile Include="src\java\nio\DirectFloatBufferU\DirectFloatBufferU.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="src\java\nio\FloatBuffer\FloatBuffer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="src\java\util\List.cpp" />
     <ClCompile Include="src\minecraft\client\EntityPlayerSP\EntityPlayerSP.cpp" />
     <ClCompile Include="src\minecraft\client\entity\AbstractClientPlayer\AbstractClientPlayer.cpp">
@@ -222,6 +249,7 @@
     <ClCompile Include="src\minhook\src\hook.c" />
     <ClCompile Include="src\minhook\src\trampoline.c" />
     <ClCompile Include="src\rendering\rendering.cpp" />
+    <ClCompile Include="src\util\math\mathutils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -23,8 +23,6 @@ void mainthread( HMODULE hmodule )
 	FILE* f;
 	freopen_s( &f, "CONOUT$", "w", stdout );
 	printf( "hello\n" );
-	printf( "BaseAddress : %x\n", GetModuleHandleA( NULL ) );
-
 
 	java::Init();
 	hooks::Init();

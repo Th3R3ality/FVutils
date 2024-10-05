@@ -2,9 +2,12 @@
 
 #include <format>
 
+#include <gl/GLU.h>
+
 #include "helper.h"
 #include "../minecraft/minecraft.h"
 #include "../cache/cache.h"
+#include "../util/math/mathutils.h"
 
 namespace rendering
 {
@@ -39,26 +42,36 @@ namespace rendering
 		ImGui::Begin("FVutils");
 		for ( auto&& p : cache::data.players )
 		{
-			bool isTitan = true;
-			const char TITAN[] = "\xC2\xA7\x62\xE2\xAD\x90";
-			int idx = 0;
-			for ( int i = 0; i < sizeof(TITAN) - 1; i++ )
-			{
-				if ( p.name.size() <= i || p.name.c_str()[i] != TITAN[ i ] )
-				{
-					isTitan = false;
-					break;
-				}
-			}
 
-
-			ImGui::TextColored( isTitan ? ImColor(0xFFFF8888) : ImColor(0xFF88FF88), "%s", p.name.c_str());
+			ImGui::TextColored( p.type == fv::PlayerType::titan ? ImColor(0xFFFF8888) : ImColor(0xFF88FF88), "%s", p.name.c_str());
 		}
 		ImGui::End();
 	}
 	void DoPlayers()
 	{
+		ImGui::SetNextWindowPos( ImVec2( 0, 0 ) );
+		ImGui::SetNextWindowSize( clientRect );
+		ImGui::Begin( "Overlay", nullptr,
+			ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize |
+			ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar |
+			ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_NoBackground );
 
+		ImDrawList* drawlist = ImGui::GetWindowDrawList();
+
+		for ( auto& p : cache::data.players )
+		{
+			vec3<double> projected;
+			//gluProject( p.pos.x, p.pos.y, p.pos.z, (GLdouble*)&cache::data.modelView, (GLdouble*)&cache::data.projection, (GLint*)&cache::data.viewport, &projected.x, &projected.y, &projected.z );
+
+			std::optional<ivec2> xy = mathutils::WorldToScreen(p.pos, cache::data.modelView, cache::data.projection, clientRect.x, clientRect.y );
+
+			if ( xy.has_value() )
+			{
+				drawlist->AddText( xy.value(), ImColor( 0xffff00ff ), p.name.c_str() );
+			}
+		}
+
+		ImGui::End();
 	}
 	void DoIndicators()
 	{
@@ -82,8 +95,9 @@ namespace rendering
 		AddTextShadow( drawlist, ImVec2( clientRect.x - 200, textSize.y * 3 + 50 ), ImColor( 0, 255, 0, 255 ),
 			std::format( "World: {}", (void*)minecraft::world->instance ).c_str() );
 
-		//AddTextShadow( drawlist, ImVec2( clientRect.x - 200, textSize.y * 4.5 + 50 ), ImColor( 255, 0, 255, 255 ),
-		//	std::format( "Health {}", minecraft::localPlayer->getHealth() ).c_str() );
+		AddTextShadow( drawlist, ImVec2( clientRect.x - 200, textSize.y * 4.5 + 50 ), ImColor( 0, 255, 255, 255 ),
+			std::format( "Timer: {}", (void*)minecraft::timer->instance ).c_str() );
+
 
 		ImGui::End();
 	}

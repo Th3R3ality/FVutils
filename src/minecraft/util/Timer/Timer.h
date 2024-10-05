@@ -16,6 +16,11 @@ struct Timer : IClass
 		GET_FIELD( "renderPartialTicks", "F" );
 	}
 
+	float renderPartialTicks()
+	{
+		return java::env->GetFloatField(this->instance, Timer::fieldIDs["renderPartialTicks"]);
+	}
+
 	STRUCTORS();
 };
 

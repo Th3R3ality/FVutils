@@ -7,6 +7,7 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include <lang/Class.h>
 
 namespace hooks
 {
@@ -20,14 +21,12 @@ namespace hooks
 		jobject _entity = JavaHook::get_jobject_param_at( frame, 1 );
 
 
-		jclass klass = env->GetObjectClass( _entity );
+		//Class klass = env->GetObjectClass( _entity );
+		//klass.noDeref = true;
 
-		static jclass ccls = env->FindClass("java/lang/Class");
-		static jmethodID mid_getName = env->GetMethodID(ccls, "getName", "()Ljava/lang/String;");
-		String klassStr = env->CallObjectMethod(klass, mid_getName);
+		//String klassStr = klass.getName( env );
 		//klassStr.noDeref = true;
-		env->DeleteLocalRef( klass );
-		
+
 
 
 		//if ( env->IsInstanceOf( instance, RenderPlayer::klass ) )
