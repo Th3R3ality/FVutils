@@ -12,6 +12,7 @@ namespace cache
 
 	void UpdateCache()
 	{
+
 		// players
 		std::vector<EntityPlayer> playerEntities;
 		minecraft::world->playerEntities(playerEntities);
@@ -21,12 +22,22 @@ namespace cache
 
 		for ( jint idx = 0; idx < size; idx++ )
 		{
-			temp.players.at(idx) = PlayerData(playerEntities.at( idx ));
+			temp.players.at( idx ) = PlayerData( playerEntities.at( idx ) );
+
+			if ( temp.players.at( idx ).realname == minecraft::localPlayer->getName().ToString() )
+			{
+				temp.local = temp.players.at( idx );
+			}
 		}
+
+
 
 		temp.modelView = ActiveRenderInfo::ModelViewMatrix();
 		temp.projection = ActiveRenderInfo::ProjectionMatrix();
-		//temp.viewport = ActiveRenderInfo::Viewport();
+		temp.viewport = ActiveRenderInfo::Viewport();
+		temp.renderOffset = ActiveRenderInfo::RenderPos();
+		temp.renderPos = minecraft::renderManager->RenderPos();
+		temp.renderPos.y += 3.4f;
 
 		temp.renderPartialTicks = minecraft::timer->renderPartialTicks();
 

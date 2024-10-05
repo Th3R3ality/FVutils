@@ -26,7 +26,7 @@ void hooks::Init()
 
 	HOOK( jhk_handleChat, NetHandlerPlayClient::methodIDs[ "handleChat" ] );
 	HOOK( jhk_renderName, RenderLivingEntity::methodIDs[ "renderName" ] );
-	HOOK( jhk_runTick, Minecraft::methodIDs[ "runTick" ] );
+	//HOOK( jhk_runTick, Minecraft::methodIDs[ "runTick" ] );
 }
 
 void hooks::Destroy()

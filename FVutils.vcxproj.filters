@@ -180,6 +180,18 @@
     <ClInclude Include="src\java\nio\DirectFloatBufferU\DirectFloatBufferU.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\java\nio\DirectIntBufferU\DirectIntBufferU.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\java\nio\IntBuffer\IntBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\minecraft\util\Vec3\Vec3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\minecraft\client\renderer\entity\RenderManager\RenderManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dllmain.cpp">
@@ -327,6 +339,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\java\nio\DirectFloatBufferU\DirectFloatBufferU.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\java\nio\DirectIntBufferU\DirectIntBufferU.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\java\nio\IntBuffer\IntBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\util\Vec3\Vec3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\client\renderer\entity\RenderManager\RenderManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

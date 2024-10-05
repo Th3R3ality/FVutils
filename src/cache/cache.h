@@ -18,6 +18,7 @@ namespace cache
 		PlayerData() = default;
 		PlayerData( int i ){};
 
+		std::string realname = "";
 		std::string name = "";
 		fv::PlayerType type = fv::PlayerType::normal;
 		fvec3 pos = { 0.f };
@@ -29,6 +30,7 @@ namespace cache
 		{
 			std::string str = player.getDisplayName().ToString();
 
+			realname = player.getName().ToString();
 			type = fv::GetPlayerType( str );
 			pos = player.GetPos();
 			lastTickPos = player.GetLastTickPos();
@@ -57,11 +59,14 @@ namespace cache
 
 	struct CacheData
 	{
+		PlayerData local;
 		std::vector<PlayerData> players;
 		float renderPartialTicks;
 		matrix modelView;
 		matrix projection;
 		ivec4 viewport;
+		fvec3 renderPos;
+		fvec3 renderOffset;
 		
 	};
 	inline CacheData data = {};

@@ -40,6 +40,17 @@ namespace minecraft
 		else
 			java::env->DeleteLocalRef( timerInstance );
 
+		jobject rmInstance = java::env->GetObjectField( Minecraft::staticInstance, Minecraft::fieldIDs[ "renderManager" ] );
+		if ( !rmInstance )
+		{
+			renderManager = nullptr;
+			return false;
+		}
+		if ( renderManager == nullptr || rmInstance != renderManager->instance )
+			renderManager = std::make_unique<RenderManager>( rmInstance );
+		else
+			java::env->DeleteLocalRef( rmInstance );
+
 		return true;
 	}
 }

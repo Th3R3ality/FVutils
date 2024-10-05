@@ -1,5 +1,7 @@
 #pragma once
 
+#include <array>
+
 #include <IClass.h>
 #include "../../../util/math/vec.h"
 
@@ -22,13 +24,23 @@ struct FloatBuffer : public IClass
 	{
 		return java::env->CallFloatMethod( this->instance, FloatBuffer::methodIDs[ "get" ], index );
 	}
+	
+	fvec4 GetFloat4()
+	{
+		return fvec4{
+			java::env->CallFloatMethod( this->instance, FloatBuffer::methodIDs[ "get" ], 0 ),
+			java::env->CallFloatMethod( this->instance, FloatBuffer::methodIDs[ "get" ], 1 ),
+			java::env->CallFloatMethod( this->instance, FloatBuffer::methodIDs[ "get" ], 2 ),
+			java::env->CallFloatMethod( this->instance, FloatBuffer::methodIDs[ "get" ], 3 )
+		};
+	}
 
 	matrix GetMatrix()
 	{
-		std::vector<float> arr;
+		std::array<float, 16> arr;
 		for (int i = 0; i < 16; i++)
 		{
-			arr.push_back(java::env->CallFloatMethod(this->instance, FloatBuffer::methodIDs["get"], i));
+			arr.at(i) = java::env->CallFloatMethod(this->instance, FloatBuffer::methodIDs["get"], i);
 		}
 
 		matrix m;

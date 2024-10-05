@@ -5,12 +5,14 @@
 #include "client/EntityPlayerSP/EntityPlayerSP.h"
 #include "client/WorldClient/WorldClient.h"
 #include "util/Timer/Timer.h"
+#include "client/renderer/entity/RenderManager/RenderManager.h"
 
 namespace minecraft
 {
 	inline std::unique_ptr<EntityPlayerSP> localPlayer = {};
 	inline std::unique_ptr<WorldClient> world = {};
 	inline std::unique_ptr<Timer> timer = {};
+	inline std::unique_ptr<RenderManager> renderManager = {};
 
 	inline bool objectsAreValid = false;
 	bool ValidateObjects();

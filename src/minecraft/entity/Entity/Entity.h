@@ -50,9 +50,9 @@ struct Entity : public IClass
 	fvec3 GetPos()
 	{
 		return fvec3{
-			(float)java::env->GetDoubleField(this->instance, Entity::fieldIDs["posX"]),
-			(float)java::env->GetDoubleField(this->instance, Entity::fieldIDs["posY"]),
-			(float)java::env->GetDoubleField(this->instance, Entity::fieldIDs["posZ"])
+			(float)java::env->GetDoubleField(instance, Entity::fieldIDs["posX"]),
+			(float)java::env->GetDoubleField(instance, Entity::fieldIDs["posY"]),
+			(float)java::env->GetDoubleField(instance, Entity::fieldIDs["posZ"])
 		};
 	}
 

@@ -124,7 +124,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="src\java\nio\DirectIntBufferU\DirectIntBufferU.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="src\java\nio\FloatBuffer\FloatBuffer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\java\nio\IntBuffer\IntBuffer.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -147,6 +155,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="src\minecraft\client\renderer\entity\RenderManager\RenderManager.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="src\minecraft\client\renderer\entity\RenderPlayer\RenderPlayer.h">
       <SubType>
       </SubType>
@@ -161,6 +173,10 @@
     <ClInclude Include="src\minecraft\network\S02PacketChat\S02PacketChat.h" />
     <ClInclude Include="src\minecraft\util\IChatComponent\IChatComponent.h" />
     <ClInclude Include="src\minecraft\util\Timer\Timer.h" />
+    <ClInclude Include="src\minecraft\util\Vec3\Vec3.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="src\minecraft\world\World\World.h" />
     <ClInclude Include="src\minhook\include\MinHook.h" />
     <ClInclude Include="src\minhook\src\buffer.h" />
@@ -208,7 +224,15 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="src\java\nio\DirectIntBufferU\DirectIntBufferU.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="src\java\nio\FloatBuffer\FloatBuffer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="src\java\nio\IntBuffer\IntBuffer.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -229,6 +253,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="src\minecraft\client\renderer\entity\RenderManager\RenderManager.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="src\minecraft\client\renderer\entity\RenderPlayer\RenderPlayer.cpp">
       <SubType>
       </SubType>
@@ -242,6 +270,10 @@
     <ClCompile Include="src\minecraft\network\S02PacketChat\S02PacketChat.cpp" />
     <ClCompile Include="src\minecraft\util\IChatComponent\IChatComponent.cpp" />
     <ClCompile Include="src\minecraft\util\Timer\Timer.cpp" />
+    <ClCompile Include="src\minecraft\util\Vec3\Vec3.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="src\minecraft\world\World\World.cpp" />
     <ClCompile Include="src\minhook\src\buffer.c" />
     <ClCompile Include="src\minhook\src\hde\hde32.c" />

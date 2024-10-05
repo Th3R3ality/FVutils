@@ -3,13 +3,15 @@
 
 #include "../../../../util/math/vec.h"
 #include "../../../../java/nio/FloatBuffer/FloatBuffer.h"
+#include "../../../../java/nio/IntBuffer/IntBuffer.h"
 #include <lang/Class.h>
+#include "../../../util/Vec3/Vec3.h"
 
 #include <iostream>
 
 #define CURRENTCLASSNAME ActiveRenderInfo
 
-SETCLASSPATH("net/minecraft/client/renderer/ActiveRenderInfo");
+SETCLASSPATH( "net/minecraft/client/renderer/ActiveRenderInfo" );
 
 struct ActiveRenderInfo : IClass
 {
@@ -19,34 +21,47 @@ struct ActiveRenderInfo : IClass
 	{
 		INITIALISER_HEADER();
 
-		GET_STATIC_FIELD("PROJECTION", "Ljava/nio/FloatBuffer;");
-		GET_STATIC_FIELD("MODELVIEW", "Ljava/nio/FloatBuffer;");
+		GET_STATIC_FIELD( "PROJECTION", "Ljava/nio/FloatBuffer;" );
+		GET_STATIC_FIELD( "MODELVIEW", "Ljava/nio/FloatBuffer;" );
+		GET_STATIC_FIELD( "VIEWPORT", "Ljava/nio/IntBuffer;" );
+
+		GET_STATIC_METHOD( "getPosition", "()Lnet/minecraft/util/Vec3;" );
 	}
 
 	static matrix ProjectionMatrix()
 	{
-		jobject projection = java::env->GetStaticObjectField(ActiveRenderInfo::klass, ActiveRenderInfo::fieldIDs["PROJECTION"]);
-		matrix m = FloatBuffer(projection).GetMatrix();
+		jobject projection = java::env->GetStaticObjectField( ActiveRenderInfo::klass, ActiveRenderInfo::fieldIDs[ "PROJECTION" ] );
+		matrix m = FloatBuffer( projection ).GetMatrix();
 		//java::env->DeleteLocalRef(projection); // IClass derefs
 		return m;
 	}
 
 	static matrix ModelViewMatrix()
 	{
-		jobject modelView = java::env->GetStaticObjectField(ActiveRenderInfo::klass, ActiveRenderInfo::fieldIDs["MODELVIEW"]);
-		matrix m = FloatBuffer(modelView).GetMatrix();
+		jobject modelView = java::env->GetStaticObjectField( ActiveRenderInfo::klass, ActiveRenderInfo::fieldIDs[ "MODELVIEW" ] );
+		matrix m = FloatBuffer( modelView ).GetMatrix();
 		//java::env->DeleteLocalRef(modelView); // IClass derefs
 		return m;
 	}
 
 	static ivec4 Viewport()
 	{
-		jobject viewport = java::env->GetStaticObjectField(ActiveRenderInfo::klass, ActiveRenderInfo::fieldIDs["MODELVIEW"]);
+		jobject viewport = java::env->GetStaticObjectField( ActiveRenderInfo::klass, ActiveRenderInfo::fieldIDs[ "VIEWPORT" ] );
 
-		//Class klass = java::env->GetObjectClass( modelView );
+		ivec4 vec = IntBuffer( viewport ).GetInt4();
+
+		return vec;
+	}
+
+	static fvec3 RenderPos()
+	{
+		jobject vec3 = java::env->CallStaticObjectMethod( ActiveRenderInfo::klass, ActiveRenderInfo::methodIDs[ "getPosition" ] );
+
+		//Class klass = java::env->GetObjectClass(vec3);
+
 		//std::cout << klass.getName().ToString() << "\n";
-		java::env->DeleteLocalRef(viewport); // IClass derefs
-		return ivec4{};
+
+		return Vec3( vec3 ).fvec();
 	}
 
 	STRUCTORS();
