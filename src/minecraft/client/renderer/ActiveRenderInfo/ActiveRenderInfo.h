@@ -28,6 +28,30 @@ struct ActiveRenderInfo : IClass
 		GET_STATIC_METHOD( "getPosition", "()Lnet/minecraft/util/Vec3;" );
 	}
 
+	static std::array<double, 16> RawProjectionMatrix()
+	{
+		jobject matrix = java::env->GetStaticObjectField( ActiveRenderInfo::klass, ActiveRenderInfo::fieldIDs[ "PROJECTION" ] );
+		
+		std::vector<double> data = FloatBuffer( matrix ).GetFloatsAsDoubles( 16 );
+
+		std::array<double, 16> out;
+		std::copy_n( data.begin(), 16, out.begin() );
+
+		return out;
+	}
+
+	static std::array<double, 16> RawModelViewMatrix()
+	{
+		jobject matrix = java::env->GetStaticObjectField( ActiveRenderInfo::klass, ActiveRenderInfo::fieldIDs[ "MODELVIEW" ] );
+		
+		std::vector<double> data = FloatBuffer( matrix ).GetFloatsAsDoubles( 16 );
+
+		std::array<double, 16> out;
+		std::copy_n( data.begin(), 16, out.begin() );
+
+		return out;
+	}
+
 	static matrix ProjectionMatrix()
 	{
 		jobject projection = java::env->GetStaticObjectField( ActiveRenderInfo::klass, ActiveRenderInfo::fieldIDs[ "PROJECTION" ] );

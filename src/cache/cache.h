@@ -5,6 +5,7 @@
 #include <sstream>
 #include <iomanip>
 #include <iostream>
+#include <array>
 
 #include "../fv/PlayerType.h"
 #include "../util/math/vec.h"
@@ -62,6 +63,8 @@ namespace cache
 		PlayerData local;
 		std::vector<PlayerData> players;
 		float renderPartialTicks;
+		std::array<double, 16> _modelView;
+		std::array<double, 16> _projection;
 		matrix modelView;
 		matrix projection;
 		ivec4 viewport;

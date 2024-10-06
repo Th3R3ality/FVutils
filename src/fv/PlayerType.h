@@ -4,7 +4,7 @@
 
 namespace fv
 {
-	enum class PlayerType
+	enum class PlayerTypeEnum
 	{
 		normal,
 		titan,
@@ -14,24 +14,36 @@ namespace fv
 		vice,
 		inspektor
 	};
+	struct PlayerType
+	{
+		PlayerTypeEnum id;
+	};
 
 	inline PlayerType GetPlayerType( std::string displayName )
 	{
-		bool isTitan = true;
-		const char TITAN[] = "\xC2\xA7\x62\xE2\xAD\x90";
-		int idx = 0;
-		for ( int i = 0; i < sizeof(TITAN) - 1; i++ )
+		PlayerType out;
+
+		do // get player type
 		{
-			if ( displayName.size() <= i || displayName.c_str()[i] != TITAN[ i ] )
+			bool isTitan = true;
+			const char TITAN[] = "\xC2\xA7\x62\xE2\xAD\x90";
+			int idx = 0;
+			for ( int i = 0; i < sizeof( TITAN ) - 1; i++ )
 			{
-				isTitan = false;
+				if ( displayName.size() <= i || displayName.c_str()[ i ] != TITAN[ i ] )
+				{
+					isTitan = false;
+					break;
+				}
+			}
+			if ( isTitan )
+			{
+				out.id = PlayerTypeEnum::titan;
 				break;
 			}
-		}
-		if ( isTitan ) return PlayerType::titan;
+		} while ( false );
 
 
-
-		return PlayerType::normal;
+		return out;
 	}
 }

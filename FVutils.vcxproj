@@ -100,6 +100,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\cache\cache.h" />
+    <ClInclude Include="src\config\config.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="src\fv\PlayerType.h" />
     <ClInclude Include="src\global.h" />
     <ClInclude Include="src\hooks\hooks.h" />
@@ -194,6 +198,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cache\cache.cpp" />
+    <ClCompile Include="src\config\config.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="src\dllmain.cpp" />
     <ClCompile Include="src\hooks\hk_wglSwapBuffers.cpp" />
     <ClCompile Include="src\hooks\hk_WndProc.cpp" />

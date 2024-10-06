@@ -31,13 +31,17 @@ namespace cache
 		}
 
 
+		temp._modelView = ActiveRenderInfo::RawModelViewMatrix();
+		temp._projection = ActiveRenderInfo::RawProjectionMatrix();
 
 		temp.modelView = ActiveRenderInfo::ModelViewMatrix();
 		temp.projection = ActiveRenderInfo::ProjectionMatrix();
+
+
 		temp.viewport = ActiveRenderInfo::Viewport();
 		temp.renderOffset = ActiveRenderInfo::RenderPos();
 		temp.renderPos = minecraft::renderManager->RenderPos();
-		temp.renderPos.y += 3.4f;
+		//temp.renderPos.y += 3.4f;
 
 		temp.renderPartialTicks = minecraft::timer->renderPartialTicks();
 

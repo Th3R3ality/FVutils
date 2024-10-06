@@ -11,6 +11,7 @@
 
 namespace mathutils
 {
+	std::optional<ivec2> Project( fvec3 point );
 	std::optional<ivec2> WorldToScreen( fvec3 point, matrix modelView, matrix projection, int screenWidth, int screenHeight );
 
 

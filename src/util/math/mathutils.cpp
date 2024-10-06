@@ -1,19 +1,36 @@
 #include "mathutils.h"
 
+#include <Windows.h>
+#include <gl/GL.h>
+#include <gl/GLU.h>
+
 #include <cmath>
+
+#include "../cache/cache.h"
 
 namespace mathutils
 {
-	fvec4 Multiply(fvec4 v, matrix m) {
-		return fvec4{
-			v.x * m.m00 + v.y * m.m10 + v.z * m.m20 + v.w * m.m30,
-			v.x * m.m01 + v.y * m.m11 + v.z * m.m21 + v.w * m.m31,
-			v.x * m.m02 + v.y * m.m12 + v.z * m.m22 + v.w * m.m32,
-			v.x * m.m03 + v.y * m.m13 + v.z * m.m23 + v.w * m.m33
-		};
+	std::optional<ivec2> Project( fvec3 point )
+	{
+		vec3<double> projected;
+
+		if ( GL_TRUE == gluProject( point.x, point.y, point.z, cache::data._modelView.data(), cache::data._projection.data(), cache::data.viewport, &projected.x, &projected.y, &projected.z )
+			&& projected.z < 1.0 )
+		{
+			return ivec2( projected.x, projected.y );
+		}
+		return std::nullopt;
 	}
 
 
+	//fvec4 Multiply(fvec4 v, matrix m) {
+	//	return fvec4{
+	//		v.x * m.m00 + v.y * m.m10 + v.z * m.m20 + v.w * m.m30,
+	//		v.x * m.m01 + v.y * m.m11 + v.z * m.m21 + v.w * m.m31,
+	//		v.x * m.m02 + v.y * m.m12 + v.z * m.m22 + v.w * m.m32,
+	//		v.x * m.m03 + v.y * m.m13 + v.z * m.m23 + v.w * m.m33
+	//	};
+	//}
 	std::optional<ivec2> WorldToScreen( fvec3 point, matrix modelView, matrix projection, int screenWidth, int screenHeight )
 	{
 

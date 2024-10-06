@@ -27,7 +27,7 @@ void mainthread( HMODULE hmodule )
 	java::Init();
 	hooks::Init();
 
-	while ( !GetAsyncKeyState( VK_DELETE ) )
+	while ( !GetAsyncKeyState( VK_END ) )
 	{
 		if ( (minecraft::objectsAreValid = minecraft::ValidateObjects()) )
 		{

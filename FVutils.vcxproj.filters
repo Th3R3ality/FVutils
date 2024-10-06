@@ -192,6 +192,9 @@
     <ClInclude Include="src\minecraft\client\renderer\entity\RenderManager\RenderManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\config\config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dllmain.cpp">
@@ -351,6 +354,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\minecraft\client\renderer\entity\RenderManager\RenderManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\config\config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

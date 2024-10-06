@@ -35,6 +35,26 @@ struct FloatBuffer : public IClass
 		};
 	}
 
+	std::vector<float> GetFloats( int count )
+	{
+		std::vector<float> out;
+		for (int i = 0; i < count; i++)
+		{
+			out.push_back(java::env->CallFloatMethod(this->instance, FloatBuffer::methodIDs["get"], i));
+		}
+		return out;
+	}
+
+	std::vector<double> GetFloatsAsDoubles( int count )
+	{
+		std::vector<double> out;
+		for (int i = 0; i < count; i++)
+		{
+			out.push_back((double)java::env->CallFloatMethod(this->instance, FloatBuffer::methodIDs["get"], i));
+		}
+		return out;
+	}
+
 	matrix GetMatrix()
 	{
 		std::array<float, 16> arr;
