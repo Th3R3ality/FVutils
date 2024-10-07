@@ -21,7 +21,7 @@ namespace cache
 
 		std::string realname = "";
 		std::string name = "";
-		fv::PlayerType type = fv::PlayerType::normal;
+		fv::PlayerType type = {};
 		fvec3 pos = { 0.f };
 		fvec3 lastTickPos = { 0.f };
 		float health = 0;
@@ -32,7 +32,7 @@ namespace cache
 			std::string str = player.getDisplayName().ToString();
 
 			realname = player.getName().ToString();
-			type = fv::GetPlayerType( str );
+			type = fv::PlayerType( str );
 			pos = player.GetPos();
 			lastTickPos = player.GetLastTickPos();
 			health = player.getHealth();

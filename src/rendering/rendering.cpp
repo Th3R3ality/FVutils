@@ -160,7 +160,7 @@ namespace rendering
 
 		for ( auto&& p : cache::data.players )
 		{
-			ImGui::TextColored( p.type == fv::PlayerType::titan ? ImColor( 0xFFFF8888 ) : ImColor( 0xFF88FF88 ), "%s", p.name.c_str() );
+			ImGui::TextColored( p.type.GetColor(), "%s", p.name.c_str());
 		}
 
 
