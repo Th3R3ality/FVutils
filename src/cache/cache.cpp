@@ -1,34 +1,60 @@
 #include "cache.h"
-#include "../minecraft/minecraft.h"
-#include "../minecraft/client/renderer/ActiveRenderInfo/ActiveRenderInfo.h"
-
 #include <iostream>
 #include <mutex>
 #include <string>
 
+#include "../minecraft/minecraft.h"
+#include "../minecraft/client/renderer/ActiveRenderInfo/ActiveRenderInfo.h"
+
+#include "../config/config.h"
+
 namespace cache
 {
-	CacheData temp;
 
 	void UpdateCache()
 	{
+		CacheData temp;
 
 		// players
 		std::vector<EntityPlayer> playerEntities;
 		minecraft::world->playerEntities(playerEntities);
 
 		int size = playerEntities.size();
-		temp.players.resize( size );
+		temp.players.clear();
+		//temp.players.reserve( size );
 
-		for ( jint idx = 0; idx < size; idx++ )
+		for ( auto&& pe : playerEntities )
 		{
-			temp.players.at( idx ) = PlayerData( playerEntities.at( idx ) );
-
-			if ( temp.players.at( idx ).realname == minecraft::localPlayer->getName().ToString() )
+			PlayerData pd = pe;
+			if ( pd.realname == minecraft::localPlayer->getName().ToString() )
 			{
-				temp.local = temp.players.at( idx );
+				temp.local = pd;
+			}
+			else
+			{
+				if ( config::current.render.players.hideBots
+					&& pd.invalidName )
+					continue;
+
+
+				temp.players.emplace_back(pd);
+
 			}
 		}
+
+		//for ( jint idx = 0; idx < size; idx++ )
+		//{
+
+		//	if ( temp.players.at( idx ).realname == minecraft::localPlayer->getName().ToString() )
+		//	{
+		//		temp.local = temp.players.at( idx );
+		//	}
+		//	else
+		//	{
+		//		temp.players.at( idx ) = PlayerData( playerEntities.at( idx ) );
+
+		//	}
+		//}
 
 
 		temp._modelView = ActiveRenderInfo::RawModelViewMatrix();

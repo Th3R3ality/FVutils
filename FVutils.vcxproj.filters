@@ -195,6 +195,9 @@
     <ClInclude Include="src\config\config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\util\Color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dllmain.cpp">
@@ -357,6 +360,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\config\config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fv\PlayerType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\Color.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

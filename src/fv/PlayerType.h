@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
-#include "../cache/cache.h"
 #include "../imgui/imgui.h"
+#include "../util/Color.h"
 
 namespace fv
 {
@@ -9,40 +9,34 @@ namespace fv
 	enum class PlayerTypeEnum
 	{
 		normal,
-		titan,
-		vagt,
+		pvagt,
+		cvagt,
+		bvagt,
+		avagt,
 		officer,
-		direktor,
 		vice,
-		inspektor
+		inspektor,
+		direktor
 	};
-	struct PlayerColor
+	enum class PlayerRankEnum
 	{
-		float r = 1.0f;
-		float g = 1.0f;
-		float b = 1.0f;
-		float a = 1.0f;
-
-		PlayerColor() = default;
-		PlayerColor( float r, float g, float b, float a = 1.0f ) :
-			r( r ), g( g ), b( b ), a( a )
-		{};
-
-		constexpr PlayerColor( const ImColor color ) { auto& col = color.Value; r = col.x; g = col.y; b = col.z; a = col.w; };
-		operator ImColor() { return ImColor( r, g, b, a ); };
-		operator ImVec4() const { return ImVec4( r, g, b, a ); }
-
-
+		none,
+		madchem,
+		legend,
+		titan
 	};
+
 	struct PlayerType
 	{
-		PlayerTypeEnum id = PlayerTypeEnum::normal;
+		PlayerRankEnum rank = PlayerRankEnum::none;
+		PlayerTypeEnum type = PlayerTypeEnum::normal;
 
 		PlayerType() = default;
 
 		PlayerType( std::string displayName )
 		{
-			do // get player type
+			int rankCharOffset = 0;
+			do // check titan
 			{
 				bool isTitan = true;
 				const char TITAN[] = "\xC2\xA7\x62\xE2\xAD\x90";
@@ -56,58 +50,129 @@ namespace fv
 				}
 				if ( isTitan )
 				{
-					id = PlayerTypeEnum::titan;
+					rankCharOffset = sizeof( TITAN );
+					rank = PlayerRankEnum::titan;
 					break;
 				}
 			} while ( false );
 
 
+			do // A-Vagt
+			{
+				bool typeFound = true;
+				const char AVAGT[] = "\xC2\xA7\x61";
 
+				for ( int i = 0; i  < sizeof( AVAGT ) - 1; i++ )
+				{
+					if ( displayName.size() <= i || displayName.c_str()[ i ] != AVAGT[ i ] )
+					{
+						typeFound = false;
+						break;
+					}
+				}
+				if ( typeFound )
+				{
+					type = PlayerTypeEnum::avagt;
+					break;
+				}
+
+			} while ( false );
 		}
 
-		PlayerTypeEnum GetId()
+		PlayerRankEnum GetRank()
 		{
-			return id;
+			return rank;
 		}
-		std::string GetString()
+		PlayerTypeEnum GetType()
 		{
-			switch ( id )
+			return type;
+		}
+		std::string GetTypeString()
+		{
+			switch ( type )
 			{
 			case PlayerTypeEnum::normal:
 				return std::string( "Normal" );
-			case PlayerTypeEnum::titan:
-				return std::string("Titan");
-			case PlayerTypeEnum::vagt:
-				return std::string("Vagt");
+			case PlayerTypeEnum::pvagt:
+				return std::string("P-Vagt");
+			case PlayerTypeEnum::cvagt:
+				return std::string("C-Vagt");
+			case PlayerTypeEnum::bvagt:
+				return std::string("B-Vagt");
+			case PlayerTypeEnum::avagt:
+				return std::string("A-Vagt");
 			case PlayerTypeEnum::officer:
 				return std::string("Officer");
-			case PlayerTypeEnum::direktor:
-				return std::string("Direktor");
 			case PlayerTypeEnum::vice:
 				return std::string("Vice-Inspektor");
 			case PlayerTypeEnum::inspektor:
 				return std::string("Inspektor");
+			case PlayerTypeEnum::direktor:
+				return std::string("Direktor");
+			default:
+				return std::string( "error" );
 			}
 		}
-		PlayerColor GetColor()
+
+		std::string GetRankString()
 		{
-			switch ( id )
+			switch ( rank )
+			{
+			case PlayerRankEnum::none:
+				return std::string( "Ingen" );
+			case PlayerRankEnum::madchem:
+				return std::string( "Mad Chemist" );
+			case PlayerRankEnum::legend:
+				return std::string( "Legend" );
+			case PlayerRankEnum::titan:
+				return std::string( "Titan" );
+
+			default:
+				return std::string( "error" );
+			}
+		}
+
+		Color GetTypeColor()
+		{
+			switch ( type )
 			{
 			case PlayerTypeEnum::normal:
-				return PlayerColor( 1.f, 1.f, 1.f );
-			case PlayerTypeEnum::titan:
-				return PlayerColor();
-			case PlayerTypeEnum::vagt:
-				return PlayerColor();
+				return { 1.f, 1.f, 1.f };
+			case PlayerTypeEnum::pvagt:
+				return {};
+			case PlayerTypeEnum::cvagt:
+				return {};
+			case PlayerTypeEnum::bvagt:
+				return {};
+			case PlayerTypeEnum::avagt:
+				return {};
 			case PlayerTypeEnum::officer:
-				return PlayerColor();
-			case PlayerTypeEnum::direktor:
-				return PlayerColor();
+				return {};
 			case PlayerTypeEnum::vice:
-				return PlayerColor();
+				return {};
 			case PlayerTypeEnum::inspektor:
-				return PlayerColor();
+				return {};
+			case PlayerTypeEnum::direktor:
+				return {};
+			default:
+				return { 0.f, 0.f, 0.f };
 			}
 		}
+		Color GetRankColor()
+		{
+			switch ( rank )
+			{
+			case PlayerRankEnum::none:
+				return { 1.f, 1.f, 1.f };
+			case PlayerRankEnum::titan:
+				return {0.7f, 1.f, 1.f };
+			default:
+				return { 0.f, 0.f, 0.f };
+			}
+		}
+
+
 	};
+
+	bool IsBotByName( std::string name );
 }

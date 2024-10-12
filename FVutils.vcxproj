@@ -192,6 +192,7 @@
     <ClInclude Include="src\minhook\src\trampoline.h" />
     <ClInclude Include="src\rendering\helper.h" />
     <ClInclude Include="src\rendering\rendering.h" />
+    <ClInclude Include="src\util\Color.h" />
     <ClInclude Include="src\util\math\mathutils.h" />
     <ClInclude Include="src\util\math\matrix.h" />
     <ClInclude Include="src\util\math\vec.h" />
@@ -203,6 +204,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="src\dllmain.cpp" />
+    <ClCompile Include="src\fv\PlayerType.cpp" />
     <ClCompile Include="src\hooks\hk_wglSwapBuffers.cpp" />
     <ClCompile Include="src\hooks\hk_WndProc.cpp" />
     <ClCompile Include="src\hooks\jhk_handleChat.cpp" />
@@ -289,6 +291,7 @@
     <ClCompile Include="src\minhook\src\hook.c" />
     <ClCompile Include="src\minhook\src\trampoline.c" />
     <ClCompile Include="src\rendering\rendering.cpp" />
+    <ClCompile Include="src\util\Color.cpp" />
     <ClCompile Include="src\util\math\mathutils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

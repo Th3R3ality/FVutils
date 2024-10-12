@@ -17,7 +17,7 @@ namespace mathutils
 		if ( GL_TRUE == gluProject( point.x, point.y, point.z, cache::data._modelView.data(), cache::data._projection.data(), cache::data.viewport, &projected.x, &projected.y, &projected.z )
 			&& projected.z < 1.0 )
 		{
-			return ivec2( projected.x, projected.y );
+			return ivec2( (int)projected.x, (int)projected.y );
 		}
 		return std::nullopt;
 	}
@@ -110,20 +110,20 @@ namespace mathutils
 		double d_z = pos1.z - pos.z;
 
 		double hypothenuse = sqrt( d_x * d_x + d_z * d_z );
-		float yaw = radiantsToDeg( atan2( d_z, d_x ) ) - 90.f;
-		float pitch = radiantsToDeg( -atan2( d_y, hypothenuse ) );
+		float yaw = radiantsToDeg( (float)atan2( d_z, d_x ) ) - 90.f;
+		float pitch = radiantsToDeg( (float)-atan2(d_y, hypothenuse));
 
 		return fvec2( yaw, pitch );
 	}
 
 	float radiantsToDeg( float x )
 	{
-		return x * 180.f / M_PI;
+		return (float)(x * 180.f / M_PI);
 	}
 
 	float degToRadiants( float x )
 	{
-		return x * M_PI / 180.f;
+		return (float)(x * M_PI / 180.f);
 	}
 
 
