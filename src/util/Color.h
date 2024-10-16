@@ -63,3 +63,5 @@ struct Color
 
 	static Color hex2rgba( const char* hex );
 };
+
+using _Color = Color;

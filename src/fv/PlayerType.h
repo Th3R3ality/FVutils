@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
-#include "../imgui/imgui.h"
 #include "../util/Color.h"
+#include "../imgui/imgui.h"
 
 namespace fv
 {
@@ -62,7 +62,7 @@ namespace fv
 				bool typeFound = true;
 				const char AVAGT[] = "\xC2\xA7\x61";
 
-				for ( int i = 0; i  < sizeof( AVAGT ) - 1; i++ )
+				for ( int i = 0; i < sizeof( AVAGT ) - 1; i++ )
 				{
 					if ( displayName.size() <= i || displayName.c_str()[ i ] != AVAGT[ i ] )
 					{
@@ -94,21 +94,21 @@ namespace fv
 			case PlayerTypeEnum::normal:
 				return std::string( "Normal" );
 			case PlayerTypeEnum::pvagt:
-				return std::string("P-Vagt");
+				return std::string( "P-Vagt" );
 			case PlayerTypeEnum::cvagt:
-				return std::string("C-Vagt");
+				return std::string( "C-Vagt" );
 			case PlayerTypeEnum::bvagt:
-				return std::string("B-Vagt");
+				return std::string( "B-Vagt" );
 			case PlayerTypeEnum::avagt:
-				return std::string("A-Vagt");
+				return std::string( "A-Vagt" );
 			case PlayerTypeEnum::officer:
-				return std::string("Officer");
+				return std::string( "Officer" );
 			case PlayerTypeEnum::vice:
-				return std::string("Vice-Inspektor");
+				return std::string( "Vice-Inspektor" );
 			case PlayerTypeEnum::inspektor:
-				return std::string("Inspektor");
+				return std::string( "Inspektor" );
 			case PlayerTypeEnum::direktor:
-				return std::string("Direktor");
+				return std::string( "Direktor" );
 			default:
 				return std::string( "error" );
 			}
@@ -137,25 +137,25 @@ namespace fv
 			switch ( type )
 			{
 			case PlayerTypeEnum::normal:
-				return { 1.f, 1.f, 1.f };
+				return Color( "FFFFFF" );
 			case PlayerTypeEnum::pvagt:
-				return {};
+				return Color( "FF5555" );
 			case PlayerTypeEnum::cvagt:
-				return {};
+				return Color( "FF5555" );
 			case PlayerTypeEnum::bvagt:
-				return {};
+				return Color( "55FFFF" );
 			case PlayerTypeEnum::avagt:
-				return {};
+				return Color( "55FF55" );
 			case PlayerTypeEnum::officer:
-				return {};
+				return Color( "00AA00" );
 			case PlayerTypeEnum::vice:
-				return {};
+				return Color( "00AA00" );
 			case PlayerTypeEnum::inspektor:
-				return {};
+				return Color( "AA0000" );
 			case PlayerTypeEnum::direktor:
-				return {};
+				return Color( "AA0000" );
 			default:
-				return { 0.f, 0.f, 0.f };
+				return Color( 0.f, 0.f, 0.f );
 			}
 		}
 		Color GetRankColor()
@@ -165,7 +165,7 @@ namespace fv
 			case PlayerRankEnum::none:
 				return { 1.f, 1.f, 1.f };
 			case PlayerRankEnum::titan:
-				return {0.7f, 1.f, 1.f };
+				return { 0.7f, 1.f, 1.f };
 			default:
 				return { 0.f, 0.f, 0.f };
 			}

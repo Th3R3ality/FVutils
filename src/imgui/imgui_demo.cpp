@@ -9831,7 +9831,7 @@ struct MyDocument
     bool        Open;       // Set when open (we keep an array of all available documents to simplify demo code!)
     bool        OpenPrev;   // Copy of Open from last update.
     bool        Dirty;      // Set when the document has been modified
-    ImVec4      Color;      // An arbitrary variable associated to the document
+    ImVec4      _sigmaColor;      // An arbitrary variable associated to the document
 
     MyDocument(int uid, const char* name, bool open = true, const ImVec4& color = ImVec4(1.0f, 1.0f, 1.0f, 1.0f))
     {
@@ -9839,7 +9839,7 @@ struct MyDocument
         snprintf(Name, sizeof(Name), "%s", name);
         Open = OpenPrev = open;
         Dirty = false;
-        Color = color;
+        _sigmaColor = color;
     }
     void DoOpen()       { Open = true; }
     void DoForceClose() { Open = false; Dirty = false; }
@@ -9874,7 +9874,7 @@ struct ExampleAppDocuments
     {
         ImGui::PushID(doc);
         ImGui::Text("Document \"%s\"", doc->Name);
-        ImGui::PushStyleColor(ImGuiCol_Text, doc->Color);
+        ImGui::PushStyleColor(ImGuiCol_Text, doc->_sigmaColor);
         ImGui::TextWrapped("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         ImGui::PopStyleColor();
 
@@ -9899,7 +9899,7 @@ struct ExampleAppDocuments
         ImGui::SetNextItemShortcut(ImGuiMod_Ctrl | ImGuiKey_W, ImGuiInputFlags_Tooltip);
         if (ImGui::Button("Close"))
             CloseQueue.push_back(doc);
-        ImGui::ColorEdit3("color", &doc->Color.x);  // Useful to test drag and drop and hold-dragged-to-open-tab behavior.
+        ImGui::ColorEdit3("color", &doc->_sigmaColor.x);  // Useful to test drag and drop and hold-dragged-to-open-tab behavior.
         ImGui::PopID();
     }
 

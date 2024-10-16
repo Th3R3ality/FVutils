@@ -29,6 +29,10 @@ namespace cache
 			if ( pd.realname == minecraft::localPlayer->getName().ToString() )
 			{
 				temp.local = pd;
+				if ( !config::current.render.players.hideSelf )
+				{
+					temp.players.emplace_back(pd);
+				}
 			}
 			else
 			{

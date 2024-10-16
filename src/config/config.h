@@ -28,6 +28,7 @@ namespace config
 					bool healthbarnumber = true;
 				} d2;
 				
+				bool hideSelf = true;
 				bool hideBots = true;
 			} players;
 		} render;
