@@ -31,7 +31,7 @@ namespace cache
 
 		PlayerData( EntityPlayer& player )
 		{
-			std::string str = player.getDisplayName().ToString();
+			std::string str = player.getDisplayName().getUnformattedText().ToString();
 
 			realname = player.getName().ToString();
 			invalidName = fv::IsBotByName( realname );

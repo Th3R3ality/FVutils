@@ -9,6 +9,14 @@ namespace hooks
 	{
 		JNIEnv* env = thread->get_env();
 
+		if ( !TlsSetValue( java::envTlsIndex, env ) )
+		{
+			printf("TlsSetValue error");
+			return;
+		}
+		//printf("handleChat thread %d: lpvData=%lx\n", GetCurrentThreadId(), env);
+		//java::TestTLS();
+
 		// param 0, instance
 		jobject instance = JavaHook::get_jobject_param_at( frame, 0 );
 

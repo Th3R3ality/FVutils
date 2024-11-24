@@ -13,6 +13,7 @@ namespace rendering
 	inline HDC hdc = nullptr;
 	inline HWND window;
 	inline HGLRC glContextOrig;
+	inline HGLRC glContextMenu;
 	inline ImGuiContext* imGuiContext;
 
 	inline bool GuiOpen = false;

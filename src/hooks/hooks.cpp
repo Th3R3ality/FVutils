@@ -26,7 +26,7 @@ void hooks::Init()
 
 	HOOK( jhk_handleChat, NetHandlerPlayClient::methodIDs[ "handleChat" ] );
 	HOOK( jhk_renderName, RenderLivingEntity::methodIDs[ "renderName" ] );
-	//HOOK( jhk_runTick, Minecraft::methodIDs[ "runTick" ] );
+	HOOK( jhk_runTick, Minecraft::methodIDs[ "runTick" ] );
 }
 
 void hooks::Destroy()
@@ -36,10 +36,6 @@ void hooks::Destroy()
 		global::glUnhookWant = true;
 		Sleep( 10 );
 	}
-	//if ( EndSceneOrig )
-	//{
-	//	VMTEntryHook( vtable, INDEX_ENDSCENE, EndSceneOrig );
-	//}
 
 	MH_DisableHook( MH_ALL_HOOKS );
 	MH_Uninitialize();

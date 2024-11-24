@@ -7,8 +7,11 @@
 #include "util/Timer/Timer.h"
 #include "client/renderer/entity/RenderManager/RenderManager.h"
 
+struct Minecraft;
+
 namespace minecraft
 {
+	//inline std::unique_ptr<Minecraft> mc = {};
 	inline std::unique_ptr<EntityPlayerSP> localPlayer = {};
 	inline std::unique_ptr<WorldClient> world = {};
 	inline std::unique_ptr<Timer> timer = {};
@@ -48,6 +51,8 @@ struct Minecraft : IClass
 		GET_METHOD("runTick", "()V");
 
 		GetStaticInstance();
+		//minecraft::mc = std::make_unique<Minecraft>(GetStaticInstance());
+		//minecraft::mc->noDeref = true;
 	}
 
 	STRUCTORS();
@@ -60,6 +65,13 @@ struct Minecraft : IClass
 		return Minecraft::staticInstance;
 	}
 
+
+	static bool IsInGuiState()
+	{
+
+		if ( ( ( JNIEnv* )TlsGetValue( java::envTlsIndex ) )->GetObjectField( Minecraft::staticInstance, Minecraft::fieldIDs[ "currentScreen" ] ) != NULL ) return true;
+		return false;
+	}
 };
 
 #undef CURRENTCLASSNAME

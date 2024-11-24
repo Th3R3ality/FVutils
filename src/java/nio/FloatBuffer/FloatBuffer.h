@@ -28,10 +28,10 @@ struct FloatBuffer : public IClass
 	fvec4 GetFloat4()
 	{
 		return fvec4{
-			java::env->CallFloatMethod( this->instance, FloatBuffer::methodIDs[ "get" ], 0 ),
-			java::env->CallFloatMethod( this->instance, FloatBuffer::methodIDs[ "get" ], 1 ),
-			java::env->CallFloatMethod( this->instance, FloatBuffer::methodIDs[ "get" ], 2 ),
-			java::env->CallFloatMethod( this->instance, FloatBuffer::methodIDs[ "get" ], 3 )
+			Get( 0 ),
+			Get( 1 ),
+			Get( 2 ),
+			Get( 3 )
 		};
 	}
 
@@ -60,7 +60,7 @@ struct FloatBuffer : public IClass
 		std::array<float, 16> arr;
 		for (int i = 0; i < 16; i++)
 		{
-			arr.at(i) = java::env->CallFloatMethod(this->instance, FloatBuffer::methodIDs["get"], i);
+			arr.at(i) = this->Get(i);
 		}
 
 		matrix m;

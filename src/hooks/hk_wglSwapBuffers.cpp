@@ -11,10 +11,6 @@ namespace hooks
 {
 	BOOL __stdcall hkwglSwapBuffers( IN  HDC hdc )
 	{
-		rendering::hdc = hdc;
-		rendering::window = WindowFromDC( hdc );
-		rendering::glContextOrig = wglGetCurrentContext();
-
 		if ( global::glUnhookWant )
 		{
 			if ( !global::glUnhookWaiting )
@@ -27,6 +23,7 @@ namespace hooks
 
 		if ( rendering::window != WindowFromDC( hdc ) && initialised )
 		{
+			printf( "FVutils: reset window\n" );
 			rendering::window = WindowFromDC( hdc );
 
 			rendering::glContextOrig = wglGetCurrentContext();
@@ -45,34 +42,41 @@ namespace hooks
 			return ( ( decltype( &hkwglSwapBuffers ) )wglSwapBuffersOrig )( hdc );
 		}
 
+		rendering::hdc = hdc;
+		rendering::window = WindowFromDC( hdc );
+		rendering::glContextOrig = wglGetCurrentContext();
+
 		if ( !initialised )
 		{
-			rendering::glContext = wglCreateContext( rendering::hdc );;
-			wglMakeCurrent( rendering::hdc, rendering::glContext );
+			wndProcOrig = SetWindowLongPtrW( rendering::window, GWLP_WNDPROC, ( LONG_PTR )hkWndProc );
 
-			glMatrixMode( GL_PROJECTION );
+			rendering::glContextMenu = wglCreateContext(rendering::hdc);
+			wglMakeCurrent(rendering::hdc, rendering::glContextMenu);
+
+			glMatrixMode(GL_PROJECTION);
 			glLoadIdentity();
 
-			GLint m_viewport[ 4 ];
-			glGetIntegerv( GL_VIEWPORT, m_viewport );
+			GLint m_viewport[4];
+			glGetIntegerv(GL_VIEWPORT, m_viewport);
 
-			glOrtho( 0, m_viewport[ 2 ], m_viewport[ 3 ], 0, 1, -1 );
-			glMatrixMode( GL_MODELVIEW );
+			glOrtho(0, m_viewport[2], m_viewport[3], 0, 1, -1);
+			glMatrixMode(GL_MODELVIEW);
 			glLoadIdentity();
-			glClearColor( 0, 0, 0, 0 );
+			glClearColor(0, 0, 0, 0);
 
 			rendering::imGuiContext = ImGui::CreateContext();
 			ImGuiIO& io = ImGui::GetIO();
+			io.Fonts->AddFontDefault();
 
 			ImGui_ImplWin32_Init( rendering::window );
 			ImGui_ImplOpenGL2_Init();
 
-			wndProcOrig = SetWindowLongPtrW( rendering::window, GWLP_WNDPROC, ( LONG_PTR )hkWndProc );
+			//io.Fonts->AddFontFromMemoryTTF( 0, sizeof( 0 ), 0 );
 
 			initialised = true;
 		}
 
-		wglMakeCurrent(rendering::hdc, rendering::glContext);
+		wglMakeCurrent(rendering::hdc, rendering::glContextMenu);
 
 		ImGui_ImplOpenGL2_NewFrame();
 		ImGui_ImplWin32_NewFrame();

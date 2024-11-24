@@ -42,9 +42,9 @@ struct Entity : public IClass
 	{
 		return java::env->CallObjectMethod( this->instance, Entity::methodIDs[ "getName" ] );
 	}
-	String getDisplayName()
+	IChatComponent getDisplayName()
 	{
-		return IChatComponent(java::env->CallObjectMethod( this->instance, Entity::methodIDs[ "getDisplayName" ] )).getUnformattedText();
+		return IChatComponent( java::env->CallObjectMethod( this->instance, Entity::methodIDs[ "getDisplayName" ] ) );
 	}
 
 	fvec3 GetPos()

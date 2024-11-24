@@ -15,6 +15,14 @@ namespace hooks
 	{
 		JNIEnv* env = thread->get_env();
 
+		if ( !TlsSetValue( java::envTlsIndex, env ) )
+		{
+			printf("TlsSetValue error"); 
+			return;
+		}
+		//printf("renderName thread %d: lpvData=%lx\n", GetCurrentThreadId(), env);
+		//java::TestTLS();
+
 		jobject instance = JavaHook::get_jobject_param_at( frame, 0 );
 
 		//(Lnet/minecraft/entity/Entity;DDD)V

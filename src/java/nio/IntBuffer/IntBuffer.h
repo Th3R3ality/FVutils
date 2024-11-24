@@ -20,16 +20,16 @@ struct IntBuffer : public IClass
 
 	int Get( int index )
 	{
-		return java::env->CallFloatMethod( this->instance, IntBuffer::methodIDs[ "get" ], index );
+		return java::env->CallIntMethod( this->instance, IntBuffer::methodIDs[ "get" ], index );
 	}
 
 	ivec4 GetInt4()
 	{
 		return ivec4{
-			java::env->CallIntMethod( this->instance, IntBuffer::methodIDs[ "get" ], 0 ),
-			java::env->CallIntMethod( this->instance, IntBuffer::methodIDs[ "get" ], 1 ),
-			java::env->CallIntMethod( this->instance, IntBuffer::methodIDs[ "get" ], 2 ),
-			java::env->CallIntMethod( this->instance, IntBuffer::methodIDs[ "get" ], 3 )
+			this->Get( 0 ),
+			this->Get( 1 ),
+			this->Get( 2 ),
+			this->Get( 3 )
 		};
 	}
 

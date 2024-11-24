@@ -14,7 +14,10 @@ namespace minecraft
 			return false;
 		}
 		if ( localPlayer == nullptr || localPlayerInstance != localPlayer->instance )
+		{
 			localPlayer = std::make_unique<EntityPlayerSP>( localPlayerInstance );
+			localPlayer->noDeref = true;
+		}
 		else
 			java::env->DeleteLocalRef( localPlayerInstance );
 
@@ -25,7 +28,10 @@ namespace minecraft
 			return false;
 		}
 		if ( world == nullptr || worldClientInstance != world->instance )
+		{
 			world = std::make_unique<WorldClient>( worldClientInstance );
+			world->noDeref = true;
+		}
 		else
 			java::env->DeleteLocalRef( worldClientInstance );
 
@@ -36,7 +42,10 @@ namespace minecraft
 			return false;
 		}
 		if ( timer == nullptr || timerInstance != timer->instance )
+		{
 			timer = std::make_unique<Timer>( timerInstance );
+			timer->noDeref = true;
+		}
 		else
 			java::env->DeleteLocalRef( timerInstance );
 
@@ -47,7 +56,10 @@ namespace minecraft
 			return false;
 		}
 		if ( renderManager == nullptr || rmInstance != renderManager->instance )
+		{
 			renderManager = std::make_unique<RenderManager>( rmInstance );
+			renderManager->noDeref = true;
+		}
 		else
 			java::env->DeleteLocalRef( rmInstance );
 

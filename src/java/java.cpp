@@ -2,12 +2,17 @@
 
 namespace java
 {
-
 	jobject classLoader;
 	jmethodID mid_findClass;
 
 	void java::Init()
 	{
+
+		if ( ( java::envTlsIndex = TlsAlloc() ) == TLS_OUT_OF_INDEXES )
+		{
+			printf("TlsAlloc failed"); 
+			return;
+		}
 
 		// Check if there is any Java VMs in the injected thread
 		jsize count;
@@ -93,6 +98,8 @@ namespace java
 
 	void Destroy()
 	{
+		TlsFree(java::envTlsIndex);
+
 		jvm->DetachCurrentThread();
 	}
 
@@ -102,4 +109,19 @@ namespace java
 		return (jclass)env->CallObjectMethod(classLoader, mid_findClass, klassPath_);
 	}
 
+	void TestTLS()
+	{
+		LPVOID lpvData;
+
+		// Retrieve a data pointer for the current thread.
+		lpvData = TlsGetValue(envTlsIndex); 
+		if ( ( lpvData == 0 ) && ( GetLastError() != ERROR_SUCCESS ) )
+		{
+			printf( "ERROR TlsGetValue\n" );
+			return;
+		}
+
+		// Use the data stored for the current thread. 
+		printf("common: thread %d: lpvData=%lx\n", GetCurrentThreadId(), lpvData); 
+	}
 }

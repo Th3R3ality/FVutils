@@ -3,6 +3,7 @@
 
 // https://github.com/Marcelektro/MCP-919/blob/main/src/minecraft/net/minecraft/util/Matrix4f.java
 // For readability & maybe security purposes.
+
 struct matrix
 {
 	float m00, m01, m02, m03;

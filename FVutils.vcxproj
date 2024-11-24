@@ -48,13 +48,13 @@
     <OutDir>$(SolutionDir)bin\</OutDir>
     <IntDir>$(SolutionDir)bin\intermediate\</IntDir>
     <TargetName>$(ProjectName)_$(Configuration)</TargetName>
-    <IncludePath>$(SolutionDir)src\java;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)src\jni;$(SolutionDir)src\java;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin\</OutDir>
     <IntDir>$(SolutionDir)bin\intermediate\</IntDir>
     <TargetName>$(ProjectName)_$(Configuration)</TargetName>
-    <IncludePath>$(SolutionDir)src\java;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)src\jni;$(SolutionDir)src\java;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -65,7 +65,8 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(JAVA_HOME)include\win32;$(JAVA_HOME)include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -86,7 +87,8 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(JAVA_HOME)include\win32;$(JAVA_HOME)include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -100,6 +102,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\cache\cache.h" />
+    <ClInclude Include="src\cheat\common\ClickScheduler.h" />
+    <ClInclude Include="src\cheat\modules\Clicker\Clicker.h" />
     <ClInclude Include="src\config\config.h">
       <SubType>
       </SubType>
@@ -143,6 +147,17 @@
     <ClInclude Include="src\java\util\List.h" />
     <ClInclude Include="src\jnihook\include\jnihook.h" />
     <ClInclude Include="src\jnihook\include\jnihook.hpp" />
+    <ClInclude Include="src\jni\classfile_constants.h" />
+    <ClInclude Include="src\jni\jawt.h" />
+    <ClInclude Include="src\jni\jdwpTransport.h" />
+    <ClInclude Include="src\jni\jni.h" />
+    <ClInclude Include="src\jni\jvmti.h" />
+    <ClInclude Include="src\jni\jvmticmlr.h" />
+    <ClInclude Include="src\jni\win32\bridge\AccessBridgeCallbacks.h" />
+    <ClInclude Include="src\jni\win32\bridge\AccessBridgeCalls.h" />
+    <ClInclude Include="src\jni\win32\bridge\AccessBridgePackages.h" />
+    <ClInclude Include="src\jni\win32\jawt_md.h" />
+    <ClInclude Include="src\jni\win32\jni_md.h" />
     <ClInclude Include="src\minecraft\client\EntityPlayerSP\EntityPlayerSP.h" />
     <ClInclude Include="src\minecraft\client\entity\AbstractClientPlayer\AbstractClientPlayer.h">
       <SubType>
@@ -199,6 +214,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cache\cache.cpp" />
+    <ClCompile Include="src\cheat\common\ClickScheduler.cpp" />
     <ClCompile Include="src\config\config.cpp">
       <SubType>
       </SubType>

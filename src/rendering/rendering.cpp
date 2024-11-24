@@ -60,9 +60,10 @@ namespace rendering
 
 	void DoEsp3D()
 	{
-		GLint viewport[ 4 ];
-		glGetIntegerv( GL_VIEWPORT, viewport );
-		glViewport( 0, 0, viewport[ 2 ], viewport[ 3 ] );
+		//GLint viewport[ 4 ]{};
+
+		//glGetIntegerv( GL_VIEWPORT, viewport );
+		glViewport( 0, 0, cache::data.viewport[ 2 ], cache::data.viewport[ 3 ] );
 
 		glPushMatrix();
 		glMatrixMode( GL_PROJECTION );
@@ -98,7 +99,7 @@ namespace rendering
 			glVertex3f( pos.x - 0.5f, pos.y, pos.z );
 			glEnd();
 
-			
+
 
 			// health bar
 			//background
@@ -130,8 +131,8 @@ namespace rendering
 				ImVec2 textSize = ImGui::CalcTextSize( healthText.c_str() );
 
 
-				ivec2 healthTextFinal = ivec2( /*-textSize.x / 2*/ 0, (int)( textSize.y / 2 ) ) + val;
-				healthTextFinal.y = (int)clientRect.y - healthTextFinal.y;
+				ivec2 healthTextFinal = ivec2( /*-textSize.x / 2*/ 0, ( int )( textSize.y / 2 ) ) + val;
+				healthTextFinal.y = ( int )clientRect.y - healthTextFinal.y;
 				healthTextPositions.emplace_back( _HealthText{ healthTextFinal, ImColor( 1.0f - ( p.health / p.maxHealth ), ( p.health / p.maxHealth ), 0.f, 1.f ), healthText } );
 
 			}
@@ -182,7 +183,30 @@ namespace rendering
 		//ImGui::Text( "renderOffset: %f, %f, %f", cache::data.renderOffset.x, cache::data.renderOffset.y, cache::data.renderOffset.z );
 		//ImGui::Text( "local: %f, %f, %f", cache::data.local.pos.x, cache::data.local.pos.y, cache::data.local.pos.z );
 
-		
+		ImGui::Begin( "Combat" );
+		ImGui::Checkbox( "Clicker", &config::current.combat.clicker.enabled );
+		if ( config::current.combat.clicker.enabled )
+		{
+			ImGui::Indent( 16.f );
+
+			ImGui::Checkbox( "Left", &config::current.combat.clicker.left.enabled );
+			ImGui::DragIntRange2( "CPS##leftclicker",
+				&config::current.combat.clicker.left.minCps,
+				&config::current.combat.clicker.left.maxCps,
+				1.0f, 0, 40 );
+			ImGui::Checkbox( "Right", &config::current.combat.clicker.right.enabled );
+			ImGui::DragIntRange2( "CPS##rightclicker",
+				&config::current.combat.clicker.right.minCps,
+				&config::current.combat.clicker.right.maxCps,
+				1.0f, 0, 40 );
+
+			ImGui::Unindent( 16.f );
+
+		}
+
+		ImGui::End();
+
+
 		ImGui::Begin( "Players In Render" );
 		for ( auto&& p : cache::data.players )
 		{
