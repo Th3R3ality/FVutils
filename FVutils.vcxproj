@@ -226,6 +226,7 @@
     <ClCompile Include="src\fv\PlayerType.cpp" />
     <ClCompile Include="src\hooks\hk_wglSwapBuffers.cpp" />
     <ClCompile Include="src\hooks\hk_WndProc.cpp" />
+    <ClCompile Include="src\hooks\jhk_clickMouse.cpp" />
     <ClCompile Include="src\hooks\jhk_handleChat.cpp" />
     <ClCompile Include="src\hooks\hooks.cpp" />
     <ClCompile Include="src\hooks\jhk_runGameLoop.cpp" />

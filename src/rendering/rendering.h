@@ -9,11 +9,10 @@
 
 namespace rendering
 {
-	inline HGLRC glContext = nullptr;
 	inline HDC hdc = nullptr;
-	inline HWND window;
-	inline HGLRC glContextOrig;
-	inline HGLRC glContextMenu;
+	inline HWND window = NULL;
+	inline HGLRC glContext = nullptr;
+	inline HGLRC glContextOrig = nullptr;
 	inline ImGuiContext* imGuiContext;
 
 	inline bool GuiOpen = false;

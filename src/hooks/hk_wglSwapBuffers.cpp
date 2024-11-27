@@ -50,8 +50,8 @@ namespace hooks
 		{
 			wndProcOrig = SetWindowLongPtrW( rendering::window, GWLP_WNDPROC, ( LONG_PTR )hkWndProc );
 
-			rendering::glContextMenu = wglCreateContext(rendering::hdc);
-			wglMakeCurrent(rendering::hdc, rendering::glContextMenu);
+			rendering::glContext = wglCreateContext(rendering::hdc);
+			wglMakeCurrent(rendering::hdc, rendering::glContext);
 
 			glMatrixMode(GL_PROJECTION);
 			glLoadIdentity();
@@ -76,7 +76,7 @@ namespace hooks
 			initialised = true;
 		}
 
-		wglMakeCurrent(rendering::hdc, rendering::glContextMenu);
+		wglMakeCurrent(rendering::hdc, rendering::glContext);
 
 		ImGui_ImplOpenGL2_NewFrame();
 		ImGui_ImplWin32_NewFrame();

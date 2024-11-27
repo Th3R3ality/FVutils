@@ -14,20 +14,20 @@ namespace config
 		{
 			struct __clicker
 			{
-				bool enabled = false;
+				bool enabled = true;
 				
 				struct __lmb
 				{
 					bool enabled = true;
-					int minCps = 12;
-					int maxCps = 16;
+					int minCps = 14;
+					int maxCps = 18;
 				} left;
 
 				struct __rmb
 				{
 					bool enabled = false;
-					int minCps = 12;
-					int maxCps = 16;
+					int minCps = 8;
+					int maxCps = 12;
 				} right;
 
 			} clicker;

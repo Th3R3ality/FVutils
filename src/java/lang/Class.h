@@ -17,9 +17,9 @@ struct Class : public IClass
 		GET_METHOD( "getName", "()Ljava/lang/String;" );
 	}
 
-	String getName(JNIEnv* env = java::env)
+	String getName()
 	{
-		return env->CallObjectMethod( instance, Class::methodIDs[ "getName" ] );
+		return TLSENV->CallObjectMethod( instance, Class::methodIDs[ "getName" ] );
 	}
 
 	STRUCTORS();

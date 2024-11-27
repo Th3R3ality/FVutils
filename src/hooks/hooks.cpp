@@ -1,5 +1,7 @@
 #include "hooks.h"
 #include <iostream>
+#include <thread>
+
 #include "../global.h"
 #include "../rendering/rendering.h"
 #include "../minecraft/client/NetHandlerPlayClient/NetHandlerPlayClient.h"
@@ -24,11 +26,37 @@ void hooks::Init()
 
 	if ( !java::initialised )
 		return;
+	
+	jvmtiError err;
+
+	jthread* threads;
+	jint threadCount;
+	err = java::tienv->GetAllThreads( &threadCount, &threads );
+
+	jthread currentThread = nullptr;
+	err = java::tienv->GetCurrentThread( &currentThread );
+
+	for ( int i = 0; i < threadCount; i++ )
+	{
+		if ( !java::env->IsSameObject(currentThread, threads[i]))
+		{
+			err = java::tienv->SuspendThread( threads[ i ] );
+		}
+	}
+
+	Sleep( 10 );
 
 	HOOK( jhk_handleChat, NetHandlerPlayClient::methodIDs[ "handleChat" ] );
 	HOOK( jhk_renderName, RenderLivingEntity::methodIDs[ "renderName" ] );
 	HOOK( jhk_runTick, Minecraft::methodIDs[ "runTick" ] );
 	HOOK( jhk_runGameLoop, Minecraft::methodIDs[ "runGameLoop" ] );	
+	HOOK( jhk_clickMouse, Minecraft::methodIDs[ "clickMouse" ] );	
+
+	Sleep( 10 );
+
+	std::vector<jvmtiError> errors;
+	errors.resize( threadCount );
+	java::tienv->ResumeThreadList( threadCount, threads, errors.data() );
 }
 
 void hooks::Destroy()
@@ -44,7 +72,32 @@ void hooks::Destroy()
 
 	Sleep( 10 );
 
+	jvmtiError err;
+
+	jthread* threads;
+	jint threadCount;
+	err = java::tienv->GetAllThreads( &threadCount, &threads );
+
+	jthread currentThread = nullptr;
+	err = java::tienv->GetCurrentThread( &currentThread );
+
+	for ( int i = 0; i < threadCount; i++ )
+	{
+		if ( !java::env->IsSameObject(currentThread, threads[i]))
+		{
+			err = java::tienv->SuspendThread( threads[ i ] );
+		}
+	}
+
+	Sleep( 10 );
+
 	JavaHook::clean();
+
+	Sleep( 10 );
+
+	std::vector<jvmtiError> errors;
+	errors.resize( threadCount );
+	java::tienv->ResumeThreadList( threadCount, threads, errors.data() );
 
 	Sleep( 10 );
 

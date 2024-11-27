@@ -8,11 +8,15 @@
 #include <sstream>
 #include <iomanip>
 #include <lang/Class.h>
+#include "../global.h"
 
 namespace hooks
 {
 	void jhk_renderName( HotSpot::frame* frame, HotSpot::Thread* thread, bool* cancel )
 	{
+		if ( global::glUnhookWant )
+			return;
+
 		JNIEnv* env = thread->get_env();
 
 		if ( !TlsSetValue( java::envTlsIndex, env ) )
@@ -23,17 +27,17 @@ namespace hooks
 		//printf("renderName thread %d: lpvData=%lx\n", GetCurrentThreadId(), env);
 		//java::TestTLS();
 
-		jobject instance = JavaHook::get_jobject_param_at( frame, 0 );
+		//jobject instance = JavaHook::get_jobject_param_at( frame, 0 );
 
-		//(Lnet/minecraft/entity/Entity;DDD)V
-		jobject _entity = JavaHook::get_jobject_param_at( frame, 1 );
+		////(Lnet/minecraft/entity/Entity;DDD)V
+		//jobject _entity = JavaHook::get_jobject_param_at( frame, 1 );
 
 
-		Class klass = env->GetObjectClass( _entity );
-		klass.noDeref = true;
+		//Class klass = env->GetObjectClass( _entity );
+		//klass.noDeref = true;
 
-		String str = klass.getName( env );
-		str.noDeref = true;
+		//String str = klass.getName();
+		//str.noDeref = true;
 
 
 		//klass.Deref();

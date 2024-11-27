@@ -45,6 +45,7 @@ struct Minecraft : IClass
 		_GET_FIELD( "thePlayer",			"field_71439_g",	"h",	"Lnet/minecraft/client/entity/EntityPlayerSP;" );
 		_GET_FIELD( "theWorld",				"field_71441_e",	"f",	"Lnet/minecraft/client/multiplayer/WorldClient;" );
 		_GET_FIELD( "timer",				"field_71428_T",	"Y",	"Lnet/minecraft/util/Timer;" );
+		_GET_FIELD( "leftClickCounter",		"field_71429_W",	"ag",	"I");
 
 		_GET_METHOD( "clickMouse",			"func_147116_af",	"aw",	"()V" );
 		_GET_METHOD( "getRenderViewEntity",	"func_175606_aa",	"ac",	"()Lnet/minecraft/entity/Entity;");
@@ -68,8 +69,18 @@ struct Minecraft : IClass
 
 	static bool IsInGuiState()
 	{
-		if ( TLSENV->GetObjectField( Minecraft::staticInstance, Minecraft::fieldIDs[ "currentScreen" ] ) != NULL ) return true;
+		jobject screen = nullptr;
+		if ( ( screen = TLSENV->GetObjectField( Minecraft::staticInstance, Minecraft::fieldIDs[ "currentScreen" ] ) ) != NULL )
+		{
+			//TLSENV->DeleteLocalRef( screen );
+			return true;
+		}
 		return false;
+	}
+
+	static void leftClickCounter( jint i )
+	{
+		TLSENV->SetIntField( Minecraft::staticInstance, Minecraft::fieldIDs[ "leftClickCounter" ], i );
 	}
 };
 

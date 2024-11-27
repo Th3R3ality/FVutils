@@ -23,6 +23,35 @@ namespace hooks
 			Input::DeltaKey( wParam, -1 );
 		}
 
+
+		//if ( wParam == 0x1337 )
+		//{
+		//	if ( msg == WM_LBUTTONDOWN )
+		//		wParam = MK_LBUTTON;
+		//	if ( msg == WM_RBUTTONDOWN)
+		//		wParam = MK_RBUTTON;
+
+		//	if ( msg == WM_LBUTTONUP)
+		//		wParam = 0;
+		//	if ( msg == WM_RBUTTONUP)
+		//		wParam = 0;
+
+		//	return ( ( decltype( &hkWndProc ) )wndProcOrig )( hwnd, msg, wParam, lParam );
+		//}
+
+		//switch ( msg )
+		//{
+		//case WM_LBUTTONDOWN:
+		//case WM_RBUTTONDOWN:
+		//case WM_LBUTTONUP:
+		//case WM_RBUTTONUP:
+		//	Input::SetMouseState(MK_LBUTTON, wParam & MK_LBUTTON);
+		//	Input::SetMouseState(MK_RBUTTON, wParam & MK_RBUTTON);
+		//	break;
+		//default:
+		//	break;
+		//}
+
 		if ( rendering::GuiOpen && hooks::initialised )
 		{
 			ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam);

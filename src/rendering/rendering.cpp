@@ -197,12 +197,12 @@ namespace rendering
 				ImGui::DragIntRange2( "CPS##leftclicker",
 					&config::current.combat.clicker.left.minCps,
 					&config::current.combat.clicker.left.maxCps,
-					1.0f, 0, 40 );
+					1.0f, 1, 40 );
 				ImGui::Checkbox( "Right", &config::current.combat.clicker.right.enabled );
 				ImGui::DragIntRange2( "CPS##rightclicker",
 					&config::current.combat.clicker.right.minCps,
 					&config::current.combat.clicker.right.maxCps,
-					1.0f, 0, 40 );
+					1.0f, 1, 40 );
 
 				ImGui::Unindent( 16.f );
 

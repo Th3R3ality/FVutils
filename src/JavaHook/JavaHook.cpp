@@ -17,12 +17,14 @@ struct i2iHookData
 {
     void* _i2i_entry = nullptr;
     JavaHook::Midi2iHook* hook = nullptr;
+    std::string klassSig = {};
 };
 static std::vector<i2iHookData> hooked_i2i_entries{};
 struct HookedMethod
 {
     HotSpot::Method* method = nullptr;
     JavaHook::i2i_detour_t detour = nullptr;
+    std::string klassSig = {};
 };
 static std::vector<HookedMethod> hooked_methods{};
 static std::vector<std::string> reTransformed_classes{};
@@ -31,10 +33,29 @@ void JavaHook::clean()
 {
     for (i2iHookData& hk : hooked_i2i_entries)
     {
+
+
+        //bool skip = true;
+        //for ( auto&& sig : reTransformed_classes )
+        //{
+        //    if ( hk.klassSig.compare( sig ) == 0 )
+        //    {
+        //        skip = false;
+        //        sig = "";
+        //        break;
+        //    }
+        //}
+        //if ( skip ) continue;
+
         delete hk.hook;
     }
     for (HookedMethod& hm : hooked_methods)
     {
+        //jclass klass = java::env->FindClass( hm.klassSig.c_str() );
+
+
+        //java::tienv->RetransformClasses( 1, &klass );
+
         hm.method->set_dont_inline(false);
         int* flags = (int*)hm.method->get_access_flags();
         *flags &= ~(NO_COMPILE);
@@ -43,12 +64,13 @@ void JavaHook::clean()
 
 bool JavaHook::hook(jmethodID methodID, i2i_detour_t detour)
 {
-    static int runonce = []()->int
-    {
-            jvmtiCapabilities capabilities{ .can_retransform_classes = JVMTI_ENABLE };
-            java::tienv->AddCapabilities(&capabilities);
-            return 0;
-    }();
+    //static int runonce = []()->int
+    //{
+    //        jvmtiCapabilities capabilities{ .can_retransform_classes = JVMTI_ENABLE };
+    //        capabilities.can_suspend = JVMTI_ENABLE;
+    //        java::tienv->AddCapabilities(&capabilities);
+    //        return 0;
+    //}();
     if (!methodID || !detour) 
         return false;
 
@@ -97,7 +119,7 @@ bool JavaHook::hook(jmethodID methodID, i2i_detour_t detour)
     *flags |= (NO_COMPILE);
 
 
-    hooked_methods.push_back({ method, detour });
+    hooked_methods.push_back({ method, detour, klassSig });
 
     bool hook_new_i2i = true;
     void* i2i = method->get_i2i_entry();
@@ -122,7 +144,7 @@ bool JavaHook::hook(jmethodID methodID, i2i_detour_t detour)
     if (!hook)
         return false;
 
-    hooked_i2i_entries.push_back({ i2i, hook });
+    hooked_i2i_entries.push_back({ i2i, hook, klassSig });
     return true;
 }
 

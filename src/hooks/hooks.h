@@ -38,6 +38,7 @@ namespace hooks
 	DECL_JHOOK( jhk_renderName );
 	DECL_JHOOK( jhk_runTick );
 	DECL_JHOOK( jhk_runGameLoop );
+	DECL_JHOOK( jhk_clickMouse );
 
 	LRESULT CALLBACK hkWndProc( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam );
 	BOOL __stdcall hkwglSwapBuffers( IN HDC hdc );

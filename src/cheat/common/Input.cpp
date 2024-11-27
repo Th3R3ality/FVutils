@@ -2,7 +2,7 @@
 
 namespace Input
 {
-	void DeltaKey( unsigned __int64 keyCode, int delta )
+	void DeltaKey( KeyCode keyCode, int delta )
 	{
 		for ( auto&& pair : keyStates )
 		{
@@ -16,7 +16,7 @@ namespace Input
 		if ( delta < 0 ) delta = 0;
 		keyStates.emplace_back( KeyStatePair{keyCode, delta} );
 	}
-	bool GetKey( unsigned __int64 keyCode )
+	bool GetKey( KeyCode keyCode )
 	{
 		for ( auto&& pair : keyStates )
 		{
@@ -28,4 +28,29 @@ namespace Input
 
 		return false;
 	}
+
+	//void SetMouseState( KeyCode keyCode, bool state )
+	//{
+	//	for ( auto&& pair : mouseStates )
+	//	{
+	//		if ( pair.keyCode == keyCode )
+	//		{
+	//			pair.state = state;
+	//			return;
+	//		}
+	//	}
+
+	//	mouseStates.emplace_back( MouseStatePair{keyCode, state} );
+	//}
+	//bool GetMouseState( KeyCode keyCode )
+	//{
+	//	for ( auto&& pair : mouseStates )
+	//	{
+	//		if ( pair.keyCode == keyCode )
+	//		{
+	//			return pair.state;
+	//		}
+	//	}
+	//	return false;
+	//}
 }

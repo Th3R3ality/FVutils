@@ -419,5 +419,8 @@
     <ClCompile Include="src\hooks\jhk_runGameLoop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\hooks\jhk_clickMouse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -14,6 +14,8 @@ namespace ClickScheduler
 
 		auto clickArray = std::array<int, 20>{0};
 
+		if ( clicks <= 0 ) return clickArray;
+
 		int interval = clickArray.size() / clicks;
 		int remainder = clickArray.size() % clicks;
 
