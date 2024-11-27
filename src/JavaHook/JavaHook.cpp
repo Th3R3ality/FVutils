@@ -25,6 +25,7 @@ struct HookedMethod
     JavaHook::i2i_detour_t detour = nullptr;
 };
 static std::vector<HookedMethod> hooked_methods{};
+static std::vector<std::string> reTransformed_classes{};
 
 void JavaHook::clean()
 {
@@ -63,10 +64,31 @@ bool JavaHook::hook(jmethodID methodID, i2i_detour_t detour)
     int* flags = (int*)method->get_access_flags();
     *flags |= (NO_COMPILE);
 
-    jclass owner = nullptr;
-    java::tienv->GetMethodDeclaringClass(methodID, &owner);
-    java::tienv->RetransformClasses(1, &owner); //small trick to delete any already compiled / inlined code
-    java::env->DeleteLocalRef(owner);
+    
+    jclass klass = nullptr;
+    java::tienv->GetMethodDeclaringClass(methodID, &klass);
+    
+    char* sigbuf;
+    java::tienv->GetClassSignature(klass, &sigbuf, NULL);
+    std::string klassSig = std::string( sigbuf );
+    java::tienv->Deallocate( (unsigned char*)sigbuf );
+
+    bool reTransform = true;
+    for (auto&& transformedKlass : reTransformed_classes)
+    {
+        if ( transformedKlass.compare(klassSig) == 0)
+        {
+            reTransform = false;
+            break;
+        }
+    }
+
+    if ( reTransform )
+    {
+        java::tienv->RetransformClasses(1, &klass); //small trick to delete any already compiled / inlined code
+        reTransformed_classes.emplace_back( klassSig );
+    }
+    java::env->DeleteLocalRef(klass);
 
     method = *(HotSpot::Method**)methodID;
 
