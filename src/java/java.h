@@ -12,6 +12,8 @@ namespace java
 	inline jvmtiEnv* tienv = nullptr;
 	inline bool initialised = false;
 
+#define TLSENV ( ( JNIEnv* )TlsGetValue( java::envTlsIndex ) )
+
 	inline std::vector <void( * )( )> classInitialisers;
 
 	void Init();

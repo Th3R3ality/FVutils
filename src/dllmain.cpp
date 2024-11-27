@@ -29,11 +29,7 @@ void mainthread( HMODULE hmodule )
 
 	while ( !GetAsyncKeyState( VK_END ) )
 	{
-		if ( (minecraft::objectsAreValid = minecraft::ValidateObjects()) )
-		{
-			cache::UpdateCache();
-		}
-		std::this_thread::sleep_for( std::chrono::milliseconds( 5 ) );
+		std::this_thread::sleep_for( std::chrono::milliseconds( 100 ) );
 	}
 
 	printf( "destroying hooks\n" );

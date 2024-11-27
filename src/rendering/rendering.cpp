@@ -15,6 +15,7 @@
 
 #include "../config/config.h"
 #include "../util/Color.h"
+#include "../cheat/common/Input.h"
 
 namespace rendering
 {
@@ -44,6 +45,8 @@ namespace rendering
 		if ( rendering::GuiOpen )
 			DoGui();
 
+		DoIndicators();
+
 		if ( !minecraft::objectsAreValid )
 			return;
 
@@ -54,7 +57,6 @@ namespace rendering
 
 		// imgui
 		DoPlayers();
-		DoIndicators();
 
 	}
 
@@ -154,68 +156,77 @@ namespace rendering
 		ImGui::ShowDemoWindow();
 
 		ImGui::Begin( "FVutils" );
-
-		ImGui::BeginChild( "debug" );
-		ImGui::Checkbox( "Debug Indicators", &config::current.debug.showIndicators );
-
-		ImGui::Checkbox( "Name", &config::current.render.players.name );
-
-		ImGui::Checkbox( "2D", &config::current.render.players.d2.master );
-		if ( config::current.render.players.d2.master )
 		{
 
-		}
+			ImGui::BeginChild( "debug" );
+			ImGui::Checkbox( "Debug Indicators", &config::current.debug.showIndicators );
 
-		ImGui::Checkbox( "3D", &config::current.render.players.d3.master );
-		if ( config::current.render.players.d3.master )
-		{
-			ImGui::Checkbox( "Health Bar", &config::current.render.players.d2.healthbar );
-			if ( config::current.render.players.d2.healthbar )
+			ImGui::Checkbox( "Name", &config::current.render.players.name );
+
+			ImGui::Checkbox( "2D", &config::current.render.players.d2.master );
+			if ( config::current.render.players.d2.master )
 			{
-				ImGui::Checkbox( "Health Bar Number", &config::current.render.players.d2.healthbarnumber );
+
 			}
+
+			ImGui::Checkbox( "3D", &config::current.render.players.d3.master );
+			if ( config::current.render.players.d3.master )
+			{
+				ImGui::Checkbox( "Health Bar", &config::current.render.players.d2.healthbar );
+				if ( config::current.render.players.d2.healthbar )
+				{
+					ImGui::Checkbox( "Health Bar Number", &config::current.render.players.d2.healthbarnumber );
+				}
+			}
+
+			ImGui::EndChild();
 		}
-
-		ImGui::EndChild();
-
 		ImGui::End();
 		//ImGui::Text( "renderPos: %f, %f, %f", cache::data.renderPos.x, cache::data.renderPos.y, cache::data.renderPos.z );
 		//ImGui::Text( "renderOffset: %f, %f, %f", cache::data.renderOffset.x, cache::data.renderOffset.y, cache::data.renderOffset.z );
 		//ImGui::Text( "local: %f, %f, %f", cache::data.local.pos.x, cache::data.local.pos.y, cache::data.local.pos.z );
 
 		ImGui::Begin( "Combat" );
-		ImGui::Checkbox( "Clicker", &config::current.combat.clicker.enabled );
-		if ( config::current.combat.clicker.enabled )
 		{
-			ImGui::Indent( 16.f );
+			ImGui::Checkbox( "Clicker", &config::current.combat.clicker.enabled );
+			if ( config::current.combat.clicker.enabled )
+			{
+				ImGui::Indent( 16.f );
 
-			ImGui::Checkbox( "Left", &config::current.combat.clicker.left.enabled );
-			ImGui::DragIntRange2( "CPS##leftclicker",
-				&config::current.combat.clicker.left.minCps,
-				&config::current.combat.clicker.left.maxCps,
-				1.0f, 0, 40 );
-			ImGui::Checkbox( "Right", &config::current.combat.clicker.right.enabled );
-			ImGui::DragIntRange2( "CPS##rightclicker",
-				&config::current.combat.clicker.right.minCps,
-				&config::current.combat.clicker.right.maxCps,
-				1.0f, 0, 40 );
+				ImGui::Checkbox( "Left", &config::current.combat.clicker.left.enabled );
+				ImGui::DragIntRange2( "CPS##leftclicker",
+					&config::current.combat.clicker.left.minCps,
+					&config::current.combat.clicker.left.maxCps,
+					1.0f, 0, 40 );
+				ImGui::Checkbox( "Right", &config::current.combat.clicker.right.enabled );
+				ImGui::DragIntRange2( "CPS##rightclicker",
+					&config::current.combat.clicker.right.minCps,
+					&config::current.combat.clicker.right.maxCps,
+					1.0f, 0, 40 );
 
-			ImGui::Unindent( 16.f );
+				ImGui::Unindent( 16.f );
 
+			}
 		}
-
 		ImGui::End();
 
 
 		ImGui::Begin( "Players In Render" );
-		for ( auto&& p : cache::data.players )
 		{
-			ImGui::TextColored( p.type.GetRankColor(), "%s ", p.type.GetRankString().c_str(), p.name.c_str() );
-			ImGui::SameLine();
-			ImGui::TextColored( p.type.GetTypeColor(), "%s %s", p.type.GetTypeString().c_str(), p.name.c_str() );
+			for ( auto&& p : cache::data.players )
+			{
+				ImGui::TextColored( p.type.GetRankColor(), "%s ", p.type.GetRankString().c_str(), p.name.c_str() );
+				ImGui::SameLine();
+				ImGui::TextColored( p.type.GetTypeColor(), "%s %s", p.type.GetTypeString().c_str(), p.name.c_str() );
+			}
 		}
+		ImGui::End();
 
-
+		ImGui::Begin("Key States");
+		for ( auto&& keyState : Input::keyStates )
+		{
+			ImGui::Text( "%p | %c | %d", keyState.keyCode, (char)keyState.keyCode, (int)keyState.state );
+		}
 		ImGui::End();
 	}
 	void DoPlayers()
@@ -279,17 +290,24 @@ namespace rendering
 
 		if ( config::current.debug.showIndicators )
 		{
-			AddTextShadow( drawlist, ImVec2( clientRect.x - 200, textSize.y * 1.5 + 50 ), ImColor( 0, 0, 255, 255 ),
-				std::format( "LocalPlayer: {}", ( void* )minecraft::localPlayer->instance ).c_str() );
+			AddTextShadow( drawlist, ImVec2( clientRect.x - 200, textSize.y * 1.5 + 50 ), ImColor( 200, 200, 200, 255 ),
+				std::format( "Objects Are {}", minecraft::objectsAreValid ? "Valid [+]" : "Invalid [-]").c_str());
 
-			AddTextShadow( drawlist, ImVec2( clientRect.x - 200, textSize.y * 3 + 50 ), ImColor( 0, 255, 0, 255 ),
-				std::format( "World: {}", ( void* )minecraft::world->instance ).c_str() );
+			if (minecraft::localPlayer != nullptr )
+				AddTextShadow( drawlist, ImVec2( clientRect.x - 200, textSize.y * 3 + 50 ), ImColor( 0, 0, 255, 255 ),
+					std::format( "LocalPlayer: {}", ( void* )minecraft::localPlayer->instance ).c_str() );
 
-			AddTextShadow( drawlist, ImVec2( clientRect.x - 200, textSize.y * 4.5 + 50 ), ImColor( 0, 255, 255, 255 ),
-				std::format( "Timer: {}", ( void* )minecraft::timer->instance ).c_str() );
+			if (minecraft::world != nullptr )
+				AddTextShadow( drawlist, ImVec2( clientRect.x - 200, textSize.y * 4.5 + 50 ), ImColor( 0, 255, 0, 255 ),
+					std::format( "World: {}", ( void* )minecraft::world->instance ).c_str() );
 
-			AddTextShadow( drawlist, ImVec2( clientRect.x - 200, textSize.y * 6 + 50 ), ImColor( 255, 255, 0, 255 ),
-				std::format( "RenderManager: {}", ( void* )minecraft::renderManager->instance ).c_str() );
+			if (minecraft::timer != nullptr )
+				AddTextShadow( drawlist, ImVec2( clientRect.x - 200, textSize.y * 6 + 50 ), ImColor( 0, 255, 255, 255 ),
+					std::format( "Timer: {}", ( void* )minecraft::timer->instance ).c_str() );
+			
+			if (minecraft::renderManager != nullptr )
+				AddTextShadow( drawlist, ImVec2( clientRect.x - 200, textSize.y * 7.5 + 50 ), ImColor( 255, 255, 0, 255 ),
+					std::format( "RenderManager: {}", ( void* )minecraft::renderManager->instance ).c_str() );
 		}
 
 		ImGui::End();

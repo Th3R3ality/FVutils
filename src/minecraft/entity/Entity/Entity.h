@@ -40,25 +40,25 @@ struct Entity : public IClass
 
 	String getName()
 	{
-		return java::env->CallObjectMethod( this->instance, Entity::methodIDs[ "getName" ] );
+		return TLSENV->CallObjectMethod( this->instance, Entity::methodIDs[ "getName" ] );
 	}
 	IChatComponent getDisplayName()
 	{
-		return IChatComponent( java::env->CallObjectMethod( this->instance, Entity::methodIDs[ "getDisplayName" ] ) );
+		return IChatComponent( TLSENV->CallObjectMethod( this->instance, Entity::methodIDs[ "getDisplayName" ] ) );
 	}
 
 	fvec3 GetPos()
 	{
 		return fvec3{
-			(float)java::env->GetDoubleField(instance, Entity::fieldIDs["posX"]),
-			(float)java::env->GetDoubleField(instance, Entity::fieldIDs["posY"]),
-			(float)java::env->GetDoubleField(instance, Entity::fieldIDs["posZ"])
+			(float)TLSENV->GetDoubleField(instance, Entity::fieldIDs["posX"]),
+			(float)TLSENV->GetDoubleField(instance, Entity::fieldIDs["posY"]),
+			(float)TLSENV->GetDoubleField(instance, Entity::fieldIDs["posZ"])
 		};
 	}
 
 	float GetHeight()
 	{
-		return java::env->GetFloatField(this->instance, Entity::fieldIDs["height"]);
+		return TLSENV->GetFloatField(this->instance, Entity::fieldIDs["height"]);
 	}
 
 	fvec3 GetEyePos()
@@ -71,9 +71,9 @@ struct Entity : public IClass
 	fvec3 GetLastTickPos()
 	{
 		return fvec3{
-			(float)java::env->GetDoubleField(this->instance, Entity::fieldIDs["lastTickPosX"]),
-			(float)java::env->GetDoubleField(this->instance, Entity::fieldIDs["lastTickPosY"]),
-			(float)java::env->GetDoubleField(this->instance, Entity::fieldIDs["lastTickPosZ"])
+			(float)TLSENV->GetDoubleField(this->instance, Entity::fieldIDs["lastTickPosX"]),
+			(float)TLSENV->GetDoubleField(this->instance, Entity::fieldIDs["lastTickPosY"]),
+			(float)TLSENV->GetDoubleField(this->instance, Entity::fieldIDs["lastTickPosZ"])
 		};
 	}
 

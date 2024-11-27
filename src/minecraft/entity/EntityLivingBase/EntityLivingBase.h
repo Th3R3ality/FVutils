@@ -21,17 +21,17 @@ struct EntityLivingBase : public Entity
 
 	float getHealth()
 	{
-		return java::env->CallFloatMethod(this->instance, EntityLivingBase::methodIDs["getHealth"]);
+		return TLSENV->CallFloatMethod(this->instance, EntityLivingBase::methodIDs["getHealth"]);
 	}
 
 	float getMaxHealth()
 	{
-		return java::env->CallFloatMethod(this->instance, EntityLivingBase::methodIDs["getMaxHealth"]);
+		return TLSENV->CallFloatMethod(this->instance, EntityLivingBase::methodIDs["getMaxHealth"]);
 	}
 
 	bool canEntityBeSeen(jobject entityInstance)
 	{
-		return java::env->CallBooleanMethod(this->instance, EntityLivingBase::methodIDs["canEntityBeSeen"], entityInstance);
+		return TLSENV->CallBooleanMethod(this->instance, EntityLivingBase::methodIDs["canEntityBeSeen"], entityInstance);
 	}
 
 	STRUCTORS( );

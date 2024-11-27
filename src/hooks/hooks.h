@@ -31,12 +31,13 @@ namespace hooks
 	inline void* wglSwapBuffersOrig = nullptr;
 	inline LONG_PTR wndProcOrig = 0;
 
-	void jhk_handleChat( HotSpot::frame* frame, HotSpot::Thread* thread, bool* cancel );
-	void jhk_renderName( HotSpot::frame* frame, HotSpot::Thread* thread, bool* cancel );
+	//void jhk_handleChat( HotSpot::frame* frame, HotSpot::Thread* thread, bool* cancel );
+	//void jhk_renderName( HotSpot::frame* frame, HotSpot::Thread* thread, bool* cancel );
 
 	DECL_JHOOK( jhk_handleChat );
 	DECL_JHOOK( jhk_renderName );
 	DECL_JHOOK( jhk_runTick );
+	DECL_JHOOK( jhk_runGameLoop );
 
 	LRESULT CALLBACK hkWndProc( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam );
 	BOOL __stdcall hkwglSwapBuffers( IN HDC hdc );

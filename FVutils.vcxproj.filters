@@ -237,6 +237,9 @@
     <ClInclude Include="src\cheat\modules\Clicker\Clicker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\cheat\common\Input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dllmain.cpp">
@@ -408,6 +411,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\cheat\common\ClickScheduler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cheat\common\Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\jhk_runGameLoop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

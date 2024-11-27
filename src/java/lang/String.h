@@ -22,9 +22,9 @@ struct String : IClass
 		if ( this->instance == nullptr )
 			return "ERROR < ToString > NO INSTANCE SET";
 		jstring jStr = (jstring)this->instance;
-		const char* nativeStr = java::env->GetStringUTFChars(jStr, nullptr);
+		const char* nativeStr = TLSENV->GetStringUTFChars(jStr, nullptr);
 		std::string ret = std::string(nativeStr);
-		java::env->ReleaseStringUTFChars(jStr, nativeStr);
+		TLSENV->ReleaseStringUTFChars(jStr, nativeStr);
 		return ret;
 	}
 

@@ -4,6 +4,7 @@
 #include "../minecraft/minecraft.h"
 
 #include "../cheat/common/ClickScheduler.h"
+#include "../cache/cache.h"
 
 namespace hooks
 {
@@ -17,13 +18,19 @@ namespace hooks
 			return;
 		}
 
+		printf( "runTick\n" );
+
+		if ( ( minecraft::objectsAreValid = minecraft::ValidateObjects() ) )
+		{
+			cache::UpdateCache();
+		}
 
 		//printf("runTick thread %d: lpvData=%lx\n", GetCurrentThreadId(), env);
 		//java::TestTLS();
 		do
 		{
 			if ( !config::current.combat.clicker.enabled ) break;
-			if ( rendering::GuiOpen ) break;
+			//if ( rendering::GuiOpen ) break;
 			if ( Minecraft::IsInGuiState() ) break;
 			//if ( ignoreBlocks && SDK::Minecraft->GetMouseOver().IsTypeOfBlock() ) return;
 

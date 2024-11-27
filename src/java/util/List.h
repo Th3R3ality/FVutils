@@ -18,7 +18,7 @@ struct List : IClass
 
 	jobjectArray toArray()
 	{
-		return ( jobjectArray )java::env->CallObjectMethod( instance, methodIDs[ "toArray" ] );
+		return ( jobjectArray )TLSENV->CallObjectMethod( instance, methodIDs[ "toArray" ] );
 	}
 
 	STRUCTORS();

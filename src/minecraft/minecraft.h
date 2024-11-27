@@ -11,11 +11,11 @@ struct Minecraft;
 
 namespace minecraft
 {
-	//inline std::unique_ptr<Minecraft> mc = {};
-	inline std::unique_ptr<EntityPlayerSP> localPlayer = {};
-	inline std::unique_ptr<WorldClient> world = {};
-	inline std::unique_ptr<Timer> timer = {};
-	inline std::unique_ptr<RenderManager> renderManager = {};
+	//inline std::unique_ptr<Minecraft> mc = nullptr;
+	inline std::unique_ptr<EntityPlayerSP> localPlayer = nullptr;
+	inline std::unique_ptr<WorldClient> world = nullptr;
+	inline std::unique_ptr<Timer> timer = nullptr;
+	inline std::unique_ptr<RenderManager> renderManager = nullptr;
 
 	inline bool objectsAreValid = false;
 	bool ValidateObjects();
@@ -24,7 +24,7 @@ namespace minecraft
 
 #define CURRENTCLASSNAME Minecraft
 
-SETCLASSPATH("net/minecraft/client/Minecraft");
+SETCLASSPATH( "net/minecraft/client/Minecraft" );
 
 struct Minecraft : IClass
 {
@@ -36,19 +36,20 @@ struct Minecraft : IClass
 	{
 		INITIALISER_HEADER();
 
-		GET_STATIC_METHOD( "getMinecraft", "()Lnet/minecraft/client/Minecraft;" );
-		
-		GET_FIELD("thePlayer", "Lnet/minecraft/client/entity/EntityPlayerSP;");
-		GET_FIELD("theWorld", "Lnet/minecraft/client/multiplayer/WorldClient;");
-		GET_FIELD("renderManager", "Lnet/minecraft/client/renderer/entity/RenderManager;");
-		GET_FIELD("timer", "Lnet/minecraft/util/Timer;");
-		GET_FIELD("gameSettings", "Lnet/minecraft/client/settings/GameSettings;");
-		GET_FIELD("currentScreen", "Lnet/minecraft/client/gui/GuiScreen;");
-		GET_FIELD("objectMouseOver", "Lnet/minecraft/util/MovingObjectPosition;");
+		_GET_STATIC_METHOD( "getMinecraft",	"func_71410_x",		"A",	"()Lnet/minecraft/client/Minecraft;" );
 
-		GET_METHOD("getRenderViewEntity", "()Lnet/minecraft/entity/Entity;");
-		GET_METHOD("clickMouse", "()V");
-		GET_METHOD("runTick", "()V");
+		_GET_FIELD( "currentScreen",		"field_71462_r",	"m",	"Lnet/minecraft/client/gui/GuiScreen;");
+		_GET_FIELD( "gameSettings",			"field_71474_y",	"t",	"Lnet/minecraft/client/settings/GameSettings;" );
+		_GET_FIELD( "objectMouseOver",		"field_71476_x",	"s",	"Lnet/minecraft/util/MovingObjectPosition;" );
+		_GET_FIELD( "renderManager",		"field_175616_W",	"aa",	"Lnet/minecraft/client/renderer/entity/RenderManager;" );
+		_GET_FIELD( "thePlayer",			"field_71439_g",	"h",	"Lnet/minecraft/client/entity/EntityPlayerSP;" );
+		_GET_FIELD( "theWorld",				"field_71441_e",	"f",	"Lnet/minecraft/client/multiplayer/WorldClient;" );
+		_GET_FIELD( "timer",				"field_71428_T",	"Y",	"Lnet/minecraft/util/Timer;" );
+
+		_GET_METHOD( "clickMouse",			"func_147116_af",	"aw",	"()V" );
+		_GET_METHOD( "getRenderViewEntity",	"func_175606_aa",	"ac",	"()Lnet/minecraft/entity/Entity;");
+		_GET_METHOD( "runTick",				"func_71407_l",		"s",	"()V" );
+		_GET_METHOD( "runGameLoop",			"func_71411_J",		"av",	"()V");
 
 		GetStaticInstance();
 		//minecraft::mc = std::make_unique<Minecraft>(GetStaticInstance());
@@ -65,11 +66,9 @@ struct Minecraft : IClass
 		return Minecraft::staticInstance;
 	}
 
-
 	static bool IsInGuiState()
 	{
-
-		if ( ( ( JNIEnv* )TlsGetValue( java::envTlsIndex ) )->GetObjectField( Minecraft::staticInstance, Minecraft::fieldIDs[ "currentScreen" ] ) != NULL ) return true;
+		if ( TLSENV->GetObjectField( Minecraft::staticInstance, Minecraft::fieldIDs[ "currentScreen" ] ) != NULL ) return true;
 		return false;
 	}
 };

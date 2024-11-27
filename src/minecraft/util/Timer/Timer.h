@@ -18,7 +18,7 @@ struct Timer : IClass
 
 	float renderPartialTicks()
 	{
-		return java::env->GetFloatField(this->instance, Timer::fieldIDs["renderPartialTicks"]);
+		return TLSENV->GetFloatField(this->instance, Timer::fieldIDs["renderPartialTicks"]);
 	}
 
 	STRUCTORS();

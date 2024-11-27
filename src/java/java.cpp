@@ -31,6 +31,12 @@ namespace java
 		if ( env == nullptr )
 			jvm->DestroyJavaVM();
 
+		if ( !TlsSetValue( java::envTlsIndex, env ) )
+		{
+			printf( "TlsSetValue error" );
+			return;
+		}
+
 		jvm->GetEnv( ( void** )&tienv, JVMTI_VERSION );
 
 
@@ -98,15 +104,15 @@ namespace java
 
 	void Destroy()
 	{
-		TlsFree(java::envTlsIndex);
-
 		jvm->DetachCurrentThread();
+
+		TlsFree(java::envTlsIndex);
 	}
 
 	jclass FindClass( const char* klassPath )
 	{
-		jstring klassPath_ = env->NewStringUTF(klassPath);
-		return (jclass)env->CallObjectMethod(classLoader, mid_findClass, klassPath_);
+		jstring klassPath_ = TLSENV->NewStringUTF(klassPath);
+		return (jclass)TLSENV->CallObjectMethod(classLoader, mid_findClass, klassPath_);
 	}
 
 	void TestTLS()

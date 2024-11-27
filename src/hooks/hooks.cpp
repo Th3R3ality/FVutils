@@ -5,6 +5,7 @@
 #include "../minecraft/client/NetHandlerPlayClient/NetHandlerPlayClient.h"
 #include "../minecraft/client/renderer/entity/RenderLivingEntity/RenderLivingEntity.h"
 #include "../minecraft/minecraft.h"
+#include "../minecraft/client/renderer/entity/RenderPlayer/RenderPlayer.h"
 
 #define HOOK(detour, methodID) \
 if (false == JavaHook::hook(methodID, detour)) \
@@ -27,6 +28,7 @@ void hooks::Init()
 	HOOK( jhk_handleChat, NetHandlerPlayClient::methodIDs[ "handleChat" ] );
 	HOOK( jhk_renderName, RenderLivingEntity::methodIDs[ "renderName" ] );
 	HOOK( jhk_runTick, Minecraft::methodIDs[ "runTick" ] );
+	//HOOK( jhk_runGameLoop, Minecraft::methodIDs[ "runGameLoop" ] );	
 }
 
 void hooks::Destroy()

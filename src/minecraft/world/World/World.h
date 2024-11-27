@@ -25,16 +25,18 @@ struct World : IClass
 
 	void playerEntities(std::vector<EntityPlayer>& out)
 	{
-		List playerList = java::env->GetObjectField( instance, World::fieldIDs[ "playerEntities" ] );
+		JNIEnv* env = TLSENV;
+
+		List playerList = env->GetObjectField( this->instance, World::fieldIDs[ "playerEntities" ] );
 		jobjectArray playerArray = playerList.toArray();
 		if ( playerArray == nullptr ) return;
 
-		jsize length = java::env->GetArrayLength( playerArray );
+		jsize length = TLSENV->GetArrayLength( playerArray );
 		out.reserve(length);
 
 		for ( jsize idx = 0; idx < length; idx++ )
 		{
-			EntityPlayer player = java::env->GetObjectArrayElement( playerArray, idx );
+			EntityPlayer player = TLSENV->GetObjectArrayElement( playerArray, idx );
 			if ( player.instance )
 			{
 				out.emplace_back( player );
@@ -42,7 +44,7 @@ struct World : IClass
 			player.noDeref = true;
 		}
 
-		java::env->DeleteLocalRef( playerArray );
+		TLSENV->DeleteLocalRef( playerArray );
 	}
 
 };

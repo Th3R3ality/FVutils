@@ -30,7 +30,7 @@ struct ActiveRenderInfo : IClass
 
 	static std::array<double, 16> RawProjectionMatrix()
 	{
-		jobject matrix = java::env->GetStaticObjectField( ActiveRenderInfo::klass, ActiveRenderInfo::fieldIDs[ "PROJECTION" ] );
+		jobject matrix = TLSENV->GetStaticObjectField( ActiveRenderInfo::klass, ActiveRenderInfo::fieldIDs[ "PROJECTION" ] );
 		
 		std::vector<double> data = FloatBuffer( matrix ).GetFloatsAsDoubles( 16 );
 
@@ -42,7 +42,7 @@ struct ActiveRenderInfo : IClass
 
 	static std::array<double, 16> RawModelViewMatrix()
 	{
-		jobject matrix = java::env->GetStaticObjectField( ActiveRenderInfo::klass, ActiveRenderInfo::fieldIDs[ "MODELVIEW" ] );
+		jobject matrix = TLSENV->GetStaticObjectField( ActiveRenderInfo::klass, ActiveRenderInfo::fieldIDs[ "MODELVIEW" ] );
 		
 		std::vector<double> data = FloatBuffer( matrix ).GetFloatsAsDoubles( 16 );
 
@@ -54,23 +54,23 @@ struct ActiveRenderInfo : IClass
 
 	static matrix ProjectionMatrix()
 	{
-		jobject projection = java::env->GetStaticObjectField( ActiveRenderInfo::klass, ActiveRenderInfo::fieldIDs[ "PROJECTION" ] );
+		jobject projection = TLSENV->GetStaticObjectField( ActiveRenderInfo::klass, ActiveRenderInfo::fieldIDs[ "PROJECTION" ] );
 		matrix m = FloatBuffer( projection ).GetMatrix();
-		//java::env->DeleteLocalRef(projection); // IClass derefs
+		//TLSENV->DeleteLocalRef(projection); // IClass derefs
 		return m;
 	}
 
 	static matrix ModelViewMatrix()
 	{
-		jobject modelView = java::env->GetStaticObjectField( ActiveRenderInfo::klass, ActiveRenderInfo::fieldIDs[ "MODELVIEW" ] );
+		jobject modelView = TLSENV->GetStaticObjectField( ActiveRenderInfo::klass, ActiveRenderInfo::fieldIDs[ "MODELVIEW" ] );
 		matrix m = FloatBuffer( modelView ).GetMatrix();
-		//java::env->DeleteLocalRef(modelView); // IClass derefs
+		//TLSENV->DeleteLocalRef(modelView); // IClass derefs
 		return m;
 	}
 
 	static ivec4 Viewport()
 	{
-		jobject viewport = java::env->GetStaticObjectField( ActiveRenderInfo::klass, ActiveRenderInfo::fieldIDs[ "VIEWPORT" ] );
+		jobject viewport = TLSENV->GetStaticObjectField( ActiveRenderInfo::klass, ActiveRenderInfo::fieldIDs[ "VIEWPORT" ] );
 
 		ivec4 vec = IntBuffer( viewport ).GetInt4();
 
@@ -79,9 +79,9 @@ struct ActiveRenderInfo : IClass
 
 	static fvec3 RenderPos()
 	{
-		jobject vec3 = java::env->CallStaticObjectMethod( ActiveRenderInfo::klass, ActiveRenderInfo::methodIDs[ "getPosition" ] );
+		jobject vec3 = TLSENV->CallStaticObjectMethod( ActiveRenderInfo::klass, ActiveRenderInfo::methodIDs[ "getPosition" ] );
 
-		//Class klass = java::env->GetObjectClass(vec3);
+		//Class klass = TLSENV->GetObjectClass(vec3);
 
 		//std::cout << klass.getName().ToString() << "\n";
 

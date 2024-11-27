@@ -21,12 +21,12 @@ struct IChatComponent : public IClass
 
 	String getFormattedText()
 	{
-		return java::env->CallObjectMethod( instance, IChatComponent::methodIDs[ "getFormattedText" ] );
+		return TLSENV->CallObjectMethod( instance, IChatComponent::methodIDs[ "getFormattedText" ] );
 
 	}
 	String getUnformattedText()
 	{
-		return java::env->CallObjectMethod( instance, IChatComponent::methodIDs[ "getUnformattedText" ] );
+		return TLSENV->CallObjectMethod( instance, IChatComponent::methodIDs[ "getUnformattedText" ] );
 	}
 
 	STRUCTORS();

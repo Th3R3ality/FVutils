@@ -3,65 +3,34 @@
 MAKE_INITIALISER( Minecraft );
 jobject Minecraft::staticInstance = 0;
 
+
+#define VALIDATE_OBJECT(klass, objectVar, field) \
+jobject __ ## klass ## objectVar = TLSENV->GetObjectField( Minecraft::staticInstance, Minecraft::fieldIDs[ field ] ); \
+if ( !__ ## klass ## objectVar ) \
+{ \
+	minecraft::## objectVar = nullptr; \
+	return false; \
+} \
+if ( minecraft::## objectVar == nullptr || !TLSENV->IsSameObject(__ ## klass ## objectVar, minecraft::##objectVar ->instance) ) \
+{ \
+	if ( minecraft::##objectVar != nullptr && minecraft::##objectVar ->instance && minecraft::##objectVar ->noDeref == true ) \
+		{minecraft::##objectVar ->Deref();} \
+ \
+	minecraft::##objectVar = std::make_unique< klass >( __ ## klass ## objectVar ); \
+	minecraft::##objectVar ->MakeGlobal(); \
+	minecraft::##objectVar ->noDeref = true; \
+} \
+else \
+{ /*TLSENV->DeleteLocalRef( __ ## klass ## objectVar );*/ }
+
 namespace minecraft
 {
 	bool ValidateObjects()
 	{
-		jobject localPlayerInstance = java::env->GetObjectField( Minecraft::staticInstance, Minecraft::fieldIDs[ "thePlayer" ] );
-		if ( !localPlayerInstance )
-		{
-			localPlayer = nullptr;
-			return false;
-		}
-		if ( localPlayer == nullptr || localPlayerInstance != localPlayer->instance )
-		{
-			localPlayer = std::make_unique<EntityPlayerSP>( localPlayerInstance );
-			localPlayer->noDeref = true;
-		}
-		else
-			java::env->DeleteLocalRef( localPlayerInstance );
-
-		jobject worldClientInstance = java::env->GetObjectField( Minecraft::staticInstance, Minecraft::fieldIDs[ "theWorld" ] );
-		if ( !worldClientInstance )
-		{
-			world = nullptr;
-			return false;
-		}
-		if ( world == nullptr || worldClientInstance != world->instance )
-		{
-			world = std::make_unique<WorldClient>( worldClientInstance );
-			world->noDeref = true;
-		}
-		else
-			java::env->DeleteLocalRef( worldClientInstance );
-
-		jobject timerInstance = java::env->GetObjectField( Minecraft::staticInstance, Minecraft::fieldIDs[ "timer" ] );
-		if ( !timerInstance )
-		{
-			timer = nullptr;
-			return false;
-		}
-		if ( timer == nullptr || timerInstance != timer->instance )
-		{
-			timer = std::make_unique<Timer>( timerInstance );
-			timer->noDeref = true;
-		}
-		else
-			java::env->DeleteLocalRef( timerInstance );
-
-		jobject rmInstance = java::env->GetObjectField( Minecraft::staticInstance, Minecraft::fieldIDs[ "renderManager" ] );
-		if ( !rmInstance )
-		{
-			renderManager = nullptr;
-			return false;
-		}
-		if ( renderManager == nullptr || rmInstance != renderManager->instance )
-		{
-			renderManager = std::make_unique<RenderManager>( rmInstance );
-			renderManager->noDeref = true;
-		}
-		else
-			java::env->DeleteLocalRef( rmInstance );
+		VALIDATE_OBJECT( EntityPlayerSP, localPlayer, "thePlayer" );
+		VALIDATE_OBJECT( WorldClient, world, "theWorld" );
+		VALIDATE_OBJECT( Timer, timer, "timer" );
+		VALIDATE_OBJECT( RenderManager, renderManager, "renderManager" );
 
 		return true;
 	}

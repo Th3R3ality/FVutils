@@ -27,18 +27,18 @@ struct RenderManager : public IClass
 	fvec3 RenderPos()
 	{
 		return fvec3{
-			(float)java::env->GetDoubleField(instance, RenderManager::fieldIDs["renderPosX"]),
-			(float)java::env->GetDoubleField(instance, RenderManager::fieldIDs["renderPosY"]),
-			(float)java::env->GetDoubleField(instance, RenderManager::fieldIDs["renderPosZ"])
+			(float)TLSENV->GetDoubleField(instance, RenderManager::fieldIDs["renderPosX"]),
+			(float)TLSENV->GetDoubleField(instance, RenderManager::fieldIDs["renderPosY"]),
+			(float)TLSENV->GetDoubleField(instance, RenderManager::fieldIDs["renderPosZ"])
 		};
 	}
 
 	fvec3 ViewerPos()
 	{
 		return fvec3{
-			(float)java::env->GetDoubleField(instance, RenderManager::fieldIDs["viewerPosX"]),
-			(float)java::env->GetDoubleField(instance, RenderManager::fieldIDs["viewerPosY"]),
-			(float)java::env->GetDoubleField(instance, RenderManager::fieldIDs["viewerPosZ"])
+			(float)TLSENV->GetDoubleField(instance, RenderManager::fieldIDs["viewerPosX"]),
+			(float)TLSENV->GetDoubleField(instance, RenderManager::fieldIDs["viewerPosY"]),
+			(float)TLSENV->GetDoubleField(instance, RenderManager::fieldIDs["viewerPosZ"])
 		};
 	}
 

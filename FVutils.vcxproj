@@ -67,6 +67,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>
       </AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -103,6 +104,7 @@
   <ItemGroup>
     <ClInclude Include="src\cache\cache.h" />
     <ClInclude Include="src\cheat\common\ClickScheduler.h" />
+    <ClInclude Include="src\cheat\common\Input.h" />
     <ClInclude Include="src\cheat\modules\Clicker\Clicker.h" />
     <ClInclude Include="src\config\config.h">
       <SubType>
@@ -215,6 +217,7 @@
   <ItemGroup>
     <ClCompile Include="src\cache\cache.cpp" />
     <ClCompile Include="src\cheat\common\ClickScheduler.cpp" />
+    <ClCompile Include="src\cheat\common\Input.cpp" />
     <ClCompile Include="src\config\config.cpp">
       <SubType>
       </SubType>
@@ -225,6 +228,7 @@
     <ClCompile Include="src\hooks\hk_WndProc.cpp" />
     <ClCompile Include="src\hooks\jhk_handleChat.cpp" />
     <ClCompile Include="src\hooks\hooks.cpp" />
+    <ClCompile Include="src\hooks\jhk_runGameLoop.cpp" />
     <ClCompile Include="src\hooks\jhk_renderName.cpp" />
     <ClCompile Include="src\hooks\jhk_runTick.cpp">
       <SubType>

@@ -15,6 +15,8 @@ struct EntityPlayer : public EntityLivingBase
 		INITIALISER_HEADER( );
 	}
 
+	//STRUCTORS();
+
 	EntityPlayer() = default; EntityPlayer( INITIALISER_TYPE )
 	{
 		java::classInitialisers.push_back( &Initialise );
@@ -25,7 +27,7 @@ struct EntityPlayer : public EntityLivingBase
 	} ~EntityPlayer()
 	{
 		//printf( "~EntityPlayer() : %p%s\n", instance, noDeref ? " : noDeref" : "");
-		if ( instance && !this->noDeref ) java::env->DeleteLocalRef( instance );
+		if ( instance && !this->noDeref ) TLSENV->DeleteLocalRef( instance );
 	};
 };
 

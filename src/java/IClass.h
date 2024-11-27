@@ -5,6 +5,7 @@
 #include <map>
 
 #include <java.h>
+#include <cassert>
 
 #define STATICS() \
 static std::map<std::string, jmethodID> methodIDs; \
@@ -25,10 +26,9 @@ CURRENTCLASSNAME ( jobject _instance ) \
 } \
  \
 ~ CURRENTCLASSNAME () \
-{	if ( instance && !this->noDeref ) java::env->DeleteLocalRef( instance ); }
+{	if ( instance && !this->noDeref ) TLSENV->DeleteLocalRef( instance ); }
 
-//
-//
+
 
 #define EXPAND(x) x
 
@@ -51,21 +51,30 @@ if ( CURRENTCLASSNAME :: initialised ) { return; } \
 CURRENTCLASSNAME :: klass = java::FindClass( CURRENTCLASSNAME :: klassPath ); \
 printf("Class [" EXPANDSTR(CURRENTCLASSNAME) "]: %p\n", CURRENTCLASSNAME :: klass);
 
-#define GET_METHOD(name, sig) \
-CURRENTCLASSNAME :: methodIDs[ name ] = java::env->GetMethodID( CURRENTCLASSNAME :: klass, name, sig ); \
-printf("  Method ["##name##"]: %p\n", CURRENTCLASSNAME :: methodIDs[ name ]);
+#define GET_METHOD(MCPname, SRGdesc) \
+CURRENTCLASSNAME :: methodIDs[ MCPname ] = TLSENV->GetMethodID( CURRENTCLASSNAME :: klass, MCPname, SRGdesc ); \
+printf("  Method ["##MCPname##"]: %p\n", CURRENTCLASSNAME :: methodIDs[ MCPname ]);
 
-#define GET_STATIC_METHOD(name, sig) \
-CURRENTCLASSNAME :: methodIDs[ name ] = java::env->GetStaticMethodID( CURRENTCLASSNAME :: klass, name, sig ); \
-printf("  Static Method ["##name##"]: %p\n", CURRENTCLASSNAME :: methodIDs[ name ]);
+#define _GET_METHOD(MCPname, SRCname, OBFname, SRGdesc) GET_METHOD(MCPname, SRGdesc)
 
-#define GET_FIELD(name, sig) \
-CURRENTCLASSNAME :: fieldIDs[ name ] = java::env->GetFieldID( CURRENTCLASSNAME :: klass, name, sig ); \
-printf("  Field ["##name##"]: %p\n", CURRENTCLASSNAME :: fieldIDs[ name ]);
+#define GET_STATIC_METHOD(MCPname, SRGdesc) \
+CURRENTCLASSNAME :: methodIDs[ MCPname ] = TLSENV->GetStaticMethodID( CURRENTCLASSNAME :: klass, MCPname, SRGdesc ); \
+printf("  Static Method ["##MCPname##"]: %p\n", CURRENTCLASSNAME :: methodIDs[ MCPname ]);
 
-#define GET_STATIC_FIELD(name, sig) \
-CURRENTCLASSNAME :: fieldIDs[ name ] = java::env->GetStaticFieldID( CURRENTCLASSNAME :: klass, name, sig ); \
-printf("  Static Field ["##name##"]: %p\n", CURRENTCLASSNAME :: fieldIDs[ name ]);
+#define _GET_STATIC_METHOD(MCPname, SRCname, OBFname, SRGdesc) GET_STATIC_METHOD(MCPname, SRGdesc)
+
+
+#define GET_FIELD(MCPname, SRGdesc) \
+CURRENTCLASSNAME :: fieldIDs[ MCPname ] = TLSENV->GetFieldID( CURRENTCLASSNAME :: klass, MCPname, SRGdesc ); \
+printf("  Field ["##MCPname##"]: %p\n", CURRENTCLASSNAME :: fieldIDs[ MCPname ]);
+
+#define _GET_FIELD(MCPname, SRGname, OBFname, SRGdesc) GET_FIELD(MCPname, SRGdesc)
+
+#define GET_STATIC_FIELD(MCPname, SRGdesc) \
+CURRENTCLASSNAME :: fieldIDs[ MCPname ] = TLSENV->GetStaticFieldID( CURRENTCLASSNAME :: klass, MCPname, SRGdesc ); \
+printf("  Static Field ["##MCPname##"]: %p\n", CURRENTCLASSNAME :: fieldIDs[ MCPname ]);
+
+#define _GET_STATIC_FIELD(MCPname, SRGname, OBFname, SRGdesc) GET_STATIC_FIELD(MCPname, SRGdesc)
 
 
 struct INITIALISER_TYPE
@@ -82,6 +91,7 @@ struct IClass
 
 	jobject instance = 0;
 	bool noDeref = false;
+	bool global = false;
 
 	static void Initialise() {}
 
@@ -94,10 +104,23 @@ struct IClass
 		instance = _instance;
 	} ~IClass()
 	{
-		if ( instance && !noDeref ) java::env->DeleteLocalRef( instance );
+		if ( instance && !noDeref ) this->Deref();
+	}
+	void MakeGlobal()
+	{
+		assert( instance );
+
+		TLSENV->NewGlobalRef( instance );
+		global = true;
 	}
 	void Deref()
 	{
-		if ( instance ) java::env->DeleteLocalRef( instance );
+		assert( instance );
+
+		if ( global )
+			TLSENV->DeleteGlobalRef( instance );
+		else
+			TLSENV->DeleteLocalRef( instance );
+
 	}
 };

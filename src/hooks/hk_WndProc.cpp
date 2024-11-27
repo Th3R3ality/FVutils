@@ -1,6 +1,8 @@
 #include "hooks.h"
 #include <Windows.h>
 #include "../rendering/rendering.h"
+#include "../cheat/common/Input.h"
+
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 namespace hooks
@@ -13,6 +15,12 @@ namespace hooks
 				rendering::GuiOpen = !rendering::GuiOpen;
 			if (wParam == VK_ESCAPE && rendering::GuiOpen)
 				rendering::GuiOpen = false;
+
+			Input::DeltaKey( wParam, 1 );
+		}
+		if ( msg == WM_KEYUP )
+		{
+			Input::DeltaKey( wParam, -1 );
 		}
 
 		if ( rendering::GuiOpen && hooks::initialised )
