@@ -45,14 +45,14 @@ namespace hooks
 					config::current.combat.clicker.left.minCps,
 					config::current.combat.clicker.left.maxCps );
 			}
-			if (config::current.combat.clicker.left.enabled && GetAsyncKeyState(VK_LBUTTON))
+			if (config::current.combat.clicker.left.enabled && Input::GetMouseState(MK_LBUTTON))
 			{
 				for ( int i = 0; i < leftclickSchedule[ leftnextClickIdx ]; i++ )
 				{
 					POINT pos_cursor;
 					GetCursorPos(&pos_cursor);
-					SendMessageW( rendering::window, WM_LBUTTONDOWN,  MK_LBUTTON, MAKELPARAM( pos_cursor.x, pos_cursor.y ) );
-					SendMessageW( rendering::window, WM_LBUTTONUP, 0, MAKELPARAM( pos_cursor.x, pos_cursor.y ) );
+					SendMessageW( rendering::window, WM_LBUTTONDOWN,  0x1337, MAKELPARAM( pos_cursor.x, pos_cursor.y ) );
+					SendMessageW( rendering::window, WM_LBUTTONUP, 0x1337, MAKELPARAM( pos_cursor.x, pos_cursor.y ) );
 				}
 			}
 			leftnextClickIdx++; leftnextClickIdx %= 20;
@@ -66,14 +66,14 @@ namespace hooks
 					config::current.combat.clicker.right.minCps,
 					config::current.combat.clicker.right.maxCps );
 			}
-			if ( config::current.combat.clicker.right.enabled &&GetAsyncKeyState(VK_RBUTTON) )
+			if ( config::current.combat.clicker.right.enabled && Input::GetMouseState(MK_RBUTTON) )
 			{
 				for ( int i = 0; i < rightclickSchedule[ rightnextClickIdx ]; i++ )
 				{
 					POINT pos_cursor;
 					GetCursorPos(&pos_cursor);
-					SendMessageW( rendering::window, WM_RBUTTONDOWN, MK_RBUTTON, MAKELPARAM( pos_cursor.x, pos_cursor.y ) );
-					SendMessageW( rendering::window, WM_RBUTTONUP, 0, MAKELPARAM( pos_cursor.x, pos_cursor.y ) );
+					SendMessageW( rendering::window, WM_RBUTTONDOWN, 0x1337, MAKELPARAM( pos_cursor.x, pos_cursor.y ) );
+					SendMessageW( rendering::window, WM_RBUTTONUP, 0x1337, MAKELPARAM( pos_cursor.x, pos_cursor.y ) );
 				}
 			}
 			rightnextClickIdx++; rightnextClickIdx %= 20;
