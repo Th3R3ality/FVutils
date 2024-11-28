@@ -20,7 +20,7 @@ struct IntBuffer : public IClass
 
 	int Get( int index )
 	{
-		return java::env->CallIntMethod( this->instance, IntBuffer::methodIDs[ "get" ], index );
+		return TLSENV->CallIntMethod( this->instance, IntBuffer::methodIDs[ "get" ], index );
 	}
 
 	ivec4 GetInt4()

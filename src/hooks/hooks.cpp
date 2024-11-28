@@ -44,15 +44,15 @@ void hooks::Init()
 		}
 	}
 
-	Sleep( 10 );
+	Sleep( 100 );
 
-	HOOK( jhk_handleChat, NetHandlerPlayClient::methodIDs[ "handleChat" ] );
-	HOOK( jhk_renderName, RenderLivingEntity::methodIDs[ "renderName" ] );
-	HOOK( jhk_runTick, Minecraft::methodIDs[ "runTick" ] );
+	//HOOK( jhk_handleChat, NetHandlerPlayClient::methodIDs[ "handleChat" ] );
+	//HOOK( jhk_renderName, RenderLivingEntity::methodIDs[ "renderName" ] );
+	//HOOK( jhk_runTick, Minecraft::methodIDs[ "runTick" ] );
 	HOOK( jhk_runGameLoop, Minecraft::methodIDs[ "runGameLoop" ] );	
-	HOOK( jhk_clickMouse, Minecraft::methodIDs[ "clickMouse" ] );	
+	//HOOK( jhk_clickMouse, Minecraft::methodIDs[ "clickMouse" ] );	
 
-	Sleep( 10 );
+	Sleep( 100 );
 
 	std::vector<jvmtiError> errors;
 	errors.resize( threadCount );
@@ -89,11 +89,11 @@ void hooks::Destroy()
 		}
 	}
 
-	Sleep( 10 );
+	Sleep( 100 );
 
 	JavaHook::clean();
 
-	Sleep( 10 );
+	Sleep( 100 );
 
 	std::vector<jvmtiError> errors;
 	errors.resize( threadCount );

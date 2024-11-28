@@ -36,12 +36,11 @@ struct World : IClass
 
 		for ( jsize idx = 0; idx < length; idx++ )
 		{
-			EntityPlayer player = TLSENV->GetObjectArrayElement( playerArray, idx );
-			if ( player.instance )
+			jobject playerObject = TLSENV->GetObjectArrayElement( playerArray, idx );
+			if ( playerObject )
 			{
-				out.emplace_back( player );
+				out.push_back( playerObject );
 			}
-			player.noDeref = true;
 		}
 
 		TLSENV->DeleteLocalRef( playerArray );

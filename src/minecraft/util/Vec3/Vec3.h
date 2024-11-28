@@ -23,9 +23,9 @@ struct Vec3 : public IClass
 	fvec3 fvec()
 	{
 		return fvec3{
-			(float)java::env->GetDoubleField(instance, Vec3::fieldIDs["xCoord"]),
-			(float)java::env->GetDoubleField(instance, Vec3::fieldIDs["yCoord"]),
-			(float)java::env->GetDoubleField(instance, Vec3::fieldIDs["zCoord"])
+			(float)TLSENV->GetDoubleField(instance, Vec3::fieldIDs["xCoord"]),
+			(float)TLSENV->GetDoubleField(instance, Vec3::fieldIDs["yCoord"]),
+			(float)TLSENV->GetDoubleField(instance, Vec3::fieldIDs["zCoord"])
 		};
 	}
 

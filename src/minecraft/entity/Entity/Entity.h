@@ -44,7 +44,7 @@ struct Entity : public IClass
 	}
 	IChatComponent getDisplayName()
 	{
-		return IChatComponent( TLSENV->CallObjectMethod( this->instance, Entity::methodIDs[ "getDisplayName" ] ) );
+		return TLSENV->CallObjectMethod( this->instance, Entity::methodIDs[ "getDisplayName" ] );
 	}
 
 	fvec3 GetPos()

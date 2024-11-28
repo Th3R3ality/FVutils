@@ -31,7 +31,7 @@ namespace cache
 				temp.local = pd;
 				if ( !config::current.render.players.hideSelf )
 				{
-					temp.players.emplace_back(pd);
+					temp.players.push_back(pd);
 				}
 			}
 			else
@@ -41,7 +41,7 @@ namespace cache
 					continue;
 
 
-				temp.players.emplace_back(pd);
+				temp.players.push_back(pd);
 
 			}
 		}
