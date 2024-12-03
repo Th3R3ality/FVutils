@@ -21,10 +21,15 @@ struct String : IClass
 	{
 		if ( this->instance == nullptr )
 			return "ERROR < ToString > NO INSTANCE SET";
-		jstring jStr = (jstring)this->instance;
-		const char* nativeStr = TLSENV->GetStringUTFChars(jStr, nullptr);
+		jboolean isCopy;
+		const char* nativeStr = TLSENV->GetStringUTFChars((jstring)this->instance, &isCopy);
 		std::string ret = std::string(nativeStr);
-		TLSENV->ReleaseStringUTFChars(jStr, nativeStr);
+		if ( nativeStr == nullptr )
+		{
+			printf( "Native Str NULL\n" );
+			return ret;
+		}
+		TLSENV->ReleaseStringUTFChars((jstring)this->instance, nativeStr);
 		return ret;
 	}
 

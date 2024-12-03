@@ -5,7 +5,7 @@
 
 namespace hooks
 {
-	void jhk_clickMouse( HotSpot::frame* frame, HotSpot::Thread* thread, bool* cancel )
+	void javahk_clickMouse( HotSpot::frame* frame, HotSpot::Thread* thread, bool* cancel )
 	{
 		if ( global::glUnhookWant )
 			return;

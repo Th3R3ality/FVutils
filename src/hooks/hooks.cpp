@@ -8,12 +8,20 @@
 #include "../minecraft/client/renderer/entity/RenderLivingEntity/RenderLivingEntity.h"
 #include "../minecraft/minecraft.h"
 #include "../minecraft/client/renderer/entity/RenderPlayer/RenderPlayer.h"
+#include "../minecraft/profiler/Profiler/Profiler.h"
 
-#define HOOK(detour, methodID) \
+#define JAVA_HOOK(detour, methodID) \
 if (false == JavaHook::hook(methodID, detour)) \
 { printf( "[-] failed hooking: " ## #detour ## "\n" ); } \
 else {printf( "[+] hooked: " ## #detour ## "\n" );}
 
+#define JNI_HOOK(methodID, detour) \
+{auto res = jnihook::attach(methodID, detour, &__orig_mid_ ## detour); \
+if ( res.has_value()) { printf( "[+] hooked: " ## #detour ## "\n" ); } \
+else { printf( "[-] failed hooking: " ## #detour ## "\n" ); }}
+
+
+bool jnihookInitialised = false;
 void hooks::Init()
 {
 	MH_Initialize();
@@ -26,9 +34,12 @@ void hooks::Init()
 
 	if ( !java::initialised )
 		return;
-	
-	jvmtiError err;
 
+	
+
+
+
+	jvmtiError err;
 	jthread* threads;
 	jint threadCount;
 	err = java::tienv->GetAllThreads( &threadCount, &threads );
@@ -38,7 +49,7 @@ void hooks::Init()
 
 	for ( int i = 0; i < threadCount; i++ )
 	{
-		if ( !java::env->IsSameObject(currentThread, threads[i]))
+		if ( !java::env->IsSameObject( currentThread, threads[ i ] ) )
 		{
 			err = java::tienv->SuspendThread( threads[ i ] );
 		}
@@ -46,11 +57,44 @@ void hooks::Init()
 
 	Sleep( 100 );
 
-	//HOOK( jhk_handleChat, NetHandlerPlayClient::methodIDs[ "handleChat" ] );
-	//HOOK( jhk_renderName, RenderLivingEntity::methodIDs[ "renderName" ] );
-	//HOOK( jhk_runTick, Minecraft::methodIDs[ "runTick" ] );
-	HOOK( jhk_runGameLoop, Minecraft::methodIDs[ "runGameLoop" ] );	
-	//HOOK( jhk_clickMouse, Minecraft::methodIDs[ "clickMouse" ] );	
+	// jni hook
+	{
+		printf( "jnihook INIT : " );
+		if ( jnihook::result_t::JNIHOOK_OK != jnihook::init( java::jvm ) )
+		{
+			printf( "ERR\n" );
+			return;
+		}
+		printf( "OK\n" );
+		jnihookInitialised = true;
+
+		java::env->ExceptionClear();
+
+		JNI_HOOK( Minecraft::methodIDs[ "runGameLoop" ], jnihk_runGameLoop );
+		JNI_HOOK( Minecraft::methodIDs[ "runTick" ], jnihk_runTick );
+
+
+	}
+
+	// java hook
+	{
+		//static int runonce = []()->int
+		//	{
+		//		jvmtiCapabilities capabilities{ .can_retransform_classes = JVMTI_ENABLE };
+		//		//capabilities.can_suspend = JVMTI_ENABLE;
+		//		java::tienv->GetPotentialCapabilities(&capabilities);
+		//		java::tienv->AddCapabilities(&capabilities);
+		//		return 0;
+		//	}();
+
+		//JAVA_HOOK( javahk_handleChat, NetHandlerPlayClient::methodIDs[ "handleChat" ] );
+		//JAVA_HOOK( javahk_renderName, RenderLivingEntity::methodIDs[ "renderName" ] );
+		//JAVA_HOOK( javahk_runTick, Minecraft::methodIDs[ "runTick" ] );
+		//JAVA_HOOK( javahk_runGameLoop, Minecraft::methodIDs[ "runGameLoop" ] );	
+		//JAVA_HOOK( javahk_clickMouse, Minecraft::methodIDs[ "clickMouse" ] );	
+		//JAVA_HOOK( javahk_endStartSection, Profiler::methodIDs[ "endStartSection" ] );	
+
+	}
 
 	Sleep( 100 );
 
@@ -70,34 +114,49 @@ void hooks::Destroy()
 	MH_DisableHook( MH_ALL_HOOKS );
 	MH_Uninitialize();
 
+
+
 	Sleep( 10 );
 
-	jvmtiError err;
 
-	jthread* threads;
-	jint threadCount;
-	err = java::tienv->GetAllThreads( &threadCount, &threads );
 
-	jthread currentThread = nullptr;
-	err = java::tienv->GetCurrentThread( &currentThread );
-
-	for ( int i = 0; i < threadCount; i++ )
+	// java hook
 	{
-		if ( !java::env->IsSameObject(currentThread, threads[i]))
+		jvmtiError err;
+
+		jthread* threads;
+		jint threadCount;
+		err = java::tienv->GetAllThreads( &threadCount, &threads );
+
+		jthread currentThread = nullptr;
+		err = java::tienv->GetCurrentThread( &currentThread );
+
+		for ( int i = 0; i < threadCount; i++ )
 		{
-			err = java::tienv->SuspendThread( threads[ i ] );
+			if ( !java::env->IsSameObject( currentThread, threads[ i ] ) )
+			{
+				err = java::tienv->SuspendThread( threads[ i ] );
+			}
 		}
+
+		Sleep( 100 );
+
+		// jni hook
+		{
+			if ( jnihookInitialised )
+			{
+				jnihook::shutdown();
+			}
+		}
+
+		//JavaHook::clean();
+
+		Sleep( 100 );
+
+		std::vector<jvmtiError> errors;
+		errors.resize( threadCount );
+		java::tienv->ResumeThreadList( threadCount, threads, errors.data() );
 	}
-
-	Sleep( 100 );
-
-	JavaHook::clean();
-
-	Sleep( 100 );
-
-	std::vector<jvmtiError> errors;
-	errors.resize( threadCount );
-	java::tienv->ResumeThreadList( threadCount, threads, errors.data() );
 
 	Sleep( 10 );
 

@@ -20,7 +20,7 @@ namespace java
 			return;
 
 
-		jint res = jvm->GetEnv( ( void** )&env, JNI_VERSION_1_6 );
+		jint res = jvm->GetEnv( ( void** )&env, JNI_VERSION_1_8 );
 
 		if ( res == JNI_EDETACHED )
 			res = jvm->AttachCurrentThread( ( void** )&env, nullptr );
@@ -39,14 +39,7 @@ namespace java
 
 		jvm->GetEnv( ( void** )&tienv, JVMTI_VERSION );
 
-		static int runonce = []()->int
-			{
-				jvmtiCapabilities capabilities{ .can_retransform_classes = JVMTI_ENABLE };
-				//capabilities.can_suspend = JVMTI_ENABLE;
-				java::tienv->GetPotentialCapabilities(&capabilities);
-				java::tienv->AddCapabilities(&capabilities);
-				return 0;
-			}();
+
 
 
 		jclass c_Thread = env->FindClass( "java/lang/Thread" );

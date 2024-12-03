@@ -198,39 +198,6 @@
     <ClInclude Include="src\util\Color.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\jni\win32\bridge\AccessBridgeCallbacks.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\jni\win32\bridge\AccessBridgeCalls.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\jni\win32\bridge\AccessBridgePackages.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\jni\win32\jawt_md.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\jni\win32\jni_md.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\jni\classfile_constants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\jni\jawt.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\jni\jdwpTransport.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\jni\jni.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\jni\jvmti.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\jni\jvmticmlr.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\cheat\common\ClickScheduler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -238,6 +205,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\cheat\common\Input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\minecraft\profiler\Profiler\Profiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\jnihook\jnihook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\jnihook\jnihook.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -314,7 +290,7 @@
     <ClCompile Include="src\JavaHook\Module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\hooks\jhk_handleChat.cpp">
+    <ClCompile Include="src\hooks\javahk_handleChat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\minecraft\network\S02PacketChat\S02PacketChat.cpp">
@@ -359,7 +335,7 @@
     <ClCompile Include="src\minecraft\client\renderer\entity\Render\Render.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\hooks\jhk_renderName.cpp">
+    <ClCompile Include="src\hooks\javahk_renderName.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\minecraft\client\renderer\entity\RenderPlayer\RenderPlayer.cpp">
@@ -374,7 +350,7 @@
     <ClCompile Include="src\minecraft\client\entity\AbstractClientPlayer\AbstractClientPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\hooks\jhk_runTick.cpp">
+    <ClCompile Include="src\hooks\javahk_runTick.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\util\math\mathutils.cpp">
@@ -416,11 +392,26 @@
     <ClCompile Include="src\cheat\common\Input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\hooks\jhk_runGameLoop.cpp">
+    <ClCompile Include="src\hooks\javahk_runGameLoop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\hooks\jhk_clickMouse.cpp">
+    <ClCompile Include="src\hooks\javahk_clickMouse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\minecraft\profiler\Profiler\Profiler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\javahk_endStartSection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\jnihk_runGameLoop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\jnihk_runTick.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="src\jnihook\jnihook.lib" />
   </ItemGroup>
 </Project>

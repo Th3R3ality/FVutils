@@ -12,7 +12,7 @@
 
 namespace hooks
 {
-	void jhk_renderName( HotSpot::frame* frame, HotSpot::Thread* thread, bool* cancel )
+	void javahk_renderName( HotSpot::frame* frame, HotSpot::Thread* thread, bool* cancel )
 	{
 		if ( global::glUnhookWant )
 			return;

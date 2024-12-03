@@ -6,7 +6,7 @@
 
 namespace hooks
 {
-	void jhk_handleChat( HotSpot::frame* frame, HotSpot::Thread* thread, bool* cancel )
+	void javahk_handleChat( HotSpot::frame* frame, HotSpot::Thread* thread, bool* cancel )
 	{
 		if ( global::glUnhookWant )
 			return;

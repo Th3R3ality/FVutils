@@ -10,7 +10,7 @@
 
 namespace hooks
 {
-	void jhk_runTick( HotSpot::frame* frame, HotSpot::Thread* thread, bool* cancel )
+	void javahk_runTick( HotSpot::frame* frame, HotSpot::Thread* thread, bool* cancel )
 	{
 		if ( global::glUnhookWant )
 			return;

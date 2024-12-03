@@ -48,13 +48,13 @@
     <OutDir>$(SolutionDir)bin\</OutDir>
     <IntDir>$(SolutionDir)bin\intermediate\</IntDir>
     <TargetName>$(ProjectName)_$(Configuration)</TargetName>
-    <IncludePath>$(SolutionDir)src\jni;$(SolutionDir)src\java;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)src\java;$(JAVA_HOME)include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin\</OutDir>
     <IntDir>$(SolutionDir)bin\intermediate\</IntDir>
     <TargetName>$(ProjectName)_$(Configuration)</TargetName>
-    <IncludePath>$(SolutionDir)src\jni;$(SolutionDir)src\java;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)src\java;$(JAVA_HOME)include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -64,7 +64,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>
       </AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -73,7 +73,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalLibraryDirectories>C:\Program Files\Java\jdk-17\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(JAVA_HOME)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>jvm.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -87,7 +87,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>
       </AdditionalIncludeDirectories>
     </ClCompile>
@@ -97,7 +97,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalLibraryDirectories>C:\Program Files\Java\jdk-17\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(JAVA_HOME)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>jvm.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -149,17 +149,8 @@
     <ClInclude Include="src\java\util\List.h" />
     <ClInclude Include="src\jnihook\include\jnihook.h" />
     <ClInclude Include="src\jnihook\include\jnihook.hpp" />
-    <ClInclude Include="src\jni\classfile_constants.h" />
-    <ClInclude Include="src\jni\jawt.h" />
-    <ClInclude Include="src\jni\jdwpTransport.h" />
-    <ClInclude Include="src\jni\jni.h" />
-    <ClInclude Include="src\jni\jvmti.h" />
-    <ClInclude Include="src\jni\jvmticmlr.h" />
-    <ClInclude Include="src\jni\win32\bridge\AccessBridgeCallbacks.h" />
-    <ClInclude Include="src\jni\win32\bridge\AccessBridgeCalls.h" />
-    <ClInclude Include="src\jni\win32\bridge\AccessBridgePackages.h" />
-    <ClInclude Include="src\jni\win32\jawt_md.h" />
-    <ClInclude Include="src\jni\win32\jni_md.h" />
+    <ClInclude Include="src\jnihook\jnihook.h" />
+    <ClInclude Include="src\jnihook\jnihook.hpp" />
     <ClInclude Include="src\minecraft\client\EntityPlayerSP\EntityPlayerSP.h" />
     <ClInclude Include="src\minecraft\client\entity\AbstractClientPlayer\AbstractClientPlayer.h">
       <SubType>
@@ -192,6 +183,10 @@
     <ClInclude Include="src\minecraft\minecraft.h" />
     <ClInclude Include="src\minecraft\client\WorldClient\WorldClient.h" />
     <ClInclude Include="src\minecraft\network\S02PacketChat\S02PacketChat.h" />
+    <ClInclude Include="src\minecraft\profiler\Profiler\Profiler.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="src\minecraft\util\IChatComponent\IChatComponent.h" />
     <ClInclude Include="src\minecraft\util\Timer\Timer.h" />
     <ClInclude Include="src\minecraft\util\Vec3\Vec3.h">
@@ -226,15 +221,21 @@
     <ClCompile Include="src\fv\PlayerType.cpp" />
     <ClCompile Include="src\hooks\hk_wglSwapBuffers.cpp" />
     <ClCompile Include="src\hooks\hk_WndProc.cpp" />
-    <ClCompile Include="src\hooks\jhk_clickMouse.cpp" />
-    <ClCompile Include="src\hooks\jhk_handleChat.cpp" />
-    <ClCompile Include="src\hooks\hooks.cpp" />
-    <ClCompile Include="src\hooks\jhk_runGameLoop.cpp" />
-    <ClCompile Include="src\hooks\jhk_renderName.cpp" />
-    <ClCompile Include="src\hooks\jhk_runTick.cpp">
+    <ClCompile Include="src\hooks\javahk_clickMouse.cpp" />
+    <ClCompile Include="src\hooks\javahk_endStartSection.cpp">
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="src\hooks\javahk_handleChat.cpp" />
+    <ClCompile Include="src\hooks\hooks.cpp" />
+    <ClCompile Include="src\hooks\javahk_runGameLoop.cpp" />
+    <ClCompile Include="src\hooks\javahk_renderName.cpp" />
+    <ClCompile Include="src\hooks\javahk_runTick.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="src\hooks\jnihk_runGameLoop.cpp" />
+    <ClCompile Include="src\hooks\jnihk_runTick.cpp" />
     <ClCompile Include="src\HotSpot\HotSpot.cpp" />
     <ClCompile Include="src\imgui\imgui.cpp" />
     <ClCompile Include="src\imgui\imgui_demo.cpp" />
@@ -299,6 +300,10 @@
     <ClCompile Include="src\minecraft\entity\Entity\Entity.cpp" />
     <ClCompile Include="src\minecraft\minecraft.cpp" />
     <ClCompile Include="src\minecraft\network\S02PacketChat\S02PacketChat.cpp" />
+    <ClCompile Include="src\minecraft\profiler\Profiler\Profiler.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="src\minecraft\util\IChatComponent\IChatComponent.cpp" />
     <ClCompile Include="src\minecraft\util\Timer\Timer.cpp" />
     <ClCompile Include="src\minecraft\util\Vec3\Vec3.cpp">
@@ -314,6 +319,9 @@
     <ClCompile Include="src\rendering\rendering.cpp" />
     <ClCompile Include="src\util\Color.cpp" />
     <ClCompile Include="src\util\math\mathutils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="src\jnihook\jnihook.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

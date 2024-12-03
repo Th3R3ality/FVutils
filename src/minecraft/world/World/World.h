@@ -39,7 +39,9 @@ struct World : IClass
 			jobject playerObject = TLSENV->GetObjectArrayElement( playerArray, idx );
 			if ( playerObject )
 			{
-				out.push_back( playerObject );
+				EntityPlayer ep = playerObject;
+				ep.noDeref = true;
+				out.emplace_back( ep );
 			}
 		}
 

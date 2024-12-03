@@ -21,11 +21,11 @@ namespace cache
 
 		int size = playerEntities.size();
 		temp.players.clear();
-		//temp.players.reserve( size );
-
-		for ( auto&& pe : playerEntities )
+		temp.players.reserve( size );
+		
+		for ( auto& pe : playerEntities )
 		{
-			PlayerData pd = pe;
+			PlayerData pd = pe.ToPlayerData();
 			if ( pd.realname == minecraft::localPlayer->getName().ToString() )
 			{
 				temp.local = pd;

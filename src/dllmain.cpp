@@ -2,9 +2,6 @@
 #include <chrono>
 #include <thread>
 
-#include <d3d9.h>
-#pragma comment(lib, "d3d9.lib")
-
 #include <jni.h>
 #include <jvmti.h>
 
@@ -21,7 +18,7 @@ void mainthread( HMODULE hmodule )
 	AllocConsole();
 	HWND consoleHwnd = GetConsoleWindow();
 	FILE* f;
-	freopen_s( &f, "CONOUT$", "w", stdout );
+ 	freopen_s( &f, "CONOUT$", "w", stdout );
 	printf( "hello\n" );
 
 	java::Init();

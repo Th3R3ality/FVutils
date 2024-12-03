@@ -46,6 +46,9 @@ static _klassName EXPAND(_klassName) ## _initialiser_ = _klassName (INITIALISER_
 #define SETCLASSPATH(path) \
 inline constexpr const char* EXPAND(CURRENTCLASSNAME)##_klasspath = path;
 
+#define _SETCLASSPATH(PKGname, SRGname, OBFname) \
+SETCLASSPATH(PKGname ## "/" ## SRGname)
+
 #define INITIALISER_HEADER() \
 if ( CURRENTCLASSNAME :: initialised ) { return; } \
 CURRENTCLASSNAME :: klass = java::FindClass( CURRENTCLASSNAME :: klassPath ); \
@@ -55,13 +58,13 @@ printf("Class [" EXPANDSTR(CURRENTCLASSNAME) "]: %p\n", CURRENTCLASSNAME :: klas
 CURRENTCLASSNAME :: methodIDs[ MCPname ] = TLSENV->GetMethodID( CURRENTCLASSNAME :: klass, MCPname, SRGdesc ); \
 printf("  Method ["##MCPname##"]: %p\n", CURRENTCLASSNAME :: methodIDs[ MCPname ]);
 
-#define _GET_METHOD(MCPname, SRCname, OBFname, SRGdesc) GET_METHOD(MCPname, SRGdesc)
+#define _GET_METHOD(MCPname, SRGname, OBFname, SRGdesc) GET_METHOD(MCPname, SRGdesc)
 
 #define GET_STATIC_METHOD(MCPname, SRGdesc) \
 CURRENTCLASSNAME :: methodIDs[ MCPname ] = TLSENV->GetStaticMethodID( CURRENTCLASSNAME :: klass, MCPname, SRGdesc ); \
 printf("  Static Method ["##MCPname##"]: %p\n", CURRENTCLASSNAME :: methodIDs[ MCPname ]);
 
-#define _GET_STATIC_METHOD(MCPname, SRCname, OBFname, SRGdesc) GET_STATIC_METHOD(MCPname, SRGdesc)
+#define _GET_STATIC_METHOD(MCPname, SRGname, OBFname, SRGdesc) GET_STATIC_METHOD(MCPname, SRGdesc)
 
 
 #define GET_FIELD(MCPname, SRGdesc) \
