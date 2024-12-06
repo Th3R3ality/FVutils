@@ -12,6 +12,7 @@
 #include "minecraft/minecraft.h"
 #include "JavaHook/JavaHook.h"
 #include "cache/cache.h"
+#include "cheat/modules/Modules.h"
 
 void mainthread( HMODULE hmodule )
 {
@@ -23,6 +24,7 @@ void mainthread( HMODULE hmodule )
 
 	java::Init();
 	hooks::Init();
+	modules::Init();
 
 	while ( !GetAsyncKeyState( VK_END ) )
 	{

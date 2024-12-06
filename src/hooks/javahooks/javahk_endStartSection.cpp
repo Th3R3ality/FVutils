@@ -1,8 +1,8 @@
-#include "hooks.h"
-#include "../global.h"
+#include "../hooks.h"
+#include "../../global.h"
+#include "../../minecraft/entity/EntityPlayer/EntityPlayer.h"
+#include "../../minecraft/minecraft.h"
 #include <lang/String.h>
-#include "../minecraft/entity/EntityPlayer/EntityPlayer.h"
-#include "../minecraft/minecraft.h"
 
 namespace hooks
 {

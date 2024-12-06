@@ -1,13 +1,13 @@
-#include "hooks.h"
-#include <iostream>
+#include "../hooks.h"
+#include "../../minecraft/minecraft.h"
+#include "../../cache/cache.h"
+#include "../../global.h"
 
-#include "../minecraft/minecraft.h"
-#include "../cache/cache.h"
-#include "../global.h"
+#include <iostream>
 
 JNIEXPORT void JNICALL hooks::jnihk_runGameLoop( JNIEnv* env, jobject instance )
 {
-	if ( global::glUnhookWant )
+	if ( global::glUnhookWaiting )
 		return;
 
 	if ( !TlsSetValue( java::envTlsIndex, env ) )

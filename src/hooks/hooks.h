@@ -8,7 +8,6 @@
 
 #include "../jnihook/jnihook.h"
 #include "../jnihook/jnihook.hpp"
-#pragma comment(lib, "jnihook.lib")
 
 inline void VMTEntryHook(uintptr_t VMT, size_t Index, uintptr_t Detour, uintptr_t* ppOrig = nullptr)
 {

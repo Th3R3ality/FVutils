@@ -1,8 +1,8 @@
-#include "hooks.h"
-#include "../minecraft/client/NetHandlerPlayClient/NetHandlerPlayClient.h"
-#include "../minecraft/network/S02PacketChat/S02PacketChat.h"
-#include "../minecraft/util/IChatComponent/IChatComponent.h"
-#include "../global.h"
+#include "../hooks.h"
+#include "../../minecraft/client/NetHandlerPlayClient/NetHandlerPlayClient.h"
+#include "../../minecraft/network/S02PacketChat/S02PacketChat.h"
+#include "../../minecraft/util/IChatComponent/IChatComponent.h"
+#include "../../global.h"
 
 namespace hooks
 {

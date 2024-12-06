@@ -1,14 +1,14 @@
-#include "hooks.h"
-#include "../minecraft/client/renderer/entity/Render/Render.h"
-#include "../minecraft/client/renderer/entity/RenderPlayer/RenderPlayer.h"
-#include "../minecraft/entity/Entity/Entity.h"
-#include "../java/lang/String.h"
+#include "../hooks.h"
+#include "../../minecraft/client/renderer/entity/Render/Render.h"
+#include "../../minecraft/client/renderer/entity/RenderPlayer/RenderPlayer.h"
+#include "../../minecraft/entity/Entity/Entity.h"
+#include "../../java/lang/String.h"
+#include "../../global.h"
+#include <lang/Class.h>
 
 #include <iostream>
 #include <sstream>
 #include <iomanip>
-#include <lang/Class.h>
-#include "../global.h"
 
 namespace hooks
 {

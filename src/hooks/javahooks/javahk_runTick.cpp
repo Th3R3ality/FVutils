@@ -1,12 +1,11 @@
-#include "hooks.h"
-#include "../config/config.h"
-#include "../rendering/rendering.h"
-#include "../minecraft/minecraft.h"
-
-#include "../cheat/common/ClickScheduler.h"
-#include "../cache/cache.h"
-#include "../global.h"
-#include "../cheat/common/Input.h"
+#include "../hooks.h"
+#include "../../config/config.h"
+#include "../../rendering/rendering.h"
+#include "../../minecraft/minecraft.h"
+#include "../../cheat/common/ClickScheduler.h"
+#include "../../cache/cache.h"
+#include "../../global.h"
+#include "../../cheat/common/Input.h"
 
 namespace hooks
 {

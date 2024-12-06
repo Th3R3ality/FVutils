@@ -216,6 +216,24 @@
     <ClInclude Include="src\jnihook\jnihook.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\minecraft\client\gui\FontRenderer\FontRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\cheat\modules\ModuleBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\initialiser_type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\cheat\modules\Modules.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\jnihook\classfile.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\jnihook\uuid.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dllmain.cpp">
@@ -290,7 +308,7 @@
     <ClCompile Include="src\JavaHook\Module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\hooks\javahk_handleChat.cpp">
+    <ClCompile Include="src\hooks\javahooks\javahk_handleChat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\minecraft\network\S02PacketChat\S02PacketChat.cpp">
@@ -335,7 +353,7 @@
     <ClCompile Include="src\minecraft\client\renderer\entity\Render\Render.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\hooks\javahk_renderName.cpp">
+    <ClCompile Include="src\hooks\javahooks\javahk_renderName.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\minecraft\client\renderer\entity\RenderPlayer\RenderPlayer.cpp">
@@ -350,7 +368,7 @@
     <ClCompile Include="src\minecraft\client\entity\AbstractClientPlayer\AbstractClientPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\hooks\javahk_runTick.cpp">
+    <ClCompile Include="src\hooks\javahooks\javahk_runTick.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\util\math\mathutils.cpp">
@@ -392,26 +410,41 @@
     <ClCompile Include="src\cheat\common\Input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\hooks\javahk_runGameLoop.cpp">
+    <ClCompile Include="src\hooks\javahooks\javahk_runGameLoop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\hooks\javahk_clickMouse.cpp">
+    <ClCompile Include="src\hooks\javahooks\javahk_clickMouse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\minecraft\profiler\Profiler\Profiler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\hooks\javahk_endStartSection.cpp">
+    <ClCompile Include="src\hooks\javahooks\javahk_endStartSection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\hooks\jnihk_runGameLoop.cpp">
+    <ClCompile Include="src\hooks\jnihooks\jnihk_runGameLoop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\hooks\jnihk_runTick.cpp">
+    <ClCompile Include="src\hooks\jnihooks\jnihk_runTick.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="src\jnihook\jnihook.lib" />
+    <ClCompile Include="src\hooks\jnihooks\jnihk_getMouseOver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\client\gui\FontRenderer\FontRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\jnihook\classfile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\jnihook\jnihook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\jnihook\uuid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cheat\modules\Modules.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

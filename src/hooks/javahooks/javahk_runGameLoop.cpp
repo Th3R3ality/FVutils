@@ -1,7 +1,7 @@
-#include "hooks.h"
-#include "../minecraft/minecraft.h"
-#include "../cache/cache.h"
-#include "../global.h"
+#include "../hooks.h"
+#include "../../minecraft/minecraft.h"
+#include "../../cache/cache.h"
+#include "../../global.h"
 #include <lang/Class.h>
 
 namespace hooks

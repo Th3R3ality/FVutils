@@ -106,6 +106,8 @@
     <ClInclude Include="src\cheat\common\ClickScheduler.h" />
     <ClInclude Include="src\cheat\common\Input.h" />
     <ClInclude Include="src\cheat\modules\Clicker\Clicker.h" />
+    <ClInclude Include="src\cheat\modules\ModuleBase.h" />
+    <ClInclude Include="src\cheat\modules\Modules.h" />
     <ClInclude Include="src\config\config.h">
       <SubType>
       </SubType>
@@ -147,16 +149,22 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="src\java\util\List.h" />
+    <ClInclude Include="src\jnihook\classfile.hpp" />
     <ClInclude Include="src\jnihook\include\jnihook.h" />
     <ClInclude Include="src\jnihook\include\jnihook.hpp" />
     <ClInclude Include="src\jnihook\jnihook.h" />
     <ClInclude Include="src\jnihook\jnihook.hpp" />
+    <ClInclude Include="src\jnihook\uuid.hpp" />
     <ClInclude Include="src\minecraft\client\EntityPlayerSP\EntityPlayerSP.h" />
     <ClInclude Include="src\minecraft\client\entity\AbstractClientPlayer\AbstractClientPlayer.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="src\minecraft\client\entity\EntityOtherPlayerMP\EntityOtherPlayerMP.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\minecraft\client\gui\FontRenderer\FontRenderer.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -205,6 +213,7 @@
     <ClInclude Include="src\rendering\helper.h" />
     <ClInclude Include="src\rendering\rendering.h" />
     <ClInclude Include="src\util\Color.h" />
+    <ClInclude Include="src\util\initialiser_type.h" />
     <ClInclude Include="src\util\math\mathutils.h" />
     <ClInclude Include="src\util\math\matrix.h" />
     <ClInclude Include="src\util\math\vec.h" />
@@ -213,6 +222,7 @@
     <ClCompile Include="src\cache\cache.cpp" />
     <ClCompile Include="src\cheat\common\ClickScheduler.cpp" />
     <ClCompile Include="src\cheat\common\Input.cpp" />
+    <ClCompile Include="src\cheat\modules\Modules.cpp" />
     <ClCompile Include="src\config\config.cpp">
       <SubType>
       </SubType>
@@ -221,21 +231,22 @@
     <ClCompile Include="src\fv\PlayerType.cpp" />
     <ClCompile Include="src\hooks\hk_wglSwapBuffers.cpp" />
     <ClCompile Include="src\hooks\hk_WndProc.cpp" />
-    <ClCompile Include="src\hooks\javahk_clickMouse.cpp" />
-    <ClCompile Include="src\hooks\javahk_endStartSection.cpp">
+    <ClCompile Include="src\hooks\javahooks\javahk_clickMouse.cpp" />
+    <ClCompile Include="src\hooks\javahooks\javahk_endStartSection.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="src\hooks\javahk_handleChat.cpp" />
+    <ClCompile Include="src\hooks\javahooks\javahk_handleChat.cpp" />
     <ClCompile Include="src\hooks\hooks.cpp" />
-    <ClCompile Include="src\hooks\javahk_runGameLoop.cpp" />
-    <ClCompile Include="src\hooks\javahk_renderName.cpp" />
-    <ClCompile Include="src\hooks\javahk_runTick.cpp">
+    <ClCompile Include="src\hooks\javahooks\javahk_runGameLoop.cpp" />
+    <ClCompile Include="src\hooks\javahooks\javahk_renderName.cpp" />
+    <ClCompile Include="src\hooks\javahooks\javahk_runTick.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="src\hooks\jnihk_runGameLoop.cpp" />
-    <ClCompile Include="src\hooks\jnihk_runTick.cpp" />
+    <ClCompile Include="src\hooks\jnihooks\jnihk_runGameLoop.cpp" />
+    <ClCompile Include="src\hooks\jnihooks\jnihk_runTick.cpp" />
+    <ClCompile Include="src\hooks\jnihooks\jnihk_getMouseOver.cpp" />
     <ClCompile Include="src\HotSpot\HotSpot.cpp" />
     <ClCompile Include="src\imgui\imgui.cpp" />
     <ClCompile Include="src\imgui\imgui_demo.cpp" />
@@ -269,12 +280,19 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="src\java\util\List.cpp" />
+    <ClCompile Include="src\jnihook\classfile.cpp" />
+    <ClCompile Include="src\jnihook\jnihook.cpp" />
+    <ClCompile Include="src\jnihook\uuid.cpp" />
     <ClCompile Include="src\minecraft\client\EntityPlayerSP\EntityPlayerSP.cpp" />
     <ClCompile Include="src\minecraft\client\entity\AbstractClientPlayer\AbstractClientPlayer.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="src\minecraft\client\entity\EntityOtherPlayerMP\EntityOtherPlayerMP.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\client\gui\FontRenderer\FontRenderer.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -319,9 +337,6 @@
     <ClCompile Include="src\rendering\rendering.cpp" />
     <ClCompile Include="src\util\Color.cpp" />
     <ClCompile Include="src\util\math\mathutils.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="src\jnihook\jnihook.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -7,6 +7,8 @@
 #include <java.h>
 #include <cassert>
 
+#include "../util/initialiser_type.h"
+
 #define STATICS() \
 static std::map<std::string, jmethodID> methodIDs; \
 static std::map<std::string, jfieldID> fieldIDs; \
@@ -80,10 +82,7 @@ printf("  Static Field ["##MCPname##"]: %p\n", CURRENTCLASSNAME :: fieldIDs[ MCP
 #define _GET_STATIC_FIELD(MCPname, SRGname, OBFname, SRGdesc) GET_STATIC_FIELD(MCPname, SRGdesc)
 
 
-struct INITIALISER_TYPE
-{
 
-};
 struct IClass
 {
 	static std::map<std::string, jmethodID> methodIDs;
