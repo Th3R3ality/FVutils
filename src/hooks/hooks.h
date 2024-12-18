@@ -51,7 +51,9 @@ namespace hooks
 
 	DECL_JNI_HOOK( void, jnihk_runGameLoop, ( JNIEnv* env, jobject instance ) );
 	DECL_JNI_HOOK( void, jnihk_runTick, ( JNIEnv* env, jobject instance ) );
-	
+	DECL_JNI_HOOK( void, jnihk_renderEntities, ( JNIEnv* env, jobject instance, /*Entity*/ jobject renderViewEntity, /*ICamera*/jobject camera, jfloat partialTicks ) );
+	DECL_JNI_HOOK( jboolean, jnihk_renderEntitySimple, ( JNIEnv* env, jobject instance, /*Entity*/ jobject entityIn, jfloat partialTicks ) );
+
 	//inline jmethodID __orig_mid_runGameLoop = nullptr;
 	//JNIEXPORT void JNICALL jnihk_runGameLoop(JNIEnv *jni, jobject obj);
 

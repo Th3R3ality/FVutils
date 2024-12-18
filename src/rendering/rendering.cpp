@@ -16,17 +16,12 @@
 #include "../config/config.h"
 #include "../util/Color.h"
 #include "../cheat/common/Input.h"
+#include "../minecraft/client/renderer/RenderGlobal/RenderGlobal.h"
+#include "../hooks/hooks.h"
+#include "../minecraft/client/renderer/GlStateManager/GlStateManager.h"
 
 namespace rendering
 {
-	struct _HealthText
-	{
-		ivec2 pos;
-		ImColor color;
-		std::string text;
-	};
-	std::vector<_HealthText> healthTextPositions = {};
-
 	void DoGui();
 	void DoPlayers();
 	void DoIndicators();
@@ -58,11 +53,54 @@ namespace rendering
 		// imgui
 		DoPlayers();
 
-
+		for (auto&& gp : cache::globalPlayers )
+		{
+			auto ep = EntityPlayer( gp.instance );
+			ep.noDeref = true;
+			
+			
+			printf( "%s : %f\n", ep.getName().ToString().c_str(), ep.getHealth());
+		}
 	}
 
 	void DoEsp3D()
 	{
+		if ( cache::renderEntitiesData.instance != nullptr &&
+			cache::renderEntitiesData.renderViewEntity != nullptr &&
+			cache::renderEntitiesData.camera != nullptr )
+		{
+
+
+			/*TLSENV->CallNonvirtualVoidMethod(
+				cache::renderEntitiesData.instance,
+				RenderGlobal::klass,
+				hooks::__orig_mid_jnihk_renderEntities,
+				cache::renderEntitiesData.renderViewEntity,
+				cache::renderEntitiesData.camera,
+				cache::renderEntitiesData.partialTicks );*/
+
+
+			TLSENV->DeleteGlobalRef( cache::renderEntitiesData.instance );
+			TLSENV->DeleteGlobalRef(cache::renderEntitiesData.renderViewEntity);
+			TLSENV->DeleteGlobalRef(cache::renderEntitiesData.camera);
+		}
+
+
+		//glEnable((int)32823);
+		//GlStateManager::enablePolygonOffset();
+		//GlStateManager::doPolygonOffset((float)1.0f, (float)-1000000.0f);
+
+		//for ( auto&& gp : cache::globalPlayers )
+		//{
+		//	if ( gp.instance )
+		//		minecraft::renderManager->renderEntitySimple(gp.instance, cache::data.renderPartialTicks);
+
+		//}
+
+		//glDisable((int)32823);
+		//GlStateManager::doPolygonOffset((float)1.0f, (float)1000000.0f);
+		//GlStateManager::disablePolygonOffset();
+
 		//GLint viewport[ 4 ]{};
 
 		//glGetIntegerv( GL_VIEWPORT, viewport );
@@ -83,63 +121,62 @@ namespace rendering
 		glEnable( GL_BLEND );
 		glLineWidth( 1.f );
 
-		healthTextPositions.clear();
 
-		for ( auto& p : cache::data.players )
-		{
-			//fvec3 pos = p.pos - cache::data.renderPos;
+		//for ( auto& p : cache::data.players )
+		//{
+		//	//fvec3 pos = p.pos - cache::data.renderPos;
 
-			fvec3 pos = ( fvec3() - cache::data.renderPos ) + p.lastTickPos - ( p.lastTickPos - p.pos ) * cache::data.renderPartialTicks; // At the feet
+		//	fvec3 pos = ( fvec3() - cache::data.renderPos ) + p.lastTickPos - ( p.lastTickPos - p.pos ) * cache::data.renderPartialTicks; // At the feet
 
-			// box
-			Color col = p.type.GetTypeColor();
-			glColor4f( col.r, col.g, col.b, col.a );
-			glBegin( GL_LINE_STRIP );
-			glVertex3f( pos.x - 0.5f, pos.y, pos.z );
-			glVertex3f( pos.x - 0.5f, pos.y + 2, pos.z );
-			glVertex3f( pos.x + 0.5f, pos.y + 2, pos.z );
-			glVertex3f( pos.x + 0.5f, pos.y, pos.z );
-			glVertex3f( pos.x - 0.5f, pos.y, pos.z );
-			glEnd();
-
+		//	// box
+		//	Color col = p.type.GetTypeColor();
+		//	glColor4f( col.r, col.g, col.b, col.a );
+		//	glBegin( GL_LINE_STRIP );
+		//	glVertex3f( pos.x - 0.5f, pos.y, pos.z );
+		//	glVertex3f( pos.x - 0.5f, pos.y + 2, pos.z );
+		//	glVertex3f( pos.x + 0.5f, pos.y + 2, pos.z );
+		//	glVertex3f( pos.x + 0.5f, pos.y, pos.z );
+		//	glVertex3f( pos.x - 0.5f, pos.y, pos.z );
+		//	glEnd();
 
 
-			// health bar
-			//background
-			glColor4f( 0.0f, 0.0f, 0.f, 1.f );
-			glBegin( GL_TRIANGLE_STRIP );
-			glVertex3f( pos.x - 0.52f, pos.y, pos.z );
-			glVertex3f( pos.x - 0.6f, pos.y, pos.z );
-			glVertex3f( pos.x - 0.52f, pos.y + 2, pos.z );
-			glVertex3f( pos.x - 0.6f, pos.y + 2, pos.z );
-			glEnd();
 
-			// colored part
-			float top = 1.98 * ( p.health / p.maxHealth );
+		//	// health bar
+		//	//background
+		//	glColor4f( 0.0f, 0.0f, 0.f, 1.f );
+		//	glBegin( GL_TRIANGLE_STRIP );
+		//	glVertex3f( pos.x - 0.52f, pos.y, pos.z );
+		//	glVertex3f( pos.x - 0.6f, pos.y, pos.z );
+		//	glVertex3f( pos.x - 0.52f, pos.y + 2, pos.z );
+		//	glVertex3f( pos.x - 0.6f, pos.y + 2, pos.z );
+		//	glEnd();
 
-			glColor4f( 1.0f - ( p.health / p.maxHealth ), ( p.health / p.maxHealth ), 0.f, 1.f );
-			glBegin( GL_TRIANGLE_STRIP );
-			glVertex3f( pos.x - 0.54f, pos.y + 0.02, pos.z );
-			glVertex3f( pos.x - 0.58f, pos.y + 0.02, pos.z );
-			glVertex3f( pos.x - 0.54f, pos.y + top, pos.z );
-			glVertex3f( pos.x - 0.58f, pos.y + top, pos.z );
-			glEnd();
+		//	// colored part
+		//	float top = 1.98 * ( p.health / p.maxHealth );
 
-
-			std::optional<ivec2> healthw2s = mathutils::Project( fvec3( pos.x - 0.62f, pos.y + top, pos.z ) );
-			if ( healthw2s.has_value() )
-			{
-				ivec2& val = healthw2s.value();
-				std::string healthText = std::format( "{}", p.health );
-				ImVec2 textSize = ImGui::CalcTextSize( healthText.c_str() );
+		//	glColor4f( 1.0f - ( p.health / p.maxHealth ), ( p.health / p.maxHealth ), 0.f, 1.f );
+		//	glBegin( GL_TRIANGLE_STRIP );
+		//	glVertex3f( pos.x - 0.54f, pos.y + 0.02, pos.z );
+		//	glVertex3f( pos.x - 0.58f, pos.y + 0.02, pos.z );
+		//	glVertex3f( pos.x - 0.54f, pos.y + top, pos.z );
+		//	glVertex3f( pos.x - 0.58f, pos.y + top, pos.z );
+		//	glEnd();
 
 
-				ivec2 healthTextFinal = ivec2( /*-textSize.x / 2*/ 0, ( int )( textSize.y / 2 ) ) + val;
-				healthTextFinal.y = ( int )clientRect.y - healthTextFinal.y;
-				healthTextPositions.emplace_back( _HealthText{ healthTextFinal, ImColor( 1.0f - ( p.health / p.maxHealth ), ( p.health / p.maxHealth ), 0.f, 1.f ), healthText } );
+		//	std::optional<ivec2> healthw2s = mathutils::Project( fvec3( pos.x - 0.62f, pos.y + top, pos.z ) );
+		//	if ( healthw2s.has_value() )
+		//	{
+		//		ivec2& val = healthw2s.value();
+		//		std::string healthText = std::format( "{}", p.health );
+		//		ImVec2 textSize = ImGui::CalcTextSize( healthText.c_str() );
 
-			}
-		}
+
+		//		ivec2 healthTextFinal = ivec2( /*-textSize.x / 2*/ 0, ( int )( textSize.y / 2 ) ) + val;
+		//		healthTextFinal.y = ( int )clientRect.y - healthTextFinal.y;
+		//		healthTextPositions.emplace_back( _HealthText{ healthTextFinal, ImColor( 1.0f - ( p.health / p.maxHealth ), ( p.health / p.maxHealth ), 0.f, 1.f ), healthText } );
+
+		//	}
+		//}
 
 
 		glDisable( GL_BLEND );
@@ -214,12 +251,12 @@ namespace rendering
 
 		ImGui::Begin( "Players In Render" );
 		{
-			for ( auto&& p : cache::data.players )
-			{
-				ImGui::TextColored( p.type.GetRankColor(), "%s ", p.type.GetRankString().c_str(), p.name.c_str() );
-				ImGui::SameLine();
-				ImGui::TextColored( p.type.GetTypeColor(), "%s %s", p.type.GetTypeString().c_str(), p.name.c_str() );
-			}
+			//for ( auto&& p : cache::data.players )
+			//{
+			//	ImGui::TextColored( p.type.GetRankColor(), "%s ", p.type.GetRankString().c_str(), p.name.c_str() );
+			//	ImGui::SameLine();
+			//	ImGui::TextColored( p.type.GetTypeColor(), "%s %s", p.type.GetTypeString().c_str(), p.name.c_str() );
+			//}
 		}
 		ImGui::End();
 
@@ -241,36 +278,31 @@ namespace rendering
 
 		ImDrawList* drawlist = ImGui::GetWindowDrawList();
 
-		for ( auto& p : cache::data.players )
-		{
-			//fvec3 origin = ( cache::data.renderPos - cache::data.renderOffset ) - p.lastTickPos + ( p.lastTickPos - p.pos ) * cache::data.renderPartialTicks; // At the feet
-			fvec3 origin = ( fvec3() - cache::data.renderPos ) + p.lastTickPos - ( p.lastTickPos - p.pos ) * cache::data.renderPartialTicks;
+		//for ( auto& p : cache::data.players )
+		//{
+		//	//fvec3 origin = ( cache::data.renderPos - cache::data.renderOffset ) - p.lastTickPos + ( p.lastTickPos - p.pos ) * cache::data.renderPartialTicks; // At the feet
+		//	fvec3 origin = ( fvec3() - cache::data.renderPos ) + p.lastTickPos - ( p.lastTickPos - p.pos ) * cache::data.renderPartialTicks;
 
 
 
-			//vec3<double> projected;
-			//if ( GL_TRUE == gluProject( origin.x, origin.y + 2.f, origin.z, cache::data._modelView.data(), cache::data._projection.data(), cache::data.viewport, &projected.x, &projected.y, &projected.z )
-			//	&& projected.z < 1.0)
-			fvec3 namePos = origin; namePos.y += 2.f;
-			std::optional<ivec2> namew2s = mathutils::Project( namePos );
-			if ( namew2s.has_value() )
-			{
-				ivec2& val = namew2s.value();
-				ImVec2 nameSize = ImGui::CalcTextSize( p.realname.c_str() );
-				AddTextShadow( drawlist, ImVec2( val.x - nameSize.x / 2, clientRect.y - val.y - nameSize.y ), p.type.GetTypeColor(), p.realname.c_str() );
-			}
+		//	//vec3<double> projected;
+		//	//if ( GL_TRUE == gluProject( origin.x, origin.y + 2.f, origin.z, cache::data._modelView.data(), cache::data._projection.data(), cache::data.viewport, &projected.x, &projected.y, &projected.z )
+		//	//	&& projected.z < 1.0)
+		//	fvec3 namePos = origin; namePos.y += 2.f;
+		//	std::optional<ivec2> namew2s = mathutils::Project( namePos );
+		//	if ( namew2s.has_value() )
+		//	{
+		//		ivec2& val = namew2s.value();
+		//		ImVec2 nameSize = ImGui::CalcTextSize( p.realname.c_str() );
+		//		AddTextShadow( drawlist, ImVec2( val.x - nameSize.x / 2, clientRect.y - val.y - nameSize.y ), p.type.GetTypeColor(), p.realname.c_str() );
+		//	}
 
-			//std::optional<ivec2> xy = mathutils::WorldToScreen( origin , cache::data.modelView, cache::data.projection, clientRect.x, clientRect.y );
-			//if ( xy.has_value() )
-			//{
-			//	drawlist->AddText( xy.value(), ImColor( 0xffff00ff ), p.realname.c_str() );
-			//}
-		}
-
-		for ( auto& health : healthTextPositions )
-		{
-			AddTextShadow( drawlist, health.pos, health.color, health.text.c_str() );
-		}
+		//	//std::optional<ivec2> xy = mathutils::WorldToScreen( origin , cache::data.modelView, cache::data.projection, clientRect.x, clientRect.y );
+		//	//if ( xy.has_value() )
+		//	//{
+		//	//	drawlist->AddText( xy.value(), ImColor( 0xffff00ff ), p.realname.c_str() );
+		//	//}
+		//}
 
 		ImGui::End();
 	}

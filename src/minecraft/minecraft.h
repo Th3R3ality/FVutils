@@ -46,6 +46,7 @@ struct Minecraft : IClass
 		_GET_FIELD( "theWorld",				"field_71441_e",	"f",	"Lnet/minecraft/client/multiplayer/WorldClient;" );
 		_GET_FIELD( "timer",				"field_71428_T",	"Y",	"Lnet/minecraft/util/Timer;" );
 		_GET_FIELD( "leftClickCounter",		"field_71429_W",	"ag",	"I");
+		_GET_FIELD( "renderGlobal",			"field_71438_f",	"g",	"Lnet/minecraft/client/renderer/RenderGlobal;" );
 
 		_GET_METHOD( "clickMouse",			"func_147116_af",	"aw",	"()V" );
 		_GET_METHOD( "getRenderViewEntity",	"func_175606_aa",	"ac",	"()Lnet/minecraft/entity/Entity;");
@@ -53,11 +54,14 @@ struct Minecraft : IClass
 		_GET_METHOD( "runGameLoop",			"func_71411_J",		"av",	"()V");
 
 		GetStaticInstance();
-		//minecraft::mc = std::make_unique<Minecraft>(GetStaticInstance());
-		//minecraft::mc->noDeref = true;
 	}
 
 	STRUCTORS();
+
+	jobject renderManager()
+	{
+		return TLSENV->GetObjectField( Minecraft::staticInstance, Minecraft::fieldIDs[ "renderManager" ] );
+	}
 
 	static jobject GetStaticInstance()
 	{

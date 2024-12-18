@@ -171,6 +171,10 @@
     <ClInclude Include="src\minecraft\client\multiplayer\PlayerControllerMP\PlayerControllerMP.h" />
     <ClInclude Include="src\minecraft\client\NetHandlerPlayClient\NetHandlerPlayClient.h" />
     <ClInclude Include="src\minecraft\client\renderer\ActiveRenderInfo\ActiveRenderInfo.h" />
+    <ClInclude Include="src\minecraft\client\renderer\culling\ICamera\ICamera.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="src\minecraft\client\renderer\entity\RenderLivingEntity\RenderLivingEntity.h">
       <SubType>
       </SubType>
@@ -184,6 +188,14 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="src\minecraft\client\renderer\entity\Render\Render.h" />
+    <ClInclude Include="src\minecraft\client\renderer\GlStateManager\GlStateManager.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\minecraft\client\renderer\RenderGlobal\RenderGlobal.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="src\minecraft\entity\EntityLivingBase\EntityLivingBase.h" />
     <ClInclude Include="src\minecraft\entity\EntityPlayer\EntityPlayer.h" />
     <ClInclude Include="src\minecraft\entity\Entity\Entity.h" />
@@ -244,6 +256,11 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="src\hooks\jnihooks\jnihk_renderEntities.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="src\hooks\jnihooks\jnihk_renderEntitySimple.cpp" />
     <ClCompile Include="src\hooks\jnihooks\jnihk_runGameLoop.cpp" />
     <ClCompile Include="src\hooks\jnihooks\jnihk_runTick.cpp" />
     <ClCompile Include="src\hooks\jnihooks\jnihk_getMouseOver.cpp" />
@@ -299,6 +316,10 @@
     <ClCompile Include="src\minecraft\client\multiplayer\PlayerControllerMP\PlayerControllerMP.cpp" />
     <ClCompile Include="src\minecraft\client\NetHandlerPlayClient\NetHandlerPlayClient.cpp" />
     <ClCompile Include="src\minecraft\client\renderer\ActiveRenderInfo\ActiveRenderInfo.cpp" />
+    <ClCompile Include="src\minecraft\client\renderer\culling\ICamera\ICamera.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="src\minecraft\client\renderer\entity\RenderLivingEntity\RenderLivingEntity.cpp">
       <SubType>
       </SubType>
@@ -312,6 +333,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="src\minecraft\client\renderer\entity\Render\Render.cpp" />
+    <ClCompile Include="src\minecraft\client\renderer\GlStateManager\GlStateManager.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\client\renderer\RenderGlobal\RenderGlobal.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="src\minecraft\client\WorldClient\WorldClient.cpp" />
     <ClCompile Include="src\minecraft\entity\EntityLivingBase\EntityLivingBase.cpp" />
     <ClCompile Include="src\minecraft\entity\EntityPlayer\EntityPlayer.cpp" />

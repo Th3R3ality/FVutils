@@ -15,6 +15,8 @@ struct RenderManager : public IClass
 	{
 		INITIALISER_HEADER();
 
+		_GET_METHOD("renderEntitySimple",	"func_147937_a",	"a",	"(Lnet/minecraft/entity/Entity;F)Z");
+
 		GET_FIELD("renderPosX", "D");
 		GET_FIELD("renderPosY", "D");
 		GET_FIELD("renderPosZ", "D");
@@ -23,6 +25,12 @@ struct RenderManager : public IClass
 		GET_FIELD("viewerPosY", "D");
 		GET_FIELD("viewerPosZ", "D");
 	}
+
+	jboolean renderEntitySimple( /*Entity*/jobject entityIn, jfloat partialTicks )
+	{
+		return TLSENV->CallBooleanMethod( instance, RenderManager::methodIDs[ "renderEntitySimple" ], entityIn, partialTicks );
+	}
+
 
 	fvec3 RenderPos()
 	{

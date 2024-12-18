@@ -5,10 +5,11 @@
 
 #include "../../../java/util/List.h"
 #include "../../entity/EntityPlayer/EntityPlayer.h"
+#include "../../profiler/Profiler/Profiler.h"
 
 #define CURRENTCLASSNAME World
 
-SETCLASSPATH( "net/minecraft/world/World" );
+_SETCLASSPATH( "net/minecraft/world", "World", "adm");
 
 struct World : IClass
 {
@@ -18,10 +19,24 @@ struct World : IClass
 	{
 		INITIALISER_HEADER();
 
-		GET_FIELD( "playerEntities", "Ljava/util/List;" );
+		_GET_FIELD( "theProfiler",	"field_72984_F",	"B",	"Lnet/minecraft/profiler/Profiler;");
+
+		_GET_FIELD( "playerEntities",	"field_73010_i",	"j",	"Ljava/util/List;" );
 	}
 
 	STRUCTORS();
+
+	Profiler theProfiler(bool noderef = false)
+	{
+		if ( noDeref )
+		{
+			Profiler ret = TLSENV->GetObjectField( instance, World::fieldIDs[ "theProfiler" ] );;
+			ret.noDeref = true;
+			return ret;
+		}
+		else
+			return TLSENV->GetObjectField( instance, World::fieldIDs[ "theProfiler" ] );
+	}
 
 	void playerEntities(std::vector<EntityPlayer>& out)
 	{

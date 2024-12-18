@@ -17,33 +17,62 @@ namespace cache
 
 		// players
 		std::vector<EntityPlayer> playerEntities;
-		minecraft::world->playerEntities(playerEntities);
+		minecraft::world->playerEntities( playerEntities );
 
-		int size = playerEntities.size();
-		temp.players.clear();
-		temp.players.reserve( size );
-		
 		for ( auto& pe : playerEntities )
 		{
-			PlayerData pd = pe.ToPlayerData();
-			if ( pd.realname == minecraft::localPlayer->getName().ToString() )
+			bool found = false;
+			for ( auto&& gp : globalPlayers )
 			{
-				temp.local = pd;
-				if ( !config::current.render.players.hideSelf )
+				if ( TLSENV->IsSameObject( pe.instance, gp.instance ) )
 				{
-					temp.players.push_back(pd);
+					gp.checked = true;
+					found = true;
 				}
+			}
+			if ( !found )
+			{
+				globalPlayers.push_back( { .checked = true, .instance = TLSENV->NewGlobalRef( pe.instance ) } );
+			}
+		}
+		//	PlayerData pd = pe.ToPlayerData();
+		//	if ( pd.realname == minecraft::localPlayer->getName().ToString() )
+		//	{
+		//		temp.local = pd;
+		//		if ( !config::current.render.players.hideSelf )
+		//		{
+		//			temp.players.push_back( pd );
+		//		}
+		//	}
+		//	else
+		//	{
+		//		if ( config::current.render.players.hideBots
+		//			&& pd.invalidName )
+		//			continue;
+
+
+		//		temp.players.push_back( pd );
+
+		//	}
+		//}
+
+		std::vector<GlobalPlayer> newGPlist;
+
+		for ( auto&& gp : globalPlayers )
+		{
+			if ( gp.checked )
+			{
+				newGPlist.push_back( gp );
 			}
 			else
 			{
-				if ( config::current.render.players.hideBots
-					&& pd.invalidName )
-					continue;
-
-
-				temp.players.push_back(pd);
-
+				TLSENV->DeleteGlobalRef( gp.instance );
 			}
+		}
+
+		{
+			std::lock_guard<std::mutex> guard( gpMutex );
+			globalPlayers = newGPlist;
 		}
 
 		//for ( jint idx = 0; idx < size; idx++ )

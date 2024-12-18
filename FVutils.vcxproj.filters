@@ -234,6 +234,15 @@
     <ClInclude Include="src\jnihook\uuid.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\minecraft\client\renderer\RenderGlobal\RenderGlobal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\minecraft\client\renderer\culling\ICamera\ICamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\minecraft\client\renderer\GlStateManager\GlStateManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dllmain.cpp">
@@ -444,6 +453,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\cheat\modules\Modules.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\client\renderer\RenderGlobal\RenderGlobal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\client\renderer\culling\ICamera\ICamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\jnihooks\jnihk_renderEntities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\jnihooks\jnihk_renderEntitySimple.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\minecraft\client\renderer\GlStateManager\GlStateManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

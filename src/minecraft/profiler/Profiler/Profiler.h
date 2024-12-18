@@ -14,10 +14,14 @@ struct Profiler : public IClass
 	{
 		INITIALISER_HEADER();
 
-		_GET_METHOD( "startSection", "func_76320_a", "a", "(Ljava/lang/String;)V" );
-		_GET_METHOD( "endSection", "func_76319_b", "b", "()V" );
-		_GET_METHOD( "endStartSection", "func_76318_c", "c", "(Ljava/lang/String;)V" );
+		_GET_METHOD( "startSection",			"func_76320_a",		"a",	"(Ljava/lang/String;)V" );
+		_GET_METHOD( "endSection",				"func_76319_b",		"b",	"()V" );
+		_GET_METHOD( "endStartSection",			"func_76318_c",		"c",	"(Ljava/lang/String;)V" );
+		_GET_METHOD( "getNameOfLastSection",	"func_76322_c",		"c",	"()Ljava/lang/String;" );
 	}
+
+	std::string getNameOfLastSection(bool noderef = false);
+
 
 	STRUCTORS();
 };

@@ -9,6 +9,7 @@
 #include "../minecraft/client/renderer/entity/RenderLivingEntity/RenderLivingEntity.h"
 #include "../minecraft/minecraft.h"
 #include "../minecraft/client/renderer/entity/RenderPlayer/RenderPlayer.h"
+#include "../minecraft/client/renderer/RenderGlobal/RenderGlobal.h"
 #include "../minecraft/profiler/Profiler/Profiler.h"
 
 std::vector<jmethodID> hookedMethods = {};
@@ -76,6 +77,8 @@ void hooks::Init()
 
 		JNI_HOOK( Minecraft::methodIDs[ "runGameLoop" ], jnihk_runGameLoop );
 		JNI_HOOK( Minecraft::methodIDs[ "runTick" ], jnihk_runTick );
+		JNI_HOOK( RenderGlobal::methodIDs[ "renderEntities" ], jnihk_renderEntities );
+		JNI_HOOK( RenderManager::methodIDs[ "renderEntitySimple" ], jnihk_renderEntitySimple );
 
 
 	}
