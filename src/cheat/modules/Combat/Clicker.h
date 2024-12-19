@@ -5,17 +5,40 @@
 #include "../../common/ClickScheduler.h"
 #include "../../../minecraft/minecraft.h"
 #include "../../../rendering/rendering.h"
+#include "../../../imgui/imgui.h"
 
 class Clicker : public ModuleBase
 {
 public:
+	MODULE_STRUCTOR( Clicker );
 
 	static void Initialise()
 	{
-		modules::postRunTickCallbacks.push_back( &run );
+		modules::callbacks::hooks::postRunTick.push_back( &run );
+		modules::callbacks::render::gui[ "Combat" ].push_back( &gui );
 	}
 
-	MODULE_STRUCTOR( Clicker );
+	static void gui()
+	{
+		ImGui::Checkbox( "Clicker", &config::current.combat.clicker.enabled );
+		if ( config::current.combat.clicker.enabled )
+		{
+			ImGui::Indent( 16.f );
+
+			ImGui::Checkbox( "Left", &config::current.combat.clicker.left.enabled );
+			ImGui::DragIntRange2( "CPS##leftclicker",
+				&config::current.combat.clicker.left.minCps,
+				&config::current.combat.clicker.left.maxCps,
+				1.0f, 1, 40 );
+			ImGui::Checkbox( "Right", &config::current.combat.clicker.right.enabled );
+			ImGui::DragIntRange2( "CPS##rightclicker",
+				&config::current.combat.clicker.right.minCps,
+				&config::current.combat.clicker.right.maxCps,
+				1.0f, 1, 40 );
+
+			ImGui::Unindent( 16.f );
+		}
+	}
 
 	static void run()
 	{

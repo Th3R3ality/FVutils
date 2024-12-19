@@ -35,25 +35,45 @@ namespace config
 
 		struct __render
 		{
-			struct __players
+			struct __esp
 			{
-				bool name = true;
+				struct __names
+				{
+					bool enabled = true;
+					bool health = true;
+					bool absorption = true;
+				} names;
 
 				struct __d3
 				{
-					bool master = false;
+					bool enabled = true;
+					enum
+					{
+						ESP25d = 0,
+						ESPbox = 1
+					} mode = ESP25d;
+					struct __d25
+					{
+						bool box = true;
+						bool healthbar = true;
+					} d25;
+					struct __box
+					{
+
+					} box;
+
 				} d3;
 
 				struct __d2
 				{
-					bool master = true;
+					bool enabled = false;
 					bool healthbar = true;
 					bool healthbarnumber = true;
 				} d2;
 				
 				bool hideSelf = true;
 				bool hideBots = true;
-			} players;
+			} esp;
 		} render;
 	};
 

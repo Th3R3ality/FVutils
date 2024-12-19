@@ -31,7 +31,7 @@ namespace hooks
 			return;
 		}
 
-		cache::renderEntitiesData = { .instance = env->NewGlobalRef(instance), .renderViewEntity = env->NewGlobalRef(renderViewEntity), .camera = env->NewGlobalRef(camera), .partialTicks = partialTicks};
-		printf( "renderEntities\n" );
+		//cache::renderEntitiesData = { .instance = env->NewGlobalRef(instance), .renderViewEntity = env->NewGlobalRef(renderViewEntity), .camera = env->NewGlobalRef(camera), .partialTicks = partialTicks};
+		//printf( "renderEntities\n" );
 	}
 }

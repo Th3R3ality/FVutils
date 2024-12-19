@@ -4,6 +4,7 @@
 #include <math.h>
 #include <cmath>
 
+
 #include "matrix.h"
 
 template <class T>
@@ -222,6 +223,24 @@ struct vec3
 		if ( z < min )		z = min;
 		else if ( z > max )	z = max;
 	}
+	vec3 cross(const vec3& other) const noexcept
+	{
+		//
+		// ay az	ax az	ax ay
+		// by bz	bx bz	bx by
+		//
+		// (ay * bz) - (az * by),
+		// (ax * bz) - (az * bx),
+		// (ax * by) - (ay * bx)
+		//
+
+		return vec3{
+			( this->y * other.z ) - ( this->z * other.y ),
+			( this->x * other.z ) - ( this->z * other.x ),
+			( this->x * other.y ) - ( this->y * other.x )
+		};
+	}
+
 	vec3 toangles() const noexcept
 	{
 		float forward;

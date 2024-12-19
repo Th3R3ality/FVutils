@@ -15,7 +15,7 @@ JNIEXPORT void JNICALL hooks::jnihk_runTick( JNIEnv* env, jobject instance )
 	}
 
 	bool cancelled = false;
-	for ( auto&& fn : modules::preRunTickCallbacks )
+	for ( auto&& fn : modules::callbacks::hooks::preRunTick )
 	{
 		if ( fn() )
 			cancelled = true;
@@ -39,7 +39,7 @@ JNIEXPORT void JNICALL hooks::jnihk_runTick( JNIEnv* env, jobject instance )
 		return;
 	}
 
-	for ( auto&& fn : modules::postRunTickCallbacks )
+	for ( auto&& fn : modules::callbacks::hooks::postRunTick )
 	{
 		fn();
 	}

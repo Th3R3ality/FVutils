@@ -201,7 +201,7 @@
     <ClInclude Include="src\cheat\common\ClickScheduler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\cheat\modules\Clicker\Clicker.h">
+    <ClInclude Include="src\cheat\modules\Combat\Clicker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\cheat\common\Input.h">
@@ -241,6 +241,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\minecraft\client\renderer\GlStateManager\GlStateManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\GLhelpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\cheat\modules\Render\Esp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

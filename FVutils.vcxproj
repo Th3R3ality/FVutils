@@ -105,7 +105,8 @@
     <ClInclude Include="src\cache\cache.h" />
     <ClInclude Include="src\cheat\common\ClickScheduler.h" />
     <ClInclude Include="src\cheat\common\Input.h" />
-    <ClInclude Include="src\cheat\modules\Clicker\Clicker.h" />
+    <ClInclude Include="src\cheat\modules\Combat\Clicker.h" />
+    <ClInclude Include="src\cheat\modules\Render\Esp.h" />
     <ClInclude Include="src\cheat\modules\ModuleBase.h" />
     <ClInclude Include="src\cheat\modules\Modules.h" />
     <ClInclude Include="src\config\config.h">
@@ -225,6 +226,7 @@
     <ClInclude Include="src\rendering\helper.h" />
     <ClInclude Include="src\rendering\rendering.h" />
     <ClInclude Include="src\util\Color.h" />
+    <ClInclude Include="src\util\GLhelpers.h" />
     <ClInclude Include="src\util\initialiser_type.h" />
     <ClInclude Include="src\util\math\mathutils.h" />
     <ClInclude Include="src\util\math\matrix.h" />

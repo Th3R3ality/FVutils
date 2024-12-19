@@ -19,7 +19,6 @@ namespace cache
 
 	struct GlobalPlayer
 	{
-		bool checked;
 		jobject instance;
 	};
 	inline std::vector<GlobalPlayer> globalPlayers;

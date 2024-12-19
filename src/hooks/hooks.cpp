@@ -77,8 +77,8 @@ void hooks::Init()
 
 		JNI_HOOK( Minecraft::methodIDs[ "runGameLoop" ], jnihk_runGameLoop );
 		JNI_HOOK( Minecraft::methodIDs[ "runTick" ], jnihk_runTick );
-		JNI_HOOK( RenderGlobal::methodIDs[ "renderEntities" ], jnihk_renderEntities );
-		JNI_HOOK( RenderManager::methodIDs[ "renderEntitySimple" ], jnihk_renderEntitySimple );
+		//JNI_HOOK( RenderGlobal::methodIDs[ "renderEntities" ], jnihk_renderEntities );
+		//JNI_HOOK( RenderManager::methodIDs[ "renderEntitySimple" ], jnihk_renderEntitySimple );
 
 
 	}

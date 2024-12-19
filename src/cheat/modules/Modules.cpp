@@ -1,11 +1,11 @@
 #include "Modules.h"
-#include "Clicker/Clicker.h"
+#include "Combat/Clicker.h"
+#include "Render/Esp.h"
 
 #define INIT(klass) klass __ ## klass ## _initialiser = klass ( INITIALISER_TYPE{} )
 
 INIT( Clicker );
-
-//inline Clicker __Clicker_initialiser = Clicker( INITIALISER_TYPE{} );
+INIT( Esp );
 
 void modules::Init()
 {

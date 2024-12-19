@@ -2,6 +2,8 @@
 #include "Modules.h"
 #include "../../util/initialiser_type.h"
 
+
+
 #define MODULE_STRUCTOR(klass) \
 klass ( INITIALISER_TYPE ) { modules::moduleInitialisers.push_back( &Initialise ); }
 
