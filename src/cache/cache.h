@@ -20,6 +20,8 @@ namespace cache
 	struct GlobalPlayer
 	{
 		jobject instance;
+		fvec3 pos;
+		fvec3 lastTickPos;
 	};
 	inline std::vector<GlobalPlayer> globalPlayers;
 

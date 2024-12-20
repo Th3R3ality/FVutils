@@ -89,7 +89,9 @@ void GL25d()
 		EntityPlayer p = gp.instance;
 		p.noDeref = true;
 
-		fvec3 pos = ( fvec3{} - cache::data.renderPos ) + p.GetLastTickPos() - ( p.GetLastTickPos() - p.GetPos() ) * cache::data.renderPartialTicks;
+		//fvec3 pos = ( fvec3{} - cache::data.renderPos ) + p.GetLastTickPos() - ( p.GetLastTickPos() - p.GetPos() ) * cache::data.renderPartialTicks;
+		fvec3 pos = gp.lastTickPos + ( gp.pos - gp.lastTickPos ) * cache::data.renderPartialTicks;
+		pos -= cache::data.renderPos;
 
 		// ( pos - lpPos );
 		fvec3 temp = pos; temp.y = 0.f;

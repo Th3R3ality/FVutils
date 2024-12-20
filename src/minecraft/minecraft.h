@@ -24,7 +24,7 @@ namespace minecraft
 
 #define CURRENTCLASSNAME Minecraft
 
-SETCLASSPATH( "net/minecraft/client/Minecraft" );
+_SETCLASSPATH( "net/minecraft/client", "Minecraft", "ave");
 
 struct Minecraft : IClass
 {

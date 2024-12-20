@@ -32,7 +32,7 @@ namespace cache
 				if ( TLSENV->IsSameObject( pe.instance, minecraft::localPlayer->instance ) )
 					continue;
 
-				globalPlayers.push_back( { .instance = TLSENV->NewGlobalRef( pe.instance ) } );
+				globalPlayers.push_back( { .instance = TLSENV->NewGlobalRef( pe.instance ), .pos = pe.GetPos(), .lastTickPos = pe.GetLastTickPos() } );
 			}
 		}
 
